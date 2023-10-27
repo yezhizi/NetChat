@@ -1,0 +1,12 @@
+/.vscode/
+/bin/*
+/lib/*
+/build/CMakeFiles/
+/build/CMakeCache.txt
+/build/tmp/
+/build/.cmake/
+/build/*.log
+
+/build/*/*-build/
+/build/*/*-stamp/
+/third_party/
