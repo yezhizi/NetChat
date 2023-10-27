@@ -1,0 +1,12 @@
+# This is a generated file and its contents are an internal implementation detail.
+# The download step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+method=url
+command=/home/deemo/cmake/bin/cmake;-P;/home/deemo/NetChat/build/zlib/src/zlib-stamp/download-zlib.cmake;COMMAND;/home/deemo/cmake/bin/cmake;-P;/home/deemo/NetChat/build/zlib/src/zlib-stamp/verify-zlib.cmake;COMMAND;/home/deemo/cmake/bin/cmake;-P;/home/deemo/NetChat/build/zlib/src/zlib-stamp/extract-zlib.cmake
+source_dir=/home/deemo/NetChat/build/zlib/src/zlib
+work_dir=/home/deemo/NetChat/build/zlib/src
+url(s)=https://github.com/madler/zlib/archive/v1.2.8.tar.gz
+hash=MD5=1eabf2698dc49f925ce0ffb81397098f
+no_extract=
+

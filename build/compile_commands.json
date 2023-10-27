@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/deemo/NetChat/build",
+  "command": "/usr/local/bin/g++  -I/home/deemo/NetChat/third_party/protobuf/include  -std=c++14 -O3 -DNDEBUG -o CMakeFiles/proto_lib.dir/src/meta.pb.cc.o -c /home/deemo/NetChat/src/meta.pb.cc",
+  "file": "/home/deemo/NetChat/src/meta.pb.cc",
+  "output": "CMakeFiles/proto_lib.dir/src/meta.pb.cc.o"
+},
+{
+  "directory": "/home/deemo/NetChat/build",
+  "command": "/usr/local/bin/g++  -I/home/deemo/NetChat/third_party/easyloggingpp/include -I/home/deemo/NetChat/src/logging.h -I/home/deemo/NetChat/src/meta.pb.h -I/home/deemo/NetChat/third_party/protobuf/include  -std=c++14 -O3 -DNDEBUG -o CMakeFiles/NetChat.dir/src/main.cpp.o -c /home/deemo/NetChat/src/main.cpp",
+  "file": "/home/deemo/NetChat/src/main.cpp",
+  "output": "CMakeFiles/NetChat.dir/src/main.cpp.o"
+}
+]
