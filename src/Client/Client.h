@@ -1,44 +1,35 @@
 #pragma once
-#include<shared_ptr>
 #include<sys/socket.h>
-
-namespace SERV{
-    const std::string ip = "127.0.0.1";
-    const int port = 8888;
-}
-
-
+#include "client_van.h"
+#include "logging.h"
+#include <mutex>
 class Client
 {
 private:
     int _client_id;
-    int _client_socket;
-    int _client_port;
-    
-    struct sockaddr_in _server;
-    
-
-    static Client* _instance;
+    Van* _van;
 
     void Init();
+    void Finalize();
 
+    static std::shared_ptr<Client> _getsharedPtr() {
+        static std::shared_ptr<Client> instance_ptr(new Client());
+        return instance_ptr;
+    }
 
-    Client();
-    ~Client();
+    Client() { this->Init(); }
+    Client(const Client&) = delete;
+    Client& operator=(const Client&) = delete;
+
 
 public:
-    static inline Client* getInstance(){
-        if(_instance == nullptr){
-            _instance = new Client();
-        }
-        return _instance;
+    static inline Client* getInstance() {
+        return _getsharedPtr().get();
     }
-    void Finalize(){
-        if(_instance != nullptr){
-            delete _instance;
-            _instance = nullptr;
-        }
+    static inline std::shared_ptr<Client> getSharedPtr() {
+        return _getsharedPtr();
     }
+    int Signup( std::string phone_number, const std::string &password);
+    ~Client() { this->Finalize(); }
 
-    
 };

@@ -10,3 +10,4 @@
 /build/*/*-build/
 /build/*/*-stamp/
 /third_party/
+/logs/

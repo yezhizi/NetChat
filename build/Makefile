@@ -181,6 +181,30 @@ NetChat/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/build
 .PHONY : NetChat/fast
 
+src/Client/Client.o: src/Client/Client.cpp.o
+.PHONY : src/Client/Client.o
+
+# target to build an object file
+src/Client/Client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/src/Client/Client.cpp.o
+.PHONY : src/Client/Client.cpp.o
+
+src/Client/Client.i: src/Client/Client.cpp.i
+.PHONY : src/Client/Client.i
+
+# target to preprocess a source file
+src/Client/Client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/src/Client/Client.cpp.i
+.PHONY : src/Client/Client.cpp.i
+
+src/Client/Client.s: src/Client/Client.cpp.s
+.PHONY : src/Client/Client.s
+
+# target to generate assembly for a file
+src/Client/Client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/src/Client/Client.cpp.s
+.PHONY : src/Client/Client.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -229,6 +253,30 @@ src/meta.pb.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/proto_lib.dir/build.make CMakeFiles/proto_lib.dir/src/meta.pb.cc.s
 .PHONY : src/meta.pb.cc.s
 
+src/van.o: src/van.cpp.o
+.PHONY : src/van.o
+
+# target to build an object file
+src/van.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/src/van.cpp.o
+.PHONY : src/van.cpp.o
+
+src/van.i: src/van.cpp.i
+.PHONY : src/van.i
+
+# target to preprocess a source file
+src/van.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/src/van.cpp.i
+.PHONY : src/van.cpp.i
+
+src/van.s: src/van.cpp.s
+.PHONY : src/van.s
+
+# target to generate assembly for a file
+src/van.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/NetChat.dir/build.make CMakeFiles/NetChat.dir/src/van.cpp.s
+.PHONY : src/van.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -242,12 +290,18 @@ help:
 	@echo "... zlib"
 	@echo "... NetChat"
 	@echo "... proto_lib"
+	@echo "... src/Client/Client.o"
+	@echo "... src/Client/Client.i"
+	@echo "... src/Client/Client.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/meta.pb.o"
 	@echo "... src/meta.pb.i"
 	@echo "... src/meta.pb.s"
+	@echo "... src/van.o"
+	@echo "... src/van.i"
+	@echo "... src/van.s"
 .PHONY : help
 
 

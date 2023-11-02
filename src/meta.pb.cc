@@ -12,636 +12,283 @@
 #include <google/protobuf/io/zero_copy_stream_impl_lite.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_meta_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PBControl_meta_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_meta_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PBNode_meta_2eproto;
-namespace netchat {
-class PBNodeDefaultTypeInternal {
+namespace ntc {
+class PBMETADefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PBNode> _instance;
-} _PBNode_default_instance_;
-class PBControlDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PBControl> _instance;
-} _PBControl_default_instance_;
-class PBMESGDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PBMESG> _instance;
-} _PBMESG_default_instance_;
-}  // namespace netchat
-static void InitDefaultsscc_info_PBControl_meta_2eproto() {
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PBMETA> _instance;
+} _PBMETA_default_instance_;
+}  // namespace ntc
+static void InitDefaultsscc_info_PBMETA_meta_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::netchat::_PBControl_default_instance_;
-    new (ptr) ::netchat::PBControl();
+    void* ptr = &::ntc::_PBMETA_default_instance_;
+    new (ptr) ::ntc::PBMETA();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::netchat::PBControl::InitAsDefaultInstance();
+  ::ntc::PBMETA::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PBControl_meta_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_PBControl_meta_2eproto}, {
-      &scc_info_PBNode_meta_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PBMETA_meta_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PBMETA_meta_2eproto}, {}};
 
-static void InitDefaultsscc_info_PBMESG_meta_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::netchat::_PBMESG_default_instance_;
-    new (ptr) ::netchat::PBMESG();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+namespace ntc {
+bool Type_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
   }
-  ::netchat::PBMESG::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PBMESG_meta_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_PBMESG_meta_2eproto}, {
-      &scc_info_PBControl_meta_2eproto.base,}};
+static ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<std::string> Type_strings[7] = {};
 
-static void InitDefaultsscc_info_PBNode_meta_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
+static const char Type_names[] =
+  "ERROR"
+  "FILE"
+  "LOGIN"
+  "LOGOUT"
+  "MESSAGE"
+  "SIGNUP"
+  "TYPE_UNKNOWN";
 
-  {
-    void* ptr = &::netchat::_PBNode_default_instance_;
-    new (ptr) ::netchat::PBNode();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+static const ::PROTOBUF_NAMESPACE_ID::internal::EnumEntry Type_entries[] = {
+  { {Type_names + 0, 5}, 6 },
+  { {Type_names + 5, 4}, 5 },
+  { {Type_names + 9, 5}, 2 },
+  { {Type_names + 14, 6}, 3 },
+  { {Type_names + 20, 7}, 4 },
+  { {Type_names + 27, 6}, 1 },
+  { {Type_names + 33, 12}, 0 },
+};
+
+static const int Type_entries_by_number[] = {
+  6, // 0 -> TYPE_UNKNOWN
+  5, // 1 -> SIGNUP
+  2, // 2 -> LOGIN
+  3, // 3 -> LOGOUT
+  4, // 4 -> MESSAGE
+  1, // 5 -> FILE
+  0, // 6 -> ERROR
+};
+
+const std::string& Type_Name(
+    Type value) {
+  static const bool dummy =
+      ::PROTOBUF_NAMESPACE_ID::internal::InitializeEnumStrings(
+          Type_entries,
+          Type_entries_by_number,
+          7, Type_strings);
+  (void) dummy;
+  int idx = ::PROTOBUF_NAMESPACE_ID::internal::LookUpEnumName(
+      Type_entries,
+      Type_entries_by_number,
+      7, value);
+  return idx == -1 ? ::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString() :
+                     Type_strings[idx].get();
+}
+bool Type_Parse(
+    const std::string& name, Type* value) {
+  int int_value;
+  bool success = ::PROTOBUF_NAMESPACE_ID::internal::LookUpEnumValue(
+      Type_entries, 7, name, &int_value);
+  if (success) {
+    *value = static_cast<Type>(int_value);
   }
-  ::netchat::PBNode::InitAsDefaultInstance();
+  return success;
+}
+bool Code_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+      return true;
+    default:
+      return false;
+  }
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PBNode_meta_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PBNode_meta_2eproto}, {}};
+static ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<std::string> Code_strings[9] = {};
 
-namespace netchat {
+static const char Code_names[] =
+  "CODE_UNKNOWN"
+  "LOGIN_NOT_EXIST"
+  "LOGIN_SUCCESS"
+  "LOGIN_WRONG_PASSWORD"
+  "LOGOUT_SUCCESS"
+  "OK"
+  "REQUEST"
+  "SINGUP_EXEIST"
+  "SINGUP_SUCCESS";
+
+static const ::PROTOBUF_NAMESPACE_ID::internal::EnumEntry Code_entries[] = {
+  { {Code_names + 0, 12}, 0 },
+  { {Code_names + 12, 15}, 5 },
+  { {Code_names + 27, 13}, 7 },
+  { {Code_names + 40, 20}, 6 },
+  { {Code_names + 60, 14}, 8 },
+  { {Code_names + 74, 2}, 1 },
+  { {Code_names + 76, 7}, 2 },
+  { {Code_names + 83, 13}, 3 },
+  { {Code_names + 96, 14}, 4 },
+};
+
+static const int Code_entries_by_number[] = {
+  0, // 0 -> CODE_UNKNOWN
+  5, // 1 -> OK
+  6, // 2 -> REQUEST
+  7, // 3 -> SINGUP_EXEIST
+  8, // 4 -> SINGUP_SUCCESS
+  1, // 5 -> LOGIN_NOT_EXIST
+  3, // 6 -> LOGIN_WRONG_PASSWORD
+  2, // 7 -> LOGIN_SUCCESS
+  4, // 8 -> LOGOUT_SUCCESS
+};
+
+const std::string& Code_Name(
+    Code value) {
+  static const bool dummy =
+      ::PROTOBUF_NAMESPACE_ID::internal::InitializeEnumStrings(
+          Code_entries,
+          Code_entries_by_number,
+          9, Code_strings);
+  (void) dummy;
+  int idx = ::PROTOBUF_NAMESPACE_ID::internal::LookUpEnumName(
+      Code_entries,
+      Code_entries_by_number,
+      9, value);
+  return idx == -1 ? ::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString() :
+                     Code_strings[idx].get();
+}
+bool Code_Parse(
+    const std::string& name, Code* value) {
+  int int_value;
+  bool success = ::PROTOBUF_NAMESPACE_ID::internal::LookUpEnumValue(
+      Code_entries, 9, name, &int_value);
+  if (success) {
+    *value = static_cast<Code>(int_value);
+  }
+  return success;
+}
 
 // ===================================================================
 
-void PBNode::InitAsDefaultInstance() {
+void PBMETA::InitAsDefaultInstance() {
 }
-class PBNode::_Internal {
+class PBMETA::_Internal {
  public:
-  using HasBits = decltype(std::declval<PBNode>()._has_bits_);
-  static void set_has_role(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static void set_has_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static void set_has_hostname(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_port(HasBits* has_bits) {
-    (*has_bits)[0] |= 8u;
-  }
-  static void set_has_is_recovery(HasBits* has_bits) {
-    (*has_bits)[0] |= 16u;
-  }
-  static void set_has_customer_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 32u;
-  }
 };
 
-PBNode::PBNode()
+PBMETA::PBMETA()
   : ::PROTOBUF_NAMESPACE_ID::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:netchat.PBNode)
+  // @@protoc_insertion_point(constructor:ntc.PBMETA)
 }
-PBNode::PBNode(const PBNode& from)
+PBMETA::PBMETA(const PBMETA& from)
   : ::PROTOBUF_NAMESPACE_ID::MessageLite(),
       _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
+      data_size_(from.data_size_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  hostname_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_hostname()) {
-    hostname_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.hostname_);
-  }
-  ::memcpy(&role_, &from.role_,
-    static_cast<size_t>(reinterpret_cast<char*>(&customer_id_) -
-    reinterpret_cast<char*>(&role_)) + sizeof(customer_id_));
-  // @@protoc_insertion_point(copy_constructor:netchat.PBNode)
+  ::memcpy(&type_, &from.type_,
+    static_cast<size_t>(reinterpret_cast<char*>(&src_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(src_));
+  // @@protoc_insertion_point(copy_constructor:ntc.PBMETA)
 }
 
-void PBNode::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PBNode_meta_2eproto.base);
-  hostname_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&role_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&customer_id_) -
-      reinterpret_cast<char*>(&role_)) + sizeof(customer_id_));
+void PBMETA::SharedCtor() {
+  ::memset(&type_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&src_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(src_));
 }
 
-PBNode::~PBNode() {
-  // @@protoc_insertion_point(destructor:netchat.PBNode)
+PBMETA::~PBMETA() {
+  // @@protoc_insertion_point(destructor:ntc.PBMETA)
   SharedDtor();
 }
 
-void PBNode::SharedDtor() {
-  hostname_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+void PBMETA::SharedDtor() {
 }
 
-void PBNode::SetCachedSize(int size) const {
+void PBMETA::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const PBNode& PBNode::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PBNode_meta_2eproto.base);
+const PBMETA& PBMETA::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PBMETA_meta_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void PBNode::Clear() {
-// @@protoc_insertion_point(message_clear_start:netchat.PBNode)
+void PBMETA::Clear() {
+// @@protoc_insertion_point(message_clear_start:ntc.PBMETA)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    hostname_.ClearNonDefaultToEmptyNoArena();
-  }
-  if (cached_has_bits & 0x0000003eu) {
-    ::memset(&role_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&customer_id_) -
-        reinterpret_cast<char*>(&role_)) + sizeof(customer_id_));
-  }
-  _has_bits_.Clear();
+  data_size_.Clear();
+  ::memset(&type_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&src_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(src_));
   _internal_metadata_.Clear();
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* PBNode::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* PBMETA::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // required int32 role = 1;
+      // .ntc.Type type = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_role(&has_bits);
-          role_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
+          set_type(static_cast<::ntc::Type>(val));
         } else goto handle_unusual;
         continue;
-      // optional int32 id = 2;
+      // .ntc.Code code = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          _Internal::set_has_id(&has_bits);
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
+          set_code(static_cast<::ntc::Code>(val));
         } else goto handle_unusual;
         continue;
-      // optional string hostname = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_hostname(), ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 port = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          _Internal::set_has_port(&has_bits);
-          port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional bool is_recovery = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          _Internal::set_has_is_recovery(&has_bits);
-          is_recovery_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 customer_id = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 80)) {
-          _Internal::set_has_customer_id(&has_bits);
-          customer_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool PBNode::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  ::PROTOBUF_NAMESPACE_ID::internal::LiteUnknownFieldSetter unknown_fields_setter(
-      &_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::io::StringOutputStream unknown_fields_output(
-      unknown_fields_setter.buffer());
-  ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream unknown_fields_stream(
-      &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:netchat.PBNode)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 role = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
-          _Internal::set_has_role(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &role_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 id = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
-          _Internal::set_has_id(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional string hostname = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_hostname()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 port = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
-          _Internal::set_has_port(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &port_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool is_recovery = 5;
-      case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
-          _Internal::set_has_is_recovery(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &is_recovery_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 customer_id = 10;
-      case 10: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (80 & 0xFF)) {
-          _Internal::set_has_customer_id(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &customer_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SkipField(
-            input, tag, &unknown_fields_stream));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:netchat.PBNode)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:netchat.PBNode)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void PBNode::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:netchat.PBNode)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required int32 role = 1;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->role(), output);
-  }
-
-  // optional int32 id = 2;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(2, this->id(), output);
-  }
-
-  // optional string hostname = 3;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->hostname(), output);
-  }
-
-  // optional int32 port = 4;
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(4, this->port(), output);
-  }
-
-  // optional bool is_recovery = 5;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(5, this->is_recovery(), output);
-  }
-
-  // optional int32 customer_id = 10;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(10, this->customer_id(), output);
-  }
-
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:netchat.PBNode)
-}
-
-size_t PBNode::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:netchat.PBNode)
-  size_t total_size = 0;
-
-  total_size += _internal_metadata_.unknown_fields().size();
-
-  // required int32 role = 1;
-  if (has_role()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->role());
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // optional string hostname = 3;
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->hostname());
-  }
-
-  if (cached_has_bits & 0x0000003cu) {
-    // optional int32 id = 2;
-    if (cached_has_bits & 0x00000004u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->id());
-    }
-
-    // optional int32 port = 4;
-    if (cached_has_bits & 0x00000008u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->port());
-    }
-
-    // optional bool is_recovery = 5;
-    if (cached_has_bits & 0x00000010u) {
-      total_size += 1 + 1;
-    }
-
-    // optional int32 customer_id = 10;
-    if (cached_has_bits & 0x00000020u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->customer_id());
-    }
-
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void PBNode::CheckTypeAndMergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::MessageLite& from) {
-  MergeFrom(*::PROTOBUF_NAMESPACE_ID::internal::DownCast<const PBNode*>(
-      &from));
-}
-
-void PBNode::MergeFrom(const PBNode& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:netchat.PBNode)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x0000003fu) {
-    if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      hostname_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.hostname_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      role_ = from.role_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      id_ = from.id_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      port_ = from.port_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      is_recovery_ = from.is_recovery_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      customer_id_ = from.customer_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
-  }
-}
-
-void PBNode::CopyFrom(const PBNode& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:netchat.PBNode)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool PBNode::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
-  return true;
-}
-
-void PBNode::InternalSwap(PBNode* other) {
-  using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  hostname_.Swap(&other->hostname_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(role_, other->role_);
-  swap(id_, other->id_);
-  swap(port_, other->port_);
-  swap(is_recovery_, other->is_recovery_);
-  swap(customer_id_, other->customer_id_);
-}
-
-std::string PBNode::GetTypeName() const {
-  return "netchat.PBNode";
-}
-
-
-// ===================================================================
-
-void PBControl::InitAsDefaultInstance() {
-}
-class PBControl::_Internal {
- public:
-  using HasBits = decltype(std::declval<PBControl>()._has_bits_);
-  static void set_has_cmd(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_barrier_group(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static void set_has_msg_sig(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-};
-
-PBControl::PBControl()
-  : ::PROTOBUF_NAMESPACE_ID::MessageLite(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:netchat.PBControl)
-}
-PBControl::PBControl(const PBControl& from)
-  : ::PROTOBUF_NAMESPACE_ID::MessageLite(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_),
-      node_(from.node_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&cmd_, &from.cmd_,
-    static_cast<size_t>(reinterpret_cast<char*>(&msg_sig_) -
-    reinterpret_cast<char*>(&cmd_)) + sizeof(msg_sig_));
-  // @@protoc_insertion_point(copy_constructor:netchat.PBControl)
-}
-
-void PBControl::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PBControl_meta_2eproto.base);
-  ::memset(&cmd_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&msg_sig_) -
-      reinterpret_cast<char*>(&cmd_)) + sizeof(msg_sig_));
-}
-
-PBControl::~PBControl() {
-  // @@protoc_insertion_point(destructor:netchat.PBControl)
-  SharedDtor();
-}
-
-void PBControl::SharedDtor() {
-}
-
-void PBControl::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const PBControl& PBControl::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PBControl_meta_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void PBControl::Clear() {
-// @@protoc_insertion_point(message_clear_start:netchat.PBControl)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  node_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
-    ::memset(&cmd_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&msg_sig_) -
-        reinterpret_cast<char*>(&cmd_)) + sizeof(msg_sig_));
-  }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* PBControl::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required int32 cmd = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_cmd(&has_bits);
-          cmd_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated .netchat.PBNode node = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(add_node(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 barrier_group = 3;
+      // int32 dst = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          _Internal::set_has_barrier_group(&has_bits);
-          barrier_group_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          dst_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // optional uint64 msg_sig = 4;
+      // int32 src = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          _Internal::set_has_msg_sig(&has_bits);
-          msg_sig_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          src_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated int32 data_size = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(mutable_data_size(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40) {
+          add_data_size(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -658,7 +305,6 @@ const char* PBControl::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
     }  // switch
   }  // while
 success:
-  _has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -666,7 +312,7 @@ failure:
 #undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool PBControl::MergePartialFromCodedStream(
+bool PBMETA::MergePartialFromCodedStream(
     ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::PROTOBUF_NAMESPACE_ID::uint32 tag;
@@ -676,673 +322,76 @@ bool PBControl::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:netchat.PBControl)
+  // @@protoc_insertion_point(parse_start:ntc.PBMETA)
   for (;;) {
     ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 cmd = 1;
+      // .ntc.Type type = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
-          _Internal::set_has_cmd(&_has_bits_);
+          int value = 0;
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &cmd_)));
+                   int, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_type(static_cast< ::ntc::Type >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // repeated .netchat.PBNode node = 2;
+      // .ntc.Code code = 2;
       case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-                input, add_node()));
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+          int value = 0;
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   int, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_code(static_cast< ::ntc::Code >(value));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional int32 barrier_group = 3;
+      // int32 dst = 3;
       case 3: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
-          _Internal::set_has_barrier_group(&_has_bits_);
+
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
                    ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &barrier_group_)));
+                 input, &dst_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional uint64 msg_sig = 4;
+      // int32 src = 4;
       case 4: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
-          _Internal::set_has_msg_sig(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &msg_sig_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
 
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SkipField(
-            input, tag, &unknown_fields_stream));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:netchat.PBControl)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:netchat.PBControl)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void PBControl::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:netchat.PBControl)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required int32 cmd = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->cmd(), output);
-  }
-
-  // repeated .netchat.PBNode node = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->node_size()); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessage(
-      2,
-      this->node(static_cast<int>(i)),
-      output);
-  }
-
-  // optional int32 barrier_group = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(3, this->barrier_group(), output);
-  }
-
-  // optional uint64 msg_sig = 4;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(4, this->msg_sig(), output);
-  }
-
-  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
-                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:netchat.PBControl)
-}
-
-size_t PBControl::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:netchat.PBControl)
-  size_t total_size = 0;
-
-  total_size += _internal_metadata_.unknown_fields().size();
-
-  // required int32 cmd = 1;
-  if (has_cmd()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->cmd());
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // repeated .netchat.PBNode node = 2;
-  {
-    unsigned int count = static_cast<unsigned int>(this->node_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          this->node(static_cast<int>(i)));
-    }
-  }
-
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000006u) {
-    // optional int32 barrier_group = 3;
-    if (cached_has_bits & 0x00000002u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->barrier_group());
-    }
-
-    // optional uint64 msg_sig = 4;
-    if (cached_has_bits & 0x00000004u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-          this->msg_sig());
-    }
-
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void PBControl::CheckTypeAndMergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::MessageLite& from) {
-  MergeFrom(*::PROTOBUF_NAMESPACE_ID::internal::DownCast<const PBControl*>(
-      &from));
-}
-
-void PBControl::MergeFrom(const PBControl& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:netchat.PBControl)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  node_.MergeFrom(from.node_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
-    if (cached_has_bits & 0x00000001u) {
-      cmd_ = from.cmd_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      barrier_group_ = from.barrier_group_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      msg_sig_ = from.msg_sig_;
-    }
-    _has_bits_[0] |= cached_has_bits;
-  }
-}
-
-void PBControl::CopyFrom(const PBControl& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:netchat.PBControl)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool PBControl::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(this->node())) return false;
-  return true;
-}
-
-void PBControl::InternalSwap(PBControl* other) {
-  using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  CastToBase(&node_)->InternalSwap(CastToBase(&other->node_));
-  swap(cmd_, other->cmd_);
-  swap(barrier_group_, other->barrier_group_);
-  swap(msg_sig_, other->msg_sig_);
-}
-
-std::string PBControl::GetTypeName() const {
-  return "netchat.PBControl";
-}
-
-
-// ===================================================================
-
-void PBMESG::InitAsDefaultInstance() {
-  ::netchat::_PBMESG_default_instance_._instance.get_mutable()->control_ = const_cast< ::netchat::PBControl*>(
-      ::netchat::PBControl::internal_default_instance());
-}
-class PBMESG::_Internal {
- public:
-  using HasBits = decltype(std::declval<PBMESG>()._has_bits_);
-  static void set_has_head(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static void set_has_body(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static const ::netchat::PBControl& control(const PBMESG* msg);
-  static void set_has_control(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static void set_has_request(HasBits* has_bits) {
-    (*has_bits)[0] |= 8u;
-  }
-  static void set_has_app_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 128u;
-  }
-  static void set_has_timestamp(HasBits* has_bits) {
-    (*has_bits)[0] |= 256u;
-  }
-  static void set_has_customer_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 512u;
-  }
-  static void set_has_push(HasBits* has_bits) {
-    (*has_bits)[0] |= 16u;
-  }
-  static void set_has_pull(HasBits* has_bits) {
-    (*has_bits)[0] |= 32u;
-  }
-  static void set_has_simple_app(HasBits* has_bits) {
-    (*has_bits)[0] |= 64u;
-  }
-  static void set_has_data_size(HasBits* has_bits) {
-    (*has_bits)[0] |= 1024u;
-  }
-  static void set_has_priority(HasBits* has_bits) {
-    (*has_bits)[0] |= 2048u;
-  }
-};
-
-const ::netchat::PBControl&
-PBMESG::_Internal::control(const PBMESG* msg) {
-  return *msg->control_;
-}
-PBMESG::PBMESG()
-  : ::PROTOBUF_NAMESPACE_ID::MessageLite(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:netchat.PBMESG)
-}
-PBMESG::PBMESG(const PBMESG& from)
-  : ::PROTOBUF_NAMESPACE_ID::MessageLite(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_),
-      data_type_(from.data_type_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  body_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_body()) {
-    body_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.body_);
-  }
-  if (from.has_control()) {
-    control_ = new ::netchat::PBControl(*from.control_);
-  } else {
-    control_ = nullptr;
-  }
-  ::memcpy(&head_, &from.head_,
-    static_cast<size_t>(reinterpret_cast<char*>(&priority_) -
-    reinterpret_cast<char*>(&head_)) + sizeof(priority_));
-  // @@protoc_insertion_point(copy_constructor:netchat.PBMESG)
-}
-
-void PBMESG::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PBMESG_meta_2eproto.base);
-  body_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&control_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&priority_) -
-      reinterpret_cast<char*>(&control_)) + sizeof(priority_));
-}
-
-PBMESG::~PBMESG() {
-  // @@protoc_insertion_point(destructor:netchat.PBMESG)
-  SharedDtor();
-}
-
-void PBMESG::SharedDtor() {
-  body_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete control_;
-}
-
-void PBMESG::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const PBMESG& PBMESG::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PBMESG_meta_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void PBMESG::Clear() {
-// @@protoc_insertion_point(message_clear_start:netchat.PBMESG)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  data_type_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      body_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(control_ != nullptr);
-      control_->Clear();
-    }
-  }
-  if (cached_has_bits & 0x000000fcu) {
-    ::memset(&head_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&app_id_) -
-        reinterpret_cast<char*>(&head_)) + sizeof(app_id_));
-  }
-  if (cached_has_bits & 0x00000f00u) {
-    ::memset(&timestamp_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&priority_) -
-        reinterpret_cast<char*>(&timestamp_)) + sizeof(priority_));
-  }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* PBMESG::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // optional int32 head = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_head(&has_bits);
-          head_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional bytes body = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_body(), ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional .netchat.PBControl control = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(mutable_control(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional bool request = 4 [default = false];
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          _Internal::set_has_request(&has_bits);
-          request_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional bool push = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          _Internal::set_has_push(&has_bits);
-          push_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional bool simple_app = 6 [default = false];
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
-          _Internal::set_has_simple_app(&has_bits);
-          simple_app_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 app_id = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
-          _Internal::set_has_app_id(&has_bits);
-          app_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 timestamp = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
-          _Internal::set_has_timestamp(&has_bits);
-          timestamp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated int32 data_type = 9 [packed = true];
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(mutable_data_type(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72) {
-          add_data_type(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 customer_id = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 80)) {
-          _Internal::set_has_customer_id(&has_bits);
-          customer_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 data_size = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 88)) {
-          _Internal::set_has_data_size(&has_bits);
-          data_size_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional bool pull = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 96)) {
-          _Internal::set_has_pull(&has_bits);
-          pull_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // optional int32 priority = 13 [default = 0];
-      case 13:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 104)) {
-          _Internal::set_has_priority(&has_bits);
-          priority_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool PBMESG::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  ::PROTOBUF_NAMESPACE_ID::internal::LiteUnknownFieldSetter unknown_fields_setter(
-      &_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::io::StringOutputStream unknown_fields_output(
-      unknown_fields_setter.buffer());
-  ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream unknown_fields_stream(
-      &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:netchat.PBMESG)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 head = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
-          _Internal::set_has_head(&_has_bits_);
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
                    ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &head_)));
+                 input, &src_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional bytes body = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_body()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional .netchat.PBControl control = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_control()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool request = 4 [default = false];
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
-          _Internal::set_has_request(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &request_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool push = 5;
+      // repeated int32 data_size = 5;
       case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
-          _Internal::set_has_push(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &push_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool simple_app = 6 [default = false];
-      case 6: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (48 & 0xFF)) {
-          _Internal::set_has_simple_app(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &simple_app_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 app_id = 7;
-      case 7: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (56 & 0xFF)) {
-          _Internal::set_has_app_id(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &app_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 timestamp = 8;
-      case 8: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (64 & 0xFF)) {
-          _Internal::set_has_timestamp(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &timestamp_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated int32 data_type = 9 [packed = true];
-      case 9: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitive<
                    ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_data_type())));
-        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (72 & 0xFF)) {
+                 input, this->mutable_data_size())));
+        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
                    ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 1, 74u, input, this->mutable_data_type())));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 customer_id = 10;
-      case 10: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (80 & 0xFF)) {
-          _Internal::set_has_customer_id(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &customer_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 data_size = 11;
-      case 11: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (88 & 0xFF)) {
-          _Internal::set_has_data_size(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &data_size_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional bool pull = 12;
-      case 12: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (96 & 0xFF)) {
-          _Internal::set_has_pull(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &pull_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional int32 priority = 13 [default = 0];
-      case 13: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (104 & 0xFF)) {
-          _Internal::set_has_priority(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &priority_)));
+                 1, 42u, input, this->mutable_data_size())));
         } else {
           goto handle_unusual;
         }
@@ -1361,102 +410,61 @@ bool PBMESG::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:netchat.PBMESG)
+  // @@protoc_insertion_point(parse_success:ntc.PBMETA)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:netchat.PBMESG)
+  // @@protoc_insertion_point(parse_failure:ntc.PBMETA)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void PBMESG::SerializeWithCachedSizes(
+void PBMETA::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:netchat.PBMESG)
+  // @@protoc_insertion_point(serialize_start:ntc.PBMETA)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // optional int32 head = 1;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->head(), output);
+  // .ntc.Type type = 1;
+  if (this->type() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnum(
+      1, this->type(), output);
   }
 
-  // optional bytes body = 2;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
-      2, this->body(), output);
+  // .ntc.Code code = 2;
+  if (this->code() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnum(
+      2, this->code(), output);
   }
 
-  // optional .netchat.PBControl control = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessage(
-      3, _Internal::control(this), output);
+  // int32 dst = 3;
+  if (this->dst() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(3, this->dst(), output);
   }
 
-  // optional bool request = 4 [default = false];
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(4, this->request(), output);
+  // int32 src = 4;
+  if (this->src() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(4, this->src(), output);
   }
 
-  // optional bool push = 5;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(5, this->push(), output);
-  }
-
-  // optional bool simple_app = 6 [default = false];
-  if (cached_has_bits & 0x00000040u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(6, this->simple_app(), output);
-  }
-
-  // optional int32 app_id = 7;
-  if (cached_has_bits & 0x00000080u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(7, this->app_id(), output);
-  }
-
-  // optional int32 timestamp = 8;
-  if (cached_has_bits & 0x00000100u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(8, this->timestamp(), output);
-  }
-
-  // repeated int32 data_type = 9 [packed = true];
-  if (this->data_type_size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTag(9, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
-    output->WriteVarint32(_data_type_cached_byte_size_.load(
+  // repeated int32 data_size = 5;
+  if (this->data_size_size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTag(5, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(_data_size_cached_byte_size_.load(
         std::memory_order_relaxed));
   }
-  for (int i = 0, n = this->data_type_size(); i < n; i++) {
+  for (int i = 0, n = this->data_size_size(); i < n; i++) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32NoTag(
-      this->data_type(i), output);
-  }
-
-  // optional int32 customer_id = 10;
-  if (cached_has_bits & 0x00000200u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(10, this->customer_id(), output);
-  }
-
-  // optional int32 data_size = 11;
-  if (cached_has_bits & 0x00000400u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(11, this->data_size(), output);
-  }
-
-  // optional bool pull = 12;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(12, this->pull(), output);
-  }
-
-  // optional int32 priority = 13 [default = 0];
-  if (cached_has_bits & 0x00000800u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(13, this->priority(), output);
+      this->data_size(i), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:netchat.PBMESG)
+  // @@protoc_insertion_point(serialize_end:ntc.PBMETA)
 }
 
-size_t PBMESG::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:netchat.PBMESG)
+size_t PBMETA::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ntc.PBMETA)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -1465,217 +473,111 @@ size_t PBMESG::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated int32 data_type = 9 [packed = true];
+  // repeated int32 data_size = 5;
   {
     size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      Int32Size(this->data_type_);
+      Int32Size(this->data_size_);
     if (data_size > 0) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
             static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
     }
     int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _data_type_cached_byte_size_.store(cached_size,
+    _data_size_cached_byte_size_.store(cached_size,
                                     std::memory_order_relaxed);
     total_size += data_size;
   }
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    // optional bytes body = 2;
-    if (cached_has_bits & 0x00000001u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-          this->body());
-    }
-
-    // optional .netchat.PBControl control = 3;
-    if (cached_has_bits & 0x00000002u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          *control_);
-    }
-
-    // optional int32 head = 1;
-    if (cached_has_bits & 0x00000004u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->head());
-    }
-
-    // optional bool request = 4 [default = false];
-    if (cached_has_bits & 0x00000008u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool push = 5;
-    if (cached_has_bits & 0x00000010u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool pull = 12;
-    if (cached_has_bits & 0x00000020u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool simple_app = 6 [default = false];
-    if (cached_has_bits & 0x00000040u) {
-      total_size += 1 + 1;
-    }
-
-    // optional int32 app_id = 7;
-    if (cached_has_bits & 0x00000080u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->app_id());
-    }
-
+  // .ntc.Type type = 1;
+  if (this->type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->type());
   }
-  if (cached_has_bits & 0x00000f00u) {
-    // optional int32 timestamp = 8;
-    if (cached_has_bits & 0x00000100u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->timestamp());
-    }
 
-    // optional int32 customer_id = 10;
-    if (cached_has_bits & 0x00000200u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->customer_id());
-    }
-
-    // optional int32 data_size = 11;
-    if (cached_has_bits & 0x00000400u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->data_size());
-    }
-
-    // optional int32 priority = 13 [default = 0];
-    if (cached_has_bits & 0x00000800u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-          this->priority());
-    }
-
+  // .ntc.Code code = 2;
+  if (this->code() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->code());
   }
+
+  // int32 dst = 3;
+  if (this->dst() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->dst());
+  }
+
+  // int32 src = 4;
+  if (this->src() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->src());
+  }
+
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void PBMESG::CheckTypeAndMergeFrom(
+void PBMETA::CheckTypeAndMergeFrom(
     const ::PROTOBUF_NAMESPACE_ID::MessageLite& from) {
-  MergeFrom(*::PROTOBUF_NAMESPACE_ID::internal::DownCast<const PBMESG*>(
+  MergeFrom(*::PROTOBUF_NAMESPACE_ID::internal::DownCast<const PBMETA*>(
       &from));
 }
 
-void PBMESG::MergeFrom(const PBMESG& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:netchat.PBMESG)
+void PBMETA::MergeFrom(const PBMETA& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ntc.PBMETA)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  data_type_.MergeFrom(from.data_type_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      body_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.body_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      mutable_control()->::netchat::PBControl::MergeFrom(from.control());
-    }
-    if (cached_has_bits & 0x00000004u) {
-      head_ = from.head_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      request_ = from.request_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      push_ = from.push_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      pull_ = from.pull_;
-    }
-    if (cached_has_bits & 0x00000040u) {
-      simple_app_ = from.simple_app_;
-    }
-    if (cached_has_bits & 0x00000080u) {
-      app_id_ = from.app_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  data_size_.MergeFrom(from.data_size_);
+  if (from.type() != 0) {
+    set_type(from.type());
   }
-  if (cached_has_bits & 0x00000f00u) {
-    if (cached_has_bits & 0x00000100u) {
-      timestamp_ = from.timestamp_;
-    }
-    if (cached_has_bits & 0x00000200u) {
-      customer_id_ = from.customer_id_;
-    }
-    if (cached_has_bits & 0x00000400u) {
-      data_size_ = from.data_size_;
-    }
-    if (cached_has_bits & 0x00000800u) {
-      priority_ = from.priority_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.code() != 0) {
+    set_code(from.code());
+  }
+  if (from.dst() != 0) {
+    set_dst(from.dst());
+  }
+  if (from.src() != 0) {
+    set_src(from.src());
   }
 }
 
-void PBMESG::CopyFrom(const PBMESG& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:netchat.PBMESG)
+void PBMETA::CopyFrom(const PBMETA& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ntc.PBMETA)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool PBMESG::IsInitialized() const {
-  if (has_control()) {
-    if (!this->control_->IsInitialized()) return false;
-  }
+bool PBMETA::IsInitialized() const {
   return true;
 }
 
-void PBMESG::InternalSwap(PBMESG* other) {
+void PBMETA::InternalSwap(PBMETA* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  data_type_.InternalSwap(&other->data_type_);
-  body_.Swap(&other->body_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(control_, other->control_);
-  swap(head_, other->head_);
-  swap(request_, other->request_);
-  swap(push_, other->push_);
-  swap(pull_, other->pull_);
-  swap(simple_app_, other->simple_app_);
-  swap(app_id_, other->app_id_);
-  swap(timestamp_, other->timestamp_);
-  swap(customer_id_, other->customer_id_);
-  swap(data_size_, other->data_size_);
-  swap(priority_, other->priority_);
+  data_size_.InternalSwap(&other->data_size_);
+  swap(type_, other->type_);
+  swap(code_, other->code_);
+  swap(dst_, other->dst_);
+  swap(src_, other->src_);
 }
 
-std::string PBMESG::GetTypeName() const {
-  return "netchat.PBMESG";
+std::string PBMETA::GetTypeName() const {
+  return "ntc.PBMETA";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace netchat
+}  // namespace ntc
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::netchat::PBNode* Arena::CreateMaybeMessage< ::netchat::PBNode >(Arena* arena) {
-  return Arena::CreateInternal< ::netchat::PBNode >(arena);
-}
-template<> PROTOBUF_NOINLINE ::netchat::PBControl* Arena::CreateMaybeMessage< ::netchat::PBControl >(Arena* arena) {
-  return Arena::CreateInternal< ::netchat::PBControl >(arena);
-}
-template<> PROTOBUF_NOINLINE ::netchat::PBMESG* Arena::CreateMaybeMessage< ::netchat::PBMESG >(Arena* arena) {
-  return Arena::CreateInternal< ::netchat::PBMESG >(arena);
+template<> PROTOBUF_NOINLINE ::ntc::PBMETA* Arena::CreateMaybeMessage< ::ntc::PBMETA >(Arena* arena) {
+  return Arena::CreateInternal< ::ntc::PBMETA >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

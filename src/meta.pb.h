@@ -30,6 +30,7 @@
 #include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_util.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_meta_2eproto
@@ -45,49 +46,95 @@ struct TableStruct_meta_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[1]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
-namespace netchat {
-class PBControl;
-class PBControlDefaultTypeInternal;
-extern PBControlDefaultTypeInternal _PBControl_default_instance_;
-class PBMESG;
-class PBMESGDefaultTypeInternal;
-extern PBMESGDefaultTypeInternal _PBMESG_default_instance_;
-class PBNode;
-class PBNodeDefaultTypeInternal;
-extern PBNodeDefaultTypeInternal _PBNode_default_instance_;
-}  // namespace netchat
+namespace ntc {
+class PBMETA;
+class PBMETADefaultTypeInternal;
+extern PBMETADefaultTypeInternal _PBMETA_default_instance_;
+}  // namespace ntc
 PROTOBUF_NAMESPACE_OPEN
-template<> ::netchat::PBControl* Arena::CreateMaybeMessage<::netchat::PBControl>(Arena*);
-template<> ::netchat::PBMESG* Arena::CreateMaybeMessage<::netchat::PBMESG>(Arena*);
-template<> ::netchat::PBNode* Arena::CreateMaybeMessage<::netchat::PBNode>(Arena*);
+template<> ::ntc::PBMETA* Arena::CreateMaybeMessage<::ntc::PBMETA>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace netchat {
+namespace ntc {
 
+enum Type : int {
+  TYPE_UNKNOWN = 0,
+  SIGNUP = 1,
+  LOGIN = 2,
+  LOGOUT = 3,
+  MESSAGE = 4,
+  FILE = 5,
+  ERROR = 6,
+  Type_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  Type_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool Type_IsValid(int value);
+constexpr Type Type_MIN = TYPE_UNKNOWN;
+constexpr Type Type_MAX = ERROR;
+constexpr int Type_ARRAYSIZE = Type_MAX + 1;
+
+const std::string& Type_Name(Type value);
+template<typename T>
+inline const std::string& Type_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, Type>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function Type_Name.");
+  return Type_Name(static_cast<Type>(enum_t_value));
+}
+bool Type_Parse(
+    const std::string& name, Type* value);
+enum Code : int {
+  CODE_UNKNOWN = 0,
+  OK = 1,
+  REQUEST = 2,
+  SINGUP_EXEIST = 3,
+  SINGUP_SUCCESS = 4,
+  LOGIN_NOT_EXIST = 5,
+  LOGIN_WRONG_PASSWORD = 6,
+  LOGIN_SUCCESS = 7,
+  LOGOUT_SUCCESS = 8,
+  Code_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  Code_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool Code_IsValid(int value);
+constexpr Code Code_MIN = CODE_UNKNOWN;
+constexpr Code Code_MAX = LOGOUT_SUCCESS;
+constexpr int Code_ARRAYSIZE = Code_MAX + 1;
+
+const std::string& Code_Name(Code value);
+template<typename T>
+inline const std::string& Code_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, Code>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function Code_Name.");
+  return Code_Name(static_cast<Code>(enum_t_value));
+}
+bool Code_Parse(
+    const std::string& name, Code* value);
 // ===================================================================
 
-class PBNode :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netchat.PBNode) */ {
+class PBMETA :
+    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:ntc.PBMETA) */ {
  public:
-  PBNode();
-  virtual ~PBNode();
+  PBMETA();
+  virtual ~PBMETA();
 
-  PBNode(const PBNode& from);
-  PBNode(PBNode&& from) noexcept
-    : PBNode() {
+  PBMETA(const PBMETA& from);
+  PBMETA(PBMETA&& from) noexcept
+    : PBMETA() {
     *this = ::std::move(from);
   }
 
-  inline PBNode& operator=(const PBNode& from) {
+  inline PBMETA& operator=(const PBMETA& from) {
     CopyFrom(from);
     return *this;
   }
-  inline PBNode& operator=(PBNode&& from) noexcept {
+  inline PBMETA& operator=(PBMETA&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -96,44 +143,37 @@ class PBNode :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const PBNode& default_instance();
+  static const PBMETA& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PBNode* internal_default_instance() {
-    return reinterpret_cast<const PBNode*>(
-               &_PBNode_default_instance_);
+  static inline const PBMETA* internal_default_instance() {
+    return reinterpret_cast<const PBMETA*>(
+               &_PBMETA_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(PBNode& a, PBNode& b) {
+  friend void swap(PBMETA& a, PBMETA& b) {
     a.Swap(&b);
   }
-  inline void Swap(PBNode* other) {
+  inline void Swap(PBMETA* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PBNode* New() const final {
-    return CreateMaybeMessage<PBNode>(nullptr);
+  inline PBMETA* New() const final {
+    return CreateMaybeMessage<PBMETA>(nullptr);
   }
 
-  PBNode* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<PBNode>(arena);
+  PBMETA* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PBMETA>(arena);
   }
   void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
     final;
-  void CopyFrom(const PBNode& from);
-  void MergeFrom(const PBNode& from);
+  void CopyFrom(const PBMETA& from);
+  void MergeFrom(const PBMETA& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -153,10 +193,10 @@ class PBNode :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(PBNode* other);
+  void InternalSwap(PBMETA* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "netchat.PBNode";
+    return "ntc.PBMETA";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -174,453 +214,55 @@ class PBNode :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kHostnameFieldNumber = 3,
-    kRoleFieldNumber = 1,
-    kIdFieldNumber = 2,
-    kPortFieldNumber = 4,
-    kIsRecoveryFieldNumber = 5,
-    kCustomerIdFieldNumber = 10,
+    kDataSizeFieldNumber = 5,
+    kTypeFieldNumber = 1,
+    kCodeFieldNumber = 2,
+    kDstFieldNumber = 3,
+    kSrcFieldNumber = 4,
   };
-  // optional string hostname = 3;
-  bool has_hostname() const;
-  void clear_hostname();
-  const std::string& hostname() const;
-  void set_hostname(const std::string& value);
-  void set_hostname(std::string&& value);
-  void set_hostname(const char* value);
-  void set_hostname(const char* value, size_t size);
-  std::string* mutable_hostname();
-  std::string* release_hostname();
-  void set_allocated_hostname(std::string* hostname);
-
-  // required int32 role = 1;
-  bool has_role() const;
-  void clear_role();
-  ::PROTOBUF_NAMESPACE_ID::int32 role() const;
-  void set_role(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional int32 id = 2;
-  bool has_id() const;
-  void clear_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 id() const;
-  void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional int32 port = 4;
-  bool has_port() const;
-  void clear_port();
-  ::PROTOBUF_NAMESPACE_ID::int32 port() const;
-  void set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional bool is_recovery = 5;
-  bool has_is_recovery() const;
-  void clear_is_recovery();
-  bool is_recovery() const;
-  void set_is_recovery(bool value);
-
-  // optional int32 customer_id = 10;
-  bool has_customer_id() const;
-  void clear_customer_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 customer_id() const;
-  void set_customer_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // @@protoc_insertion_point(class_scope:netchat.PBNode)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostname_;
-  ::PROTOBUF_NAMESPACE_ID::int32 role_;
-  ::PROTOBUF_NAMESPACE_ID::int32 id_;
-  ::PROTOBUF_NAMESPACE_ID::int32 port_;
-  bool is_recovery_;
-  ::PROTOBUF_NAMESPACE_ID::int32 customer_id_;
-  friend struct ::TableStruct_meta_2eproto;
-};
-// -------------------------------------------------------------------
-
-class PBControl :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netchat.PBControl) */ {
- public:
-  PBControl();
-  virtual ~PBControl();
-
-  PBControl(const PBControl& from);
-  PBControl(PBControl&& from) noexcept
-    : PBControl() {
-    *this = ::std::move(from);
-  }
-
-  inline PBControl& operator=(const PBControl& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline PBControl& operator=(PBControl&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const PBControl& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PBControl* internal_default_instance() {
-    return reinterpret_cast<const PBControl*>(
-               &_PBControl_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
-
-  friend void swap(PBControl& a, PBControl& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(PBControl* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline PBControl* New() const final {
-    return CreateMaybeMessage<PBControl>(nullptr);
-  }
-
-  PBControl* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<PBControl>(arena);
-  }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
-  void CopyFrom(const PBControl& from);
-  void MergeFrom(const PBControl& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(PBControl* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "netchat.PBControl";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  std::string GetTypeName() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kNodeFieldNumber = 2,
-    kCmdFieldNumber = 1,
-    kBarrierGroupFieldNumber = 3,
-    kMsgSigFieldNumber = 4,
-  };
-  // repeated .netchat.PBNode node = 2;
-  int node_size() const;
-  void clear_node();
-  ::netchat::PBNode* mutable_node(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netchat::PBNode >*
-      mutable_node();
-  const ::netchat::PBNode& node(int index) const;
-  ::netchat::PBNode* add_node();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netchat::PBNode >&
-      node() const;
-
-  // required int32 cmd = 1;
-  bool has_cmd() const;
-  void clear_cmd();
-  ::PROTOBUF_NAMESPACE_ID::int32 cmd() const;
-  void set_cmd(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional int32 barrier_group = 3;
-  bool has_barrier_group() const;
-  void clear_barrier_group();
-  ::PROTOBUF_NAMESPACE_ID::int32 barrier_group() const;
-  void set_barrier_group(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional uint64 msg_sig = 4;
-  bool has_msg_sig() const;
-  void clear_msg_sig();
-  ::PROTOBUF_NAMESPACE_ID::uint64 msg_sig() const;
-  void set_msg_sig(::PROTOBUF_NAMESPACE_ID::uint64 value);
-
-  // @@protoc_insertion_point(class_scope:netchat.PBControl)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netchat::PBNode > node_;
-  ::PROTOBUF_NAMESPACE_ID::int32 cmd_;
-  ::PROTOBUF_NAMESPACE_ID::int32 barrier_group_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 msg_sig_;
-  friend struct ::TableStruct_meta_2eproto;
-};
-// -------------------------------------------------------------------
-
-class PBMESG :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netchat.PBMESG) */ {
- public:
-  PBMESG();
-  virtual ~PBMESG();
-
-  PBMESG(const PBMESG& from);
-  PBMESG(PBMESG&& from) noexcept
-    : PBMESG() {
-    *this = ::std::move(from);
-  }
-
-  inline PBMESG& operator=(const PBMESG& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline PBMESG& operator=(PBMESG&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const PBMESG& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PBMESG* internal_default_instance() {
-    return reinterpret_cast<const PBMESG*>(
-               &_PBMESG_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
-
-  friend void swap(PBMESG& a, PBMESG& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(PBMESG* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline PBMESG* New() const final {
-    return CreateMaybeMessage<PBMESG>(nullptr);
-  }
-
-  PBMESG* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<PBMESG>(arena);
-  }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
-  void CopyFrom(const PBMESG& from);
-  void MergeFrom(const PBMESG& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(PBMESG* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "netchat.PBMESG";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  std::string GetTypeName() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kDataTypeFieldNumber = 9,
-    kBodyFieldNumber = 2,
-    kControlFieldNumber = 3,
-    kHeadFieldNumber = 1,
-    kRequestFieldNumber = 4,
-    kPushFieldNumber = 5,
-    kPullFieldNumber = 12,
-    kSimpleAppFieldNumber = 6,
-    kAppIdFieldNumber = 7,
-    kTimestampFieldNumber = 8,
-    kCustomerIdFieldNumber = 10,
-    kDataSizeFieldNumber = 11,
-    kPriorityFieldNumber = 13,
-  };
-  // repeated int32 data_type = 9 [packed = true];
-  int data_type_size() const;
-  void clear_data_type();
-  ::PROTOBUF_NAMESPACE_ID::int32 data_type(int index) const;
-  void set_data_type(int index, ::PROTOBUF_NAMESPACE_ID::int32 value);
-  void add_data_type(::PROTOBUF_NAMESPACE_ID::int32 value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
-      data_type() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
-      mutable_data_type();
-
-  // optional bytes body = 2;
-  bool has_body() const;
-  void clear_body();
-  const std::string& body() const;
-  void set_body(const std::string& value);
-  void set_body(std::string&& value);
-  void set_body(const char* value);
-  void set_body(const void* value, size_t size);
-  std::string* mutable_body();
-  std::string* release_body();
-  void set_allocated_body(std::string* body);
-
-  // optional .netchat.PBControl control = 3;
-  bool has_control() const;
-  void clear_control();
-  const ::netchat::PBControl& control() const;
-  ::netchat::PBControl* release_control();
-  ::netchat::PBControl* mutable_control();
-  void set_allocated_control(::netchat::PBControl* control);
-
-  // optional int32 head = 1;
-  bool has_head() const;
-  void clear_head();
-  ::PROTOBUF_NAMESPACE_ID::int32 head() const;
-  void set_head(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional bool request = 4 [default = false];
-  bool has_request() const;
-  void clear_request();
-  bool request() const;
-  void set_request(bool value);
-
-  // optional bool push = 5;
-  bool has_push() const;
-  void clear_push();
-  bool push() const;
-  void set_push(bool value);
-
-  // optional bool pull = 12;
-  bool has_pull() const;
-  void clear_pull();
-  bool pull() const;
-  void set_pull(bool value);
-
-  // optional bool simple_app = 6 [default = false];
-  bool has_simple_app() const;
-  void clear_simple_app();
-  bool simple_app() const;
-  void set_simple_app(bool value);
-
-  // optional int32 app_id = 7;
-  bool has_app_id() const;
-  void clear_app_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 app_id() const;
-  void set_app_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional int32 timestamp = 8;
-  bool has_timestamp() const;
-  void clear_timestamp();
-  ::PROTOBUF_NAMESPACE_ID::int32 timestamp() const;
-  void set_timestamp(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional int32 customer_id = 10;
-  bool has_customer_id() const;
-  void clear_customer_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 customer_id() const;
-  void set_customer_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // optional int32 data_size = 11;
-  bool has_data_size() const;
+  // repeated int32 data_size = 5;
+  int data_size_size() const;
   void clear_data_size();
-  ::PROTOBUF_NAMESPACE_ID::int32 data_size() const;
-  void set_data_size(::PROTOBUF_NAMESPACE_ID::int32 value);
+  ::PROTOBUF_NAMESPACE_ID::int32 data_size(int index) const;
+  void set_data_size(int index, ::PROTOBUF_NAMESPACE_ID::int32 value);
+  void add_data_size(::PROTOBUF_NAMESPACE_ID::int32 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      data_size() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      mutable_data_size();
 
-  // optional int32 priority = 13 [default = 0];
-  bool has_priority() const;
-  void clear_priority();
-  ::PROTOBUF_NAMESPACE_ID::int32 priority() const;
-  void set_priority(::PROTOBUF_NAMESPACE_ID::int32 value);
+  // .ntc.Type type = 1;
+  void clear_type();
+  ::ntc::Type type() const;
+  void set_type(::ntc::Type value);
 
-  // @@protoc_insertion_point(class_scope:netchat.PBMESG)
+  // .ntc.Code code = 2;
+  void clear_code();
+  ::ntc::Code code() const;
+  void set_code(::ntc::Code value);
+
+  // int32 dst = 3;
+  void clear_dst();
+  ::PROTOBUF_NAMESPACE_ID::int32 dst() const;
+  void set_dst(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 src = 4;
+  void clear_src();
+  ::PROTOBUF_NAMESPACE_ID::int32 src() const;
+  void set_src(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // @@protoc_insertion_point(class_scope:ntc.PBMETA)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > data_size_;
+  mutable std::atomic<int> _data_size_cached_byte_size_;
+  int type_;
+  int code_;
+  ::PROTOBUF_NAMESPACE_ID::int32 dst_;
+  ::PROTOBUF_NAMESPACE_ID::int32 src_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > data_type_;
-  mutable std::atomic<int> _data_type_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr body_;
-  ::netchat::PBControl* control_;
-  ::PROTOBUF_NAMESPACE_ID::int32 head_;
-  bool request_;
-  bool push_;
-  bool pull_;
-  bool simple_app_;
-  ::PROTOBUF_NAMESPACE_ID::int32 app_id_;
-  ::PROTOBUF_NAMESPACE_ID::int32 timestamp_;
-  ::PROTOBUF_NAMESPACE_ID::int32 customer_id_;
-  ::PROTOBUF_NAMESPACE_ID::int32 data_size_;
-  ::PROTOBUF_NAMESPACE_ID::int32 priority_;
   friend struct ::TableStruct_meta_2eproto;
 };
 // ===================================================================
@@ -632,576 +274,108 @@ class PBMESG :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// PBNode
+// PBMETA
 
-// required int32 role = 1;
-inline bool PBNode::has_role() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+// .ntc.Type type = 1;
+inline void PBMETA::clear_type() {
+  type_ = 0;
 }
-inline void PBNode::clear_role() {
-  role_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
+inline ::ntc::Type PBMETA::type() const {
+  // @@protoc_insertion_point(field_get:ntc.PBMETA.type)
+  return static_cast< ::ntc::Type >(type_);
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBNode::role() const {
-  // @@protoc_insertion_point(field_get:netchat.PBNode.role)
-  return role_;
-}
-inline void PBNode::set_role(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000002u;
-  role_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBNode.role)
+inline void PBMETA::set_type(::ntc::Type value) {
+  
+  type_ = value;
+  // @@protoc_insertion_point(field_set:ntc.PBMETA.type)
 }
 
-// optional int32 id = 2;
-inline bool PBNode::has_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// .ntc.Code code = 2;
+inline void PBMETA::clear_code() {
+  code_ = 0;
 }
-inline void PBNode::clear_id() {
-  id_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
+inline ::ntc::Code PBMETA::code() const {
+  // @@protoc_insertion_point(field_get:ntc.PBMETA.code)
+  return static_cast< ::ntc::Code >(code_);
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBNode::id() const {
-  // @@protoc_insertion_point(field_get:netchat.PBNode.id)
-  return id_;
-}
-inline void PBNode::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000004u;
-  id_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBNode.id)
+inline void PBMETA::set_code(::ntc::Code value) {
+  
+  code_ = value;
+  // @@protoc_insertion_point(field_set:ntc.PBMETA.code)
 }
 
-// optional string hostname = 3;
-inline bool PBNode::has_hostname() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
+// int32 dst = 3;
+inline void PBMETA::clear_dst() {
+  dst_ = 0;
 }
-inline void PBNode::clear_hostname() {
-  hostname_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  _has_bits_[0] &= ~0x00000001u;
+inline ::PROTOBUF_NAMESPACE_ID::int32 PBMETA::dst() const {
+  // @@protoc_insertion_point(field_get:ntc.PBMETA.dst)
+  return dst_;
 }
-inline const std::string& PBNode::hostname() const {
-  // @@protoc_insertion_point(field_get:netchat.PBNode.hostname)
-  return hostname_.GetNoArena();
-}
-inline void PBNode::set_hostname(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
-  hostname_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:netchat.PBNode.hostname)
-}
-inline void PBNode::set_hostname(std::string&& value) {
-  _has_bits_[0] |= 0x00000001u;
-  hostname_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:netchat.PBNode.hostname)
-}
-inline void PBNode::set_hostname(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _has_bits_[0] |= 0x00000001u;
-  hostname_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:netchat.PBNode.hostname)
-}
-inline void PBNode::set_hostname(const char* value, size_t size) {
-  _has_bits_[0] |= 0x00000001u;
-  hostname_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:netchat.PBNode.hostname)
-}
-inline std::string* PBNode::mutable_hostname() {
-  _has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_mutable:netchat.PBNode.hostname)
-  return hostname_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* PBNode::release_hostname() {
-  // @@protoc_insertion_point(field_release:netchat.PBNode.hostname)
-  if (!has_hostname()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return hostname_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void PBNode::set_allocated_hostname(std::string* hostname) {
-  if (hostname != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
-  } else {
-    _has_bits_[0] &= ~0x00000001u;
-  }
-  hostname_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), hostname);
-  // @@protoc_insertion_point(field_set_allocated:netchat.PBNode.hostname)
+inline void PBMETA::set_dst(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  dst_ = value;
+  // @@protoc_insertion_point(field_set:ntc.PBMETA.dst)
 }
 
-// optional int32 port = 4;
-inline bool PBNode::has_port() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+// int32 src = 4;
+inline void PBMETA::clear_src() {
+  src_ = 0;
 }
-inline void PBNode::clear_port() {
-  port_ = 0;
-  _has_bits_[0] &= ~0x00000008u;
+inline ::PROTOBUF_NAMESPACE_ID::int32 PBMETA::src() const {
+  // @@protoc_insertion_point(field_get:ntc.PBMETA.src)
+  return src_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBNode::port() const {
-  // @@protoc_insertion_point(field_get:netchat.PBNode.port)
-  return port_;
-}
-inline void PBNode::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000008u;
-  port_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBNode.port)
+inline void PBMETA::set_src(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  src_ = value;
+  // @@protoc_insertion_point(field_set:ntc.PBMETA.src)
 }
 
-// optional bool is_recovery = 5;
-inline bool PBNode::has_is_recovery() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+// repeated int32 data_size = 5;
+inline int PBMETA::data_size_size() const {
+  return data_size_.size();
 }
-inline void PBNode::clear_is_recovery() {
-  is_recovery_ = false;
-  _has_bits_[0] &= ~0x00000010u;
+inline void PBMETA::clear_data_size() {
+  data_size_.Clear();
 }
-inline bool PBNode::is_recovery() const {
-  // @@protoc_insertion_point(field_get:netchat.PBNode.is_recovery)
-  return is_recovery_;
+inline ::PROTOBUF_NAMESPACE_ID::int32 PBMETA::data_size(int index) const {
+  // @@protoc_insertion_point(field_get:ntc.PBMETA.data_size)
+  return data_size_.Get(index);
 }
-inline void PBNode::set_is_recovery(bool value) {
-  _has_bits_[0] |= 0x00000010u;
-  is_recovery_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBNode.is_recovery)
+inline void PBMETA::set_data_size(int index, ::PROTOBUF_NAMESPACE_ID::int32 value) {
+  data_size_.Set(index, value);
+  // @@protoc_insertion_point(field_set:ntc.PBMETA.data_size)
 }
-
-// optional int32 customer_id = 10;
-inline bool PBNode::has_customer_id() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void PBNode::clear_customer_id() {
-  customer_id_ = 0;
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBNode::customer_id() const {
-  // @@protoc_insertion_point(field_get:netchat.PBNode.customer_id)
-  return customer_id_;
-}
-inline void PBNode::set_customer_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000020u;
-  customer_id_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBNode.customer_id)
-}
-
-// -------------------------------------------------------------------
-
-// PBControl
-
-// required int32 cmd = 1;
-inline bool PBControl::has_cmd() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void PBControl::clear_cmd() {
-  cmd_ = 0;
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBControl::cmd() const {
-  // @@protoc_insertion_point(field_get:netchat.PBControl.cmd)
-  return cmd_;
-}
-inline void PBControl::set_cmd(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000001u;
-  cmd_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBControl.cmd)
-}
-
-// repeated .netchat.PBNode node = 2;
-inline int PBControl::node_size() const {
-  return node_.size();
-}
-inline void PBControl::clear_node() {
-  node_.Clear();
-}
-inline ::netchat::PBNode* PBControl::mutable_node(int index) {
-  // @@protoc_insertion_point(field_mutable:netchat.PBControl.node)
-  return node_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netchat::PBNode >*
-PBControl::mutable_node() {
-  // @@protoc_insertion_point(field_mutable_list:netchat.PBControl.node)
-  return &node_;
-}
-inline const ::netchat::PBNode& PBControl::node(int index) const {
-  // @@protoc_insertion_point(field_get:netchat.PBControl.node)
-  return node_.Get(index);
-}
-inline ::netchat::PBNode* PBControl::add_node() {
-  // @@protoc_insertion_point(field_add:netchat.PBControl.node)
-  return node_.Add();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netchat::PBNode >&
-PBControl::node() const {
-  // @@protoc_insertion_point(field_list:netchat.PBControl.node)
-  return node_;
-}
-
-// optional int32 barrier_group = 3;
-inline bool PBControl::has_barrier_group() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void PBControl::clear_barrier_group() {
-  barrier_group_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBControl::barrier_group() const {
-  // @@protoc_insertion_point(field_get:netchat.PBControl.barrier_group)
-  return barrier_group_;
-}
-inline void PBControl::set_barrier_group(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000002u;
-  barrier_group_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBControl.barrier_group)
-}
-
-// optional uint64 msg_sig = 4;
-inline bool PBControl::has_msg_sig() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void PBControl::clear_msg_sig() {
-  msg_sig_ = PROTOBUF_ULONGLONG(0);
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 PBControl::msg_sig() const {
-  // @@protoc_insertion_point(field_get:netchat.PBControl.msg_sig)
-  return msg_sig_;
-}
-inline void PBControl::set_msg_sig(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  _has_bits_[0] |= 0x00000004u;
-  msg_sig_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBControl.msg_sig)
-}
-
-// -------------------------------------------------------------------
-
-// PBMESG
-
-// optional int32 head = 1;
-inline bool PBMESG::has_head() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void PBMESG::clear_head() {
-  head_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::head() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.head)
-  return head_;
-}
-inline void PBMESG::set_head(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000004u;
-  head_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.head)
-}
-
-// optional bytes body = 2;
-inline bool PBMESG::has_body() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void PBMESG::clear_body() {
-  body_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline const std::string& PBMESG::body() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.body)
-  return body_.GetNoArena();
-}
-inline void PBMESG::set_body(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
-  body_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.body)
-}
-inline void PBMESG::set_body(std::string&& value) {
-  _has_bits_[0] |= 0x00000001u;
-  body_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:netchat.PBMESG.body)
-}
-inline void PBMESG::set_body(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _has_bits_[0] |= 0x00000001u;
-  body_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:netchat.PBMESG.body)
-}
-inline void PBMESG::set_body(const void* value, size_t size) {
-  _has_bits_[0] |= 0x00000001u;
-  body_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:netchat.PBMESG.body)
-}
-inline std::string* PBMESG::mutable_body() {
-  _has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_mutable:netchat.PBMESG.body)
-  return body_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* PBMESG::release_body() {
-  // @@protoc_insertion_point(field_release:netchat.PBMESG.body)
-  if (!has_body()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return body_.ReleaseNonDefaultNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void PBMESG::set_allocated_body(std::string* body) {
-  if (body != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
-  } else {
-    _has_bits_[0] &= ~0x00000001u;
-  }
-  body_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), body);
-  // @@protoc_insertion_point(field_set_allocated:netchat.PBMESG.body)
-}
-
-// optional .netchat.PBControl control = 3;
-inline bool PBMESG::has_control() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void PBMESG::clear_control() {
-  if (control_ != nullptr) control_->Clear();
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline const ::netchat::PBControl& PBMESG::control() const {
-  const ::netchat::PBControl* p = control_;
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.control)
-  return p != nullptr ? *p : *reinterpret_cast<const ::netchat::PBControl*>(
-      &::netchat::_PBControl_default_instance_);
-}
-inline ::netchat::PBControl* PBMESG::release_control() {
-  // @@protoc_insertion_point(field_release:netchat.PBMESG.control)
-  _has_bits_[0] &= ~0x00000002u;
-  ::netchat::PBControl* temp = control_;
-  control_ = nullptr;
-  return temp;
-}
-inline ::netchat::PBControl* PBMESG::mutable_control() {
-  _has_bits_[0] |= 0x00000002u;
-  if (control_ == nullptr) {
-    auto* p = CreateMaybeMessage<::netchat::PBControl>(GetArenaNoVirtual());
-    control_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:netchat.PBMESG.control)
-  return control_;
-}
-inline void PBMESG::set_allocated_control(::netchat::PBControl* control) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete control_;
-  }
-  if (control) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      control = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, control, submessage_arena);
-    }
-    _has_bits_[0] |= 0x00000002u;
-  } else {
-    _has_bits_[0] &= ~0x00000002u;
-  }
-  control_ = control;
-  // @@protoc_insertion_point(field_set_allocated:netchat.PBMESG.control)
-}
-
-// optional bool request = 4 [default = false];
-inline bool PBMESG::has_request() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void PBMESG::clear_request() {
-  request_ = false;
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline bool PBMESG::request() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.request)
-  return request_;
-}
-inline void PBMESG::set_request(bool value) {
-  _has_bits_[0] |= 0x00000008u;
-  request_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.request)
-}
-
-// optional int32 app_id = 7;
-inline bool PBMESG::has_app_id() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void PBMESG::clear_app_id() {
-  app_id_ = 0;
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::app_id() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.app_id)
-  return app_id_;
-}
-inline void PBMESG::set_app_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000080u;
-  app_id_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.app_id)
-}
-
-// optional int32 timestamp = 8;
-inline bool PBMESG::has_timestamp() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void PBMESG::clear_timestamp() {
-  timestamp_ = 0;
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::timestamp() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.timestamp)
-  return timestamp_;
-}
-inline void PBMESG::set_timestamp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000100u;
-  timestamp_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.timestamp)
-}
-
-// repeated int32 data_type = 9 [packed = true];
-inline int PBMESG::data_type_size() const {
-  return data_type_.size();
-}
-inline void PBMESG::clear_data_type() {
-  data_type_.Clear();
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::data_type(int index) const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.data_type)
-  return data_type_.Get(index);
-}
-inline void PBMESG::set_data_type(int index, ::PROTOBUF_NAMESPACE_ID::int32 value) {
-  data_type_.Set(index, value);
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.data_type)
-}
-inline void PBMESG::add_data_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  data_type_.Add(value);
-  // @@protoc_insertion_point(field_add:netchat.PBMESG.data_type)
+inline void PBMETA::add_data_size(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  data_size_.Add(value);
+  // @@protoc_insertion_point(field_add:ntc.PBMETA.data_size)
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
-PBMESG::data_type() const {
-  // @@protoc_insertion_point(field_list:netchat.PBMESG.data_type)
-  return data_type_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
-PBMESG::mutable_data_type() {
-  // @@protoc_insertion_point(field_mutable_list:netchat.PBMESG.data_type)
-  return &data_type_;
-}
-
-// optional int32 customer_id = 10;
-inline bool PBMESG::has_customer_id() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void PBMESG::clear_customer_id() {
-  customer_id_ = 0;
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::customer_id() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.customer_id)
-  return customer_id_;
-}
-inline void PBMESG::set_customer_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000200u;
-  customer_id_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.customer_id)
-}
-
-// optional bool push = 5;
-inline bool PBMESG::has_push() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void PBMESG::clear_push() {
-  push_ = false;
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline bool PBMESG::push() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.push)
-  return push_;
-}
-inline void PBMESG::set_push(bool value) {
-  _has_bits_[0] |= 0x00000010u;
-  push_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.push)
-}
-
-// optional bool pull = 12;
-inline bool PBMESG::has_pull() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void PBMESG::clear_pull() {
-  pull_ = false;
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline bool PBMESG::pull() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.pull)
-  return pull_;
-}
-inline void PBMESG::set_pull(bool value) {
-  _has_bits_[0] |= 0x00000020u;
-  pull_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.pull)
-}
-
-// optional bool simple_app = 6 [default = false];
-inline bool PBMESG::has_simple_app() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void PBMESG::clear_simple_app() {
-  simple_app_ = false;
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline bool PBMESG::simple_app() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.simple_app)
-  return simple_app_;
-}
-inline void PBMESG::set_simple_app(bool value) {
-  _has_bits_[0] |= 0x00000040u;
-  simple_app_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.simple_app)
-}
-
-// optional int32 data_size = 11;
-inline bool PBMESG::has_data_size() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void PBMESG::clear_data_size() {
-  data_size_ = 0;
-  _has_bits_[0] &= ~0x00000400u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::data_size() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.data_size)
+PBMETA::data_size() const {
+  // @@protoc_insertion_point(field_list:ntc.PBMETA.data_size)
   return data_size_;
 }
-inline void PBMESG::set_data_size(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000400u;
-  data_size_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.data_size)
-}
-
-// optional int32 priority = 13 [default = 0];
-inline bool PBMESG::has_priority() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
-}
-inline void PBMESG::clear_priority() {
-  priority_ = 0;
-  _has_bits_[0] &= ~0x00000800u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 PBMESG::priority() const {
-  // @@protoc_insertion_point(field_get:netchat.PBMESG.priority)
-  return priority_;
-}
-inline void PBMESG::set_priority(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _has_bits_[0] |= 0x00000800u;
-  priority_ = value;
-  // @@protoc_insertion_point(field_set:netchat.PBMESG.priority)
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+PBMETA::mutable_data_size() {
+  // @@protoc_insertion_point(field_mutable_list:ntc.PBMETA.data_size)
+  return &data_size_;
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace netchat
+}  // namespace ntc
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::ntc::Type> : ::std::true_type {};
+template <> struct is_proto_enum< ::ntc::Code> : ::std::true_type {};
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 
