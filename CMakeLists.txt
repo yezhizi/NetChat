@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
-project(NetChat)
+project(NetDesign2-Server)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DELPP_NO_DEFAULT_LOG_FILE")
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DELPP_NO_DEFAULT_LOG_FILE -DELPP_THREAD_SAFE")
 
 set(THIRD_PARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party"
         CACHE PATH "Where to install third party headers and libs")  # third party libraries
@@ -32,15 +33,15 @@ include(proto2cpp)
 find_package(Threads REQUIRED)
 
 
-
-file(GLOB PROTO_FILES ${SOURCE_DIR}/*.proto)
+set(PROTODIR  "${CMAKE_CURRENT_SOURCE_DIR}/proto")
+file(GLOB PROTO_FILES ${PROTODIR}/*.proto)
 
 foreach(proto_name ${PROTO_FILES})
-    file(RELATIVE_PATH proto_rel_name ${SOURCE_DIR} ${proto_name})
+    file(RELATIVE_PATH proto_rel_name ${PROTODIR} ${proto_name})
     list(APPEND REL_PROTO_FILES ${proto_rel_name})
 endforeach()
 
-PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${SOURCE_DIR} ${REL_PROTO_FILES})
+PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${PROTODIR} ${REL_PROTO_FILES})
 
 add_library(proto_lib STATIC ${PROTO_SRCS} ${PROTO_HDRS})
 set_target_properties(proto_lib PROPERTIES ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
@@ -53,10 +54,10 @@ set(HEADERS ${SOURCE_DIR} ${INCLUDE_DIR} ${SERVER_DIR} ${CLIENT_DIR})
 
 
 # test
-add_executable(NetChat ${SRC} )
-set_target_properties(NetChat PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-target_include_directories(NetChat PRIVATE ${EASYLOGGINGPP_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR}  ${HEADERS})
-target_link_libraries(NetChat PUBLIC easyloggingpp_imported proto_lib)
+add_executable(NetDesign2-Server ${SRC} )
+set_target_properties(NetDesign2-Server PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+target_include_directories(NetDesign2-Server PRIVATE ${EASYLOGGINGPP_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR}  ${HEADERS})
+target_link_libraries(NetDesign2-Server PUBLIC easyloggingpp_imported proto_lib)
 
 
 

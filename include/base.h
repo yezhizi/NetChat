@@ -6,7 +6,7 @@ namespace ntc
     static const int kvEmpty = 0;
 
     static const std::string kServerIP = "127.0.0.1";
-    static const int kServerPort = 8080;
+    static const int kServerPort = 8081;
 
     static const int ServerID = 1;
 
@@ -15,6 +15,8 @@ namespace ntc
     {
         int id;
         std::string name;
+        std::string phone_number;
+        std::string password;
     };
 }
 

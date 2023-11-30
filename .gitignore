@@ -1,6 +1,7 @@
 /.vscode/
 /bin/*
 /lib/*
+/build/
 /build/CMakeFiles/
 /build/CMakeCache.txt
 /build/tmp/
@@ -11,3 +12,4 @@
 /build/*/*-stamp/
 /third_party/
 /logs/
+Client/

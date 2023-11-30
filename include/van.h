@@ -5,25 +5,24 @@
 #include <thread>
 #include <string>
 #include "message.h"
-#include "meta.pb.h"
-class PBMeta;
+
 class Van {
 public:
-    int Send(const Message& msg);
+    int Send(const Packet& msg);
     Van();
     virtual ~Van() {}
 protected:
     virtual void Connect() = 0;
     virtual void Bind() = 0;
-    virtual int SendMesg(const Message& msg) = 0;
-    virtual int RecvMesg(Message* msg) = 0;
-    void packMeta(const Meta& meta, char** buf, int* size);
-
-private:
+    virtual int SendMesg(const Packet& msg) = 0;
+    virtual int RecvMesg(Packet* msg) = 0;
+    // void packMeta(const Meta& meta, char** buf, int* size);
     int _socket;
+private:
+
     void Receiving();
     std::unique_ptr<std::thread> receiving_thread_;
-    std::atomic<size_t> send_bytes_{0};
+    std::atomic<size_t> send_bytes_{ 0 };
 };
 
 

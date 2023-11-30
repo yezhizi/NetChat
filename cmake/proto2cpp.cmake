@@ -12,6 +12,7 @@ function(PROTOBUF_GENERATE_CPP  SRCS HDRS ROOT_DIR )
         set(ABS_FIL ${ROOT_DIR}/${FIL})
         get_filename_component(FIL_WE ${FIL} NAME_WE)
         get_filename_component(FIL_DIR ${ABS_FIL} PATH)
+        message(STATUS "ROOT_DIR:${ROOT_DIR}")
         file(RELATIVE_PATH REL_DIR ${ROOT_DIR} ${FIL_DIR})
 
         list(APPEND ${SRCS} "${SOURCE_DIR}/${FIL_WE}.pb.cc")

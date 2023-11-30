@@ -1,0 +1,141 @@
+syntax = "proto3";
+package netdesign2;
+option java_package = "top.focess.netdesign.proto";
+option optimize_for = LITE_RUNTIME;
+
+import "google/protobuf/any.proto";
+
+message Packet {
+  int32 packetId = 1;
+  google.protobuf.Any content = 2;
+}
+
+//packet id = 0 client packet
+message ServerStatusRequest {
+  string clientPublicKey = 1;
+}
+
+//packet id = 1 server packet
+message ServerStatusResponse {
+  bool online = 1;
+  bool registrable = 2;
+  string serverPublicKey = 3;
+}
+
+//packet id = 6 client packet
+message ServerStatusUpdateRequest {
+}
+
+//packet id = 7 server packet
+message ServerStatusUpdateResponse {
+  bool online = 1;
+  bool registrable = 2;
+}
+
+//packet id = 2 client packet
+message LoginPreRequest {
+  string username = 1;
+}
+
+//packet id = 3 server packet
+message LoginPreResponse {
+  string challenge = 1;
+}
+
+//packet id = 4 client packet
+message LoginRequest{
+  string username = 1;
+  string hashPassword = 2;
+}
+
+//packet id = 5 server packet
+message LoginResponse {
+  bool logined = 1;
+  string token = 2;
+}
+
+message Contact {
+  int32 id = 1;
+  string name = 2;
+  bool online = 3;
+  ContactType type = 4;
+  repeated Contact members = 5; // optional, only if type is GROUP
+  int32 header = 6;
+
+  enum ContactType {
+    FRIEND = 0;
+    GROUP = 1;
+    MEMBER = 2;
+  }
+}
+
+//packet id = 8 server packet0 return ClientAckResponse
+message ContactListRequest {
+  repeated Contact contacts = 1;
+}
+
+//packet id = 9 client packet0
+message ClientAckResponse {
+}
+
+//packet id = 10 server packet0 return ClientAckResponse
+message ContactRequest {
+  Contact contact = 1;
+  bool delete = 2;
+}
+
+//packet id = 11 server packet
+message ServerAckResponse {
+}
+
+enum MessageType {
+  TEXT = 0;
+  IMAGE = 1;
+  FILE = 2;
+}
+
+message RawMessage {
+  int32 from = 1;
+  int32 to = 2;
+  MessageType type = 3;
+  string content = 4;
+  string hash = 5;
+}
+
+message Message {
+  RawMessage message = 1;
+  int32 id = 2;
+  int32 timestamp = 3;
+  int32 internalId = 4;
+}
+
+//packet id = 12 client packet
+message ContactMessageRequest {
+  string token = 1;
+  int32 id = 2;
+  int32 internalId = 3;
+}
+
+//packet id = 13 server packet
+message ContactMessageResponse {
+  Message message = 1;
+}
+
+//packet id = 14 client packet
+message FriendSendMessageRequest {
+  RawMessage message = 1;
+}
+
+//packet id = 15 server packet
+message FriendSendMessageResponse {
+  Message message = 1; // fail if message.id == -1
+}
+
+//packet id = 16 client packet return ServerAckResponse
+message SetupChannelRequest {
+  string token = 1;
+}
+
+//packet id = 17 server packet return ClientAckResponse
+message ChannelHeartRequest {
+}
