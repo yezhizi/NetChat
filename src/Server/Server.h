@@ -3,10 +3,14 @@
 #include "server_van.h"
 #include "logging.h"
 #include <mutex>
+#include "user_manager.h"
+namespace ntc{
+
 class Server
 {
 private:
     Van* _van;
+    UM* _um;
 
     void Init();
     void Finalize();
@@ -28,11 +32,14 @@ public:
     static inline std::shared_ptr<Server> getSharedPtr() {
         return _getsharedPtr();
     }
+    const Van * getVan() const { return this->_van; }
+    const UM * getUM() const { return this->_um; }
+
     int Signup( std::string phone_number, const std::string &password);
     ~Server() { this->Finalize(); }
 
 };
 
 
-
+}
 

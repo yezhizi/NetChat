@@ -3,6 +3,7 @@
 #include "Server.h"
 
 INITIALIZE_EASYLOGGINGPP
+using namespace ntc;
 
 int main(int argc, char* argv[]) {
    el::configureServerLogger();

@@ -1,5 +1,6 @@
 #include "Server.h"
 
+namespace ntc{
 
 
 void Server::Init()
@@ -12,4 +13,5 @@ void Server::Finalize()
 {
     delete this->_van;
     LOG(INFO) << "Server closed";
+}
 }

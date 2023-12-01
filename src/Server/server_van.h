@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <thread>
 #include <sys/epoll.h>
+namespace ntc{
 
 const int MAX_EVENTS = 10;
 
@@ -18,6 +19,7 @@ class ServerVan : public Van
 {
 public:
     ServerVan() : Van() {
+        
         this->_socket = socket(AF_INET, SOCK_STREAM, 0);
         LOG(INFO) << "ServerVan initialized";
         this->Bind();
@@ -89,7 +91,7 @@ protected:
         }
 
     }
-    int SendMesg(const Packet& msg) override{
+    int SendMesg(const Packet& msg,const std::string to ,const std::string from) override{
         //TODO 
         return 0;
     }
@@ -112,7 +114,7 @@ private:
 
     
 
-
+}
 
 
 #endif //_CLIENT_VAN_H
