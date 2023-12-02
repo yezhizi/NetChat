@@ -1,45 +1,37 @@
 #pragma once
-#include<sys/socket.h>
-#include "server_van.h"
 #include "logging.h"
-#include <mutex>
-#include "user_manager.h"
-namespace ntc{
+#include "van.h"
 
-class Server
-{
-private:
-    Van* _van;
-    UM* _um;
+#include <mutex>
+#include <sys/socket.h>
+#include <unordered_map>
+namespace ntc {
+
+class Server {
+  friend class UM;
+  private:
+    Van *_van;
 
     void Init();
     void Finalize();
 
-    static std::shared_ptr<Server> _getsharedPtr() {
-        static std::shared_ptr<Server> instance_ptr(new Server());
-        return instance_ptr;
-    }
-
     Server() { this->Init(); }
-    Server(const Server&) = delete;
-    Server& operator=(const Server&) = delete;
+    Server(const Server &) = delete;
+    Server &operator=(const Server &) = delete;
+
+    //临时连接池
+        std::unordered_map<std::string, int> _temp_socket_pool;
 
 
-public:
-    static inline Server* getInstance() {
-        return _getsharedPtr().get();
+  public:
+    static Server *Get() {
+        static Server server;
+        return &server;
     }
-    static inline std::shared_ptr<Server> getSharedPtr() {
-        return _getsharedPtr();
-    }
-    const Van * getVan() const { return this->_van; }
-    const UM * getUM() const { return this->_um; }
+    const Van *getVan() const { return this->_van; }
 
-    int Signup( std::string phone_number, const std::string &password);
+    int Signup(std::string phone_number, const std::string &password);
     ~Server() { this->Finalize(); }
-
 };
 
-
-}
-
+} // namespace ntc

@@ -23,6 +23,7 @@ set(MYCMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH ${MYCMAKE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${MYCMAKE_DIR}/third-party)
 
+
 # easyloggingpp
 include(easyloggingpp)
 
@@ -30,6 +31,7 @@ include(easyloggingpp)
 include(zlib)
 include(protobuf)
 include(proto2cpp)
+include(libuuid)
 find_package(Threads REQUIRED)
 
 
@@ -56,9 +58,9 @@ set(HEADERS ${SOURCE_DIR} ${INCLUDE_DIR} ${SERVER_DIR} ${CLIENT_DIR})
 # test
 add_executable(NetDesign2-Server ${SRC} )
 set_target_properties(NetDesign2-Server PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-target_include_directories(NetDesign2-Server PRIVATE ${EASYLOGGINGPP_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR}  ${HEADERS})
+target_include_directories(NetDesign2-Server PRIVATE ${EASYLOGGINGPP_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR} ${LIBUUID_INCLUDE_DIR}  ${HEADERS})
 target_link_libraries(NetDesign2-Server PUBLIC easyloggingpp_imported proto_lib)
-
+target_link_libraries(NetDesign2-Server PUBLIC libuuid_imported )
 
 
 
