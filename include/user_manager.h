@@ -39,9 +39,9 @@ class UM {
     int setLongLifeSocket(const std::string &user_id, int fd) { return 0; }
     // 临时连接池
     // 设置对应的临时连接socket  ipport -> fd threadsafe
-    void setTempSocket(const std::string &ipport, int fd) {
+    void setRevcSocketMp(const std::string &ipport, int fd) {
         std::lock_guard<std::mutex> lock(this->_temp_socket_pool_mu);
-        this->server_ptr_->_temp_socket_pool[ipport] = fd;
+        this->server_ptr_->_revc_socket_pool[ipport] = fd;
     }
 };
 } // namespace ntc

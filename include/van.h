@@ -13,7 +13,7 @@ public:
     Van();
     virtual ~Van() {}
 protected:
-    virtual void Connect() = 0;
+    virtual void Accepting() = 0;
     virtual void Bind() = 0;
     virtual int SendMesg(const Packet& msg,const std::string to ,const std::string from) = 0;
     virtual int RecvMesg(Packet* msg) = 0;

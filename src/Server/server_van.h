@@ -5,6 +5,7 @@
 #include "base.h"
 #include "logging.h"
 #include "user_manager.h"
+#include "threadsafe_queue.h"
 #include "van.h"
 #include <arpa/inet.h>
 #include <mutex>
@@ -23,17 +24,26 @@ class ServerVan : public Van {
         this->_socket = socket(AF_INET, SOCK_STREAM, 0);
         LOG(INFO) << "ServerVan initialized";
         this->Bind();
-        this->epoll_fd_ = epoll_create(MAX_EVENTS);
+
+        this->RevcSocketThreads_.resize(Server::getRevcSocketNum());
+        for (auto &t : this->RevcSocketThreads_)
+            t = std::thread(&ServerVan::RevcSocketThreadFunc_, this);
+        //bind the working thread function
+
+        int epoll_fd_ = epoll_create(MAX_EVENTS);
+        LOG_IF(epoll_fd_ < 0, FATAL) << "epoll_create failed";
+        this->epoll_fd_ = epoll_fd_;
+
         struct epoll_event event;
         event.events = EPOLLIN;
         event.data.fd = this->_socket;
 
-        epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, this->_socket, &event);
-
-        this->connecting_thread_ = std::unique_ptr<std::thread>(
-            new std::thread(&ServerVan::Connect, this));
+        int ret = epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, this->_socket, &event);
+        LOG_IF(ret < 0, FATAL) << "epoll_ctl add server socket failed";
+        this->accepting_thread_ = std::unique_ptr<std::thread>(
+            new std::thread(&ServerVan::Accepting, this));
     }
-    ~ServerVan() { this->connecting_thread_->join(); }
+    ~ServerVan() { this->accepting_thread_->join(); }
 
   protected:
     void Bind() override {
@@ -50,7 +60,7 @@ class ServerVan : public Van {
         LOG_IF(ret < 0, FATAL) << "listen server socket failed";
         LOG(INFO) << "listen server socket success";
     }
-    void Connect() override {
+    void Accepting() override {
         // TODO : modify the epoll logic
         while (true) {
             struct epoll_event events[MAX_EVENTS];
@@ -78,13 +88,17 @@ class ServerVan : public Van {
                     LOG(INFO) << "accept client socket success from "
                               << client_ip_port;
 
-                    UM::Get()->setTempSocket(client_ip_port, client_socket);
+                    UM::Get()->setRevcSocketMp(client_ip_port, client_socket);
 
                     struct epoll_event event;
                     event.events = EPOLLIN | EPOLLET;
                     event.data.fd = client_socket;
-                    epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, client_socket,
+                    int ret =epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, client_socket,
                               &event);
+                    LOG_IF(ret < 0, FATAL) << "epoll_ctl add client socket failed";
+                }else{
+                    // the client socket is ready to read, add to the queue
+                    if (events[i].events & EPOLLIN) this->RevcSocketQueue_.Push(events[i].data.fd);
                 }
             }
         }
@@ -100,10 +114,24 @@ class ServerVan : public Van {
     }
 
   private:
-    std::unique_ptr<std::thread> connecting_thread_;
+    std::unique_ptr<std::thread> accepting_thread_;
+    //临时连接池
+    ThreadsafeQueue<int> RevcSocketQueue_;
+    //工作在临时连接池的工作线程
+    std::vector<std::thread> RevcSocketThreads_;
 
     int epoll_fd_;
     std::mutex _mtx;
+
+    //工作线程函数
+    void RevcSocketThreadFunc_(){
+        while(true){
+            int client_fd ;
+            this->RevcSocketQueue_.WaitAndPop(&client_fd);
+            Server::Get()->processRevcSocket(client_fd);
+        }
+    
+    }
 };
 
 } // namespace ntc
