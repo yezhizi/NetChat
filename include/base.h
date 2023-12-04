@@ -4,6 +4,8 @@
 namespace ntc {
 static const int kvEmpty = 0;
 
+static const size_t kChallengeSize = 32;
+
 static const int kMaxMessageSize = 1024 * 1024; // 1MB
 
 static const std::string kServerIP = "127.0.0.1";

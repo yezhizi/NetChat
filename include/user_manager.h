@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+
 namespace ntc {
 
 class UM {
@@ -30,6 +31,7 @@ class UM {
 
     // mutex
     std::mutex _temp_socket_pool_mu;
+    std::mutex _challenge_pool_mu;
 
   public:
     static inline UM *Get() { return getSharedPtr().get(); }
@@ -42,6 +44,47 @@ class UM {
     void setRevcSocketMp(const std::string &ipport, int fd) {
         std::lock_guard<std::mutex> lock(this->_temp_socket_pool_mu);
         this->server_ptr_->_revc_socket_pool[ipport] = fd;
+    }
+
+    // 用户数据  username->str id->int32 pass->str(sha256 hash)
+    //  TODO 换成数据库接口
+    std::unordered_map<std::string, std::pair<int, std::string>>
+        _test_user_info;
+    std::pair<int, std::string> getUserInfo(const std::string &username) {
+        if (this->_test_user_info.find(username) !=
+            this->_test_user_info.end()) {
+            return this->_test_user_info[username];
+        } else {
+            return std::make_pair(-1, "");
+        }
+    }
+    int setUserInfo(const std::string &username, const std::string &password) {
+
+        this->_test_user_info[username] = std::make_pair(0, SHA256(password));
+        return 0;
+    }
+
+    // 用户登录
+    //  设置对应的challenge  username -> challenge threadsafe
+    bool setChallengeMp(const std::string &username,
+                        const std::string &challenge) {
+        // TODO 查找对应的用户是否注册
+        if (/*not find*/ false)
+            return false;
+
+        std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
+        this->server_ptr_->_challenge_pool[username] = challenge;
+        return true;
+    }
+    // 获取对应的challenge  username -> challenge threadsafe
+    std::string getChallengeMp(const std::string &username) {
+        std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
+        if (this->server_ptr_->_challenge_pool.find(username) !=
+            this->server_ptr_->_challenge_pool.end()) {
+            return this->server_ptr_->_challenge_pool[username];
+        } else {
+            return "";
+        }
     }
 };
 } // namespace ntc

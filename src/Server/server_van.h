@@ -118,7 +118,22 @@ class ServerVan : public Van {
         // TODO
         return 0;
     }
-    int SendMesg(const Packet &msg, const int fd) override { return 0; }
+    int SendMesg(const Packet &msg, const int fd) override {
+        int bytes = 0;
+        char buf[ntc::kMaxMessageSize];
+        msg.SerializeToArray(buf, ntc::kMaxMessageSize);
+        int len = msg.ByteSizeLong();
+        while (bytes < len) {
+            int size_send = send(fd, buf + bytes, len - bytes, 0);
+            if (size_send < 0) {
+                LOG(ERROR) << "send message failed";
+                return -1;
+            } else {
+                bytes += size_send;
+            }
+        }
+        return bytes;
+    }
     int RecvMesg(int fd, Packet *msg) override {
         // TODO
         int bytes = 0;
