@@ -26,11 +26,13 @@
 #include <google/protobuf/generated_message_table_driven.h>
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/inlined_string_field.h>
-#include <google/protobuf/metadata_lite.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/metadata.h>
+#include <google/protobuf/generated_message_reflection.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_util.h>
+#include <google/protobuf/generated_enum_reflection.h>
+#include <google/protobuf/unknown_field_set.h>
 #include <google/protobuf/any.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -53,6 +55,7 @@ struct TableStruct_messages_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_messages_2eproto;
 namespace netdesign2 {
 class ChannelHeartRequest;
 class ChannelHeartRequestDefaultTypeInternal;
@@ -159,16 +162,20 @@ constexpr Contact_ContactType Contact_ContactType_ContactType_MIN = Contact_Cont
 constexpr Contact_ContactType Contact_ContactType_ContactType_MAX = Contact_ContactType_MEMBER;
 constexpr int Contact_ContactType_ContactType_ARRAYSIZE = Contact_ContactType_ContactType_MAX + 1;
 
-const std::string& Contact_ContactType_Name(Contact_ContactType value);
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Contact_ContactType_descriptor();
 template<typename T>
 inline const std::string& Contact_ContactType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, Contact_ContactType>::value ||
     ::std::is_integral<T>::value,
     "Incorrect type passed to function Contact_ContactType_Name.");
-  return Contact_ContactType_Name(static_cast<Contact_ContactType>(enum_t_value));
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    Contact_ContactType_descriptor(), enum_t_value);
 }
-bool Contact_ContactType_Parse(
-    const std::string& name, Contact_ContactType* value);
+inline bool Contact_ContactType_Parse(
+    const std::string& name, Contact_ContactType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<Contact_ContactType>(
+    Contact_ContactType_descriptor(), name, value);
+}
 enum MessageType : int {
   TEXT = 0,
   IMAGE = 1,
@@ -181,20 +188,24 @@ constexpr MessageType MessageType_MIN = TEXT;
 constexpr MessageType MessageType_MAX = FILE;
 constexpr int MessageType_ARRAYSIZE = MessageType_MAX + 1;
 
-const std::string& MessageType_Name(MessageType value);
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MessageType_descriptor();
 template<typename T>
 inline const std::string& MessageType_Name(T enum_t_value) {
   static_assert(::std::is_same<T, MessageType>::value ||
     ::std::is_integral<T>::value,
     "Incorrect type passed to function MessageType_Name.");
-  return MessageType_Name(static_cast<MessageType>(enum_t_value));
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    MessageType_descriptor(), enum_t_value);
 }
-bool MessageType_Parse(
-    const std::string& name, MessageType* value);
+inline bool MessageType_Parse(
+    const std::string& name, MessageType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MessageType>(
+    MessageType_descriptor(), name, value);
+}
 // ===================================================================
 
 class Packet :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.Packet) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.Packet) */ {
  public:
   Packet();
   virtual ~Packet();
@@ -218,6 +229,15 @@ class Packet :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const Packet& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -245,8 +265,8 @@ class Packet :
   Packet* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<Packet>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const Packet& from);
   void MergeFrom(const Packet& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -261,13 +281,14 @@ class Packet :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(Packet* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -282,7 +303,14 @@ class Packet :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -309,7 +337,7 @@ class Packet :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   PROTOBUF_NAMESPACE_ID::Any* content_;
   ::PROTOBUF_NAMESPACE_ID::int32 packetid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -318,7 +346,7 @@ class Packet :
 // -------------------------------------------------------------------
 
 class ServerStatusRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusRequest) */ {
  public:
   ServerStatusRequest();
   virtual ~ServerStatusRequest();
@@ -342,6 +370,15 @@ class ServerStatusRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ServerStatusRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -369,8 +406,8 @@ class ServerStatusRequest :
   ServerStatusRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ServerStatusRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ServerStatusRequest& from);
   void MergeFrom(const ServerStatusRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -385,13 +422,14 @@ class ServerStatusRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ServerStatusRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -406,7 +444,14 @@ class ServerStatusRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -430,7 +475,7 @@ class ServerStatusRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientpublickey_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -438,7 +483,7 @@ class ServerStatusRequest :
 // -------------------------------------------------------------------
 
 class ServerStatusResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusResponse) */ {
  public:
   ServerStatusResponse();
   virtual ~ServerStatusResponse();
@@ -462,6 +507,15 @@ class ServerStatusResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ServerStatusResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -489,8 +543,8 @@ class ServerStatusResponse :
   ServerStatusResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ServerStatusResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ServerStatusResponse& from);
   void MergeFrom(const ServerStatusResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -505,13 +559,14 @@ class ServerStatusResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ServerStatusResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -526,7 +581,14 @@ class ServerStatusResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -562,7 +624,7 @@ class ServerStatusResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr serverpublickey_;
   bool online_;
   bool registrable_;
@@ -572,7 +634,7 @@ class ServerStatusResponse :
 // -------------------------------------------------------------------
 
 class ServerStatusUpdateRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusUpdateRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusUpdateRequest) */ {
  public:
   ServerStatusUpdateRequest();
   virtual ~ServerStatusUpdateRequest();
@@ -596,6 +658,15 @@ class ServerStatusUpdateRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ServerStatusUpdateRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -623,8 +694,8 @@ class ServerStatusUpdateRequest :
   ServerStatusUpdateRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ServerStatusUpdateRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ServerStatusUpdateRequest& from);
   void MergeFrom(const ServerStatusUpdateRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -639,13 +710,14 @@ class ServerStatusUpdateRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ServerStatusUpdateRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -660,7 +732,14 @@ class ServerStatusUpdateRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -670,14 +749,14 @@ class ServerStatusUpdateRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
 // -------------------------------------------------------------------
 
 class ServerStatusUpdateResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusUpdateResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ServerStatusUpdateResponse) */ {
  public:
   ServerStatusUpdateResponse();
   virtual ~ServerStatusUpdateResponse();
@@ -701,6 +780,15 @@ class ServerStatusUpdateResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ServerStatusUpdateResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -728,8 +816,8 @@ class ServerStatusUpdateResponse :
   ServerStatusUpdateResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ServerStatusUpdateResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ServerStatusUpdateResponse& from);
   void MergeFrom(const ServerStatusUpdateResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -744,13 +832,14 @@ class ServerStatusUpdateResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ServerStatusUpdateResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -765,7 +854,14 @@ class ServerStatusUpdateResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -789,7 +885,7 @@ class ServerStatusUpdateResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   bool online_;
   bool registrable_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -798,7 +894,7 @@ class ServerStatusUpdateResponse :
 // -------------------------------------------------------------------
 
 class LoginPreRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.LoginPreRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.LoginPreRequest) */ {
  public:
   LoginPreRequest();
   virtual ~LoginPreRequest();
@@ -822,6 +918,15 @@ class LoginPreRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const LoginPreRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -849,8 +954,8 @@ class LoginPreRequest :
   LoginPreRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<LoginPreRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const LoginPreRequest& from);
   void MergeFrom(const LoginPreRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -865,13 +970,14 @@ class LoginPreRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(LoginPreRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -886,7 +992,14 @@ class LoginPreRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -910,7 +1023,7 @@ class LoginPreRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -918,7 +1031,7 @@ class LoginPreRequest :
 // -------------------------------------------------------------------
 
 class LoginPreResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.LoginPreResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.LoginPreResponse) */ {
  public:
   LoginPreResponse();
   virtual ~LoginPreResponse();
@@ -942,6 +1055,15 @@ class LoginPreResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const LoginPreResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -969,8 +1091,8 @@ class LoginPreResponse :
   LoginPreResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<LoginPreResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const LoginPreResponse& from);
   void MergeFrom(const LoginPreResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -985,13 +1107,14 @@ class LoginPreResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(LoginPreResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1006,7 +1129,14 @@ class LoginPreResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1030,7 +1160,7 @@ class LoginPreResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr challenge_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -1038,7 +1168,7 @@ class LoginPreResponse :
 // -------------------------------------------------------------------
 
 class LoginRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.LoginRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.LoginRequest) */ {
  public:
   LoginRequest();
   virtual ~LoginRequest();
@@ -1062,6 +1192,15 @@ class LoginRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const LoginRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1089,8 +1228,8 @@ class LoginRequest :
   LoginRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<LoginRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const LoginRequest& from);
   void MergeFrom(const LoginRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1105,13 +1244,14 @@ class LoginRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(LoginRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1126,7 +1266,14 @@ class LoginRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1162,7 +1309,7 @@ class LoginRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hashpassword_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1171,7 +1318,7 @@ class LoginRequest :
 // -------------------------------------------------------------------
 
 class LoginResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.LoginResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.LoginResponse) */ {
  public:
   LoginResponse();
   virtual ~LoginResponse();
@@ -1195,6 +1342,15 @@ class LoginResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const LoginResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1222,8 +1378,8 @@ class LoginResponse :
   LoginResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<LoginResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const LoginResponse& from);
   void MergeFrom(const LoginResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1238,13 +1394,14 @@ class LoginResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(LoginResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1259,7 +1416,14 @@ class LoginResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1289,7 +1453,7 @@ class LoginResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
   bool logined_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1298,7 +1462,7 @@ class LoginResponse :
 // -------------------------------------------------------------------
 
 class Contact :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.Contact) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.Contact) */ {
  public:
   Contact();
   virtual ~Contact();
@@ -1322,6 +1486,15 @@ class Contact :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const Contact& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1349,8 +1522,8 @@ class Contact :
   Contact* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<Contact>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const Contact& from);
   void MergeFrom(const Contact& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1365,13 +1538,14 @@ class Contact :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(Contact* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1386,7 +1560,14 @@ class Contact :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1406,6 +1587,10 @@ class Contact :
     Contact_ContactType_ContactType_MAX;
   static constexpr int ContactType_ARRAYSIZE =
     Contact_ContactType_ContactType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  ContactType_descriptor() {
+    return Contact_ContactType_descriptor();
+  }
   template<typename T>
   static inline const std::string& ContactType_Name(T enum_t_value) {
     static_assert(::std::is_same<T, ContactType>::value ||
@@ -1474,7 +1659,7 @@ class Contact :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Contact > members_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
@@ -1487,7 +1672,7 @@ class Contact :
 // -------------------------------------------------------------------
 
 class ContactListRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ContactListRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ContactListRequest) */ {
  public:
   ContactListRequest();
   virtual ~ContactListRequest();
@@ -1511,6 +1696,15 @@ class ContactListRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ContactListRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1538,8 +1732,8 @@ class ContactListRequest :
   ContactListRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ContactListRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ContactListRequest& from);
   void MergeFrom(const ContactListRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1554,13 +1748,14 @@ class ContactListRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ContactListRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1575,7 +1770,14 @@ class ContactListRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1599,7 +1801,7 @@ class ContactListRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Contact > contacts_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -1607,7 +1809,7 @@ class ContactListRequest :
 // -------------------------------------------------------------------
 
 class ClientAckResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ClientAckResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ClientAckResponse) */ {
  public:
   ClientAckResponse();
   virtual ~ClientAckResponse();
@@ -1631,6 +1833,15 @@ class ClientAckResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ClientAckResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1658,8 +1869,8 @@ class ClientAckResponse :
   ClientAckResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ClientAckResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ClientAckResponse& from);
   void MergeFrom(const ClientAckResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1674,13 +1885,14 @@ class ClientAckResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ClientAckResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1695,7 +1907,14 @@ class ClientAckResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1705,14 +1924,14 @@ class ClientAckResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
 // -------------------------------------------------------------------
 
 class ContactRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ContactRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ContactRequest) */ {
  public:
   ContactRequest();
   virtual ~ContactRequest();
@@ -1736,6 +1955,15 @@ class ContactRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ContactRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1763,8 +1991,8 @@ class ContactRequest :
   ContactRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ContactRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ContactRequest& from);
   void MergeFrom(const ContactRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1779,13 +2007,14 @@ class ContactRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ContactRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1800,7 +2029,14 @@ class ContactRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1827,7 +2063,7 @@ class ContactRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::netdesign2::Contact* contact_;
   bool delete__;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1836,7 +2072,7 @@ class ContactRequest :
 // -------------------------------------------------------------------
 
 class ServerAckResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ServerAckResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ServerAckResponse) */ {
  public:
   ServerAckResponse();
   virtual ~ServerAckResponse();
@@ -1860,6 +2096,15 @@ class ServerAckResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ServerAckResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1887,8 +2132,8 @@ class ServerAckResponse :
   ServerAckResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ServerAckResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ServerAckResponse& from);
   void MergeFrom(const ServerAckResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1903,13 +2148,14 @@ class ServerAckResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ServerAckResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -1924,7 +2170,14 @@ class ServerAckResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -1934,14 +2187,14 @@ class ServerAckResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
 // -------------------------------------------------------------------
 
 class RawMessage :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.RawMessage) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.RawMessage) */ {
  public:
   RawMessage();
   virtual ~RawMessage();
@@ -1965,6 +2218,15 @@ class RawMessage :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const RawMessage& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -1992,8 +2254,8 @@ class RawMessage :
   RawMessage* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<RawMessage>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const RawMessage& from);
   void MergeFrom(const RawMessage& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2008,13 +2270,14 @@ class RawMessage :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(RawMessage* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2029,7 +2292,14 @@ class RawMessage :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2083,7 +2353,7 @@ class RawMessage :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr content_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hash_;
   ::PROTOBUF_NAMESPACE_ID::int32 from_;
@@ -2095,7 +2365,7 @@ class RawMessage :
 // -------------------------------------------------------------------
 
 class Message :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.Message) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.Message) */ {
  public:
   Message();
   virtual ~Message();
@@ -2119,6 +2389,15 @@ class Message :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const Message& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2146,8 +2425,8 @@ class Message :
   Message* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<Message>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const Message& from);
   void MergeFrom(const Message& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2162,13 +2441,14 @@ class Message :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(Message* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2183,7 +2463,14 @@ class Message :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2222,7 +2509,7 @@ class Message :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::netdesign2::RawMessage* message_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   ::PROTOBUF_NAMESPACE_ID::int32 timestamp_;
@@ -2233,7 +2520,7 @@ class Message :
 // -------------------------------------------------------------------
 
 class ContactMessageRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ContactMessageRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ContactMessageRequest) */ {
  public:
   ContactMessageRequest();
   virtual ~ContactMessageRequest();
@@ -2257,6 +2544,15 @@ class ContactMessageRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ContactMessageRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2284,8 +2580,8 @@ class ContactMessageRequest :
   ContactMessageRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ContactMessageRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ContactMessageRequest& from);
   void MergeFrom(const ContactMessageRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2300,13 +2596,14 @@ class ContactMessageRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ContactMessageRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2321,7 +2618,14 @@ class ContactMessageRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2357,7 +2661,7 @@ class ContactMessageRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   ::PROTOBUF_NAMESPACE_ID::int32 internalid_;
@@ -2367,7 +2671,7 @@ class ContactMessageRequest :
 // -------------------------------------------------------------------
 
 class ContactMessageResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ContactMessageResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ContactMessageResponse) */ {
  public:
   ContactMessageResponse();
   virtual ~ContactMessageResponse();
@@ -2391,6 +2695,15 @@ class ContactMessageResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ContactMessageResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2418,8 +2731,8 @@ class ContactMessageResponse :
   ContactMessageResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ContactMessageResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ContactMessageResponse& from);
   void MergeFrom(const ContactMessageResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2434,13 +2747,14 @@ class ContactMessageResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ContactMessageResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2455,7 +2769,14 @@ class ContactMessageResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2476,7 +2797,7 @@ class ContactMessageResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::netdesign2::Message* message_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -2484,7 +2805,7 @@ class ContactMessageResponse :
 // -------------------------------------------------------------------
 
 class FriendSendMessageRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.FriendSendMessageRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.FriendSendMessageRequest) */ {
  public:
   FriendSendMessageRequest();
   virtual ~FriendSendMessageRequest();
@@ -2508,6 +2829,15 @@ class FriendSendMessageRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const FriendSendMessageRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2535,8 +2865,8 @@ class FriendSendMessageRequest :
   FriendSendMessageRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<FriendSendMessageRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const FriendSendMessageRequest& from);
   void MergeFrom(const FriendSendMessageRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2551,13 +2881,14 @@ class FriendSendMessageRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(FriendSendMessageRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2572,7 +2903,14 @@ class FriendSendMessageRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2593,7 +2931,7 @@ class FriendSendMessageRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::netdesign2::RawMessage* message_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -2601,7 +2939,7 @@ class FriendSendMessageRequest :
 // -------------------------------------------------------------------
 
 class FriendSendMessageResponse :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.FriendSendMessageResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.FriendSendMessageResponse) */ {
  public:
   FriendSendMessageResponse();
   virtual ~FriendSendMessageResponse();
@@ -2625,6 +2963,15 @@ class FriendSendMessageResponse :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const FriendSendMessageResponse& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2652,8 +2999,8 @@ class FriendSendMessageResponse :
   FriendSendMessageResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<FriendSendMessageResponse>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const FriendSendMessageResponse& from);
   void MergeFrom(const FriendSendMessageResponse& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2668,13 +3015,14 @@ class FriendSendMessageResponse :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(FriendSendMessageResponse* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2689,7 +3037,14 @@ class FriendSendMessageResponse :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2710,7 +3065,7 @@ class FriendSendMessageResponse :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::netdesign2::Message* message_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -2718,7 +3073,7 @@ class FriendSendMessageResponse :
 // -------------------------------------------------------------------
 
 class SetupChannelRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.SetupChannelRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.SetupChannelRequest) */ {
  public:
   SetupChannelRequest();
   virtual ~SetupChannelRequest();
@@ -2742,6 +3097,15 @@ class SetupChannelRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const SetupChannelRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2769,8 +3133,8 @@ class SetupChannelRequest :
   SetupChannelRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<SetupChannelRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const SetupChannelRequest& from);
   void MergeFrom(const SetupChannelRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2785,13 +3149,14 @@ class SetupChannelRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(SetupChannelRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2806,7 +3171,14 @@ class SetupChannelRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2830,7 +3202,7 @@ class SetupChannelRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -2838,7 +3210,7 @@ class SetupChannelRequest :
 // -------------------------------------------------------------------
 
 class ChannelHeartRequest :
-    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:netdesign2.ChannelHeartRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ChannelHeartRequest) */ {
  public:
   ChannelHeartRequest();
   virtual ~ChannelHeartRequest();
@@ -2862,6 +3234,15 @@ class ChannelHeartRequest :
     return *this;
   }
 
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
   static const ChannelHeartRequest& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -2889,8 +3270,8 @@ class ChannelHeartRequest :
   ChannelHeartRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
     return CreateMaybeMessage<ChannelHeartRequest>(arena);
   }
-  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)
-    final;
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void CopyFrom(const ChannelHeartRequest& from);
   void MergeFrom(const ChannelHeartRequest& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -2905,13 +3286,14 @@ class ChannelHeartRequest :
   #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
   void SerializeWithCachedSizes(
       ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
   private:
   inline void SharedCtor();
   inline void SharedDtor();
-  void SetCachedSize(int size) const;
+  void SetCachedSize(int size) const final;
   void InternalSwap(ChannelHeartRequest* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
@@ -2926,7 +3308,14 @@ class ChannelHeartRequest :
   }
   public:
 
-  std::string GetTypeName() const final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
 
   // nested types ----------------------------------------------------
 
@@ -2936,7 +3325,7 @@ class ChannelHeartRequest :
  private:
   class _Internal;
 
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
@@ -4326,7 +4715,15 @@ inline void SetupChannelRequest::set_allocated_token(std::string* token) {
 PROTOBUF_NAMESPACE_OPEN
 
 template <> struct is_proto_enum< ::netdesign2::Contact_ContactType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::netdesign2::Contact_ContactType>() {
+  return ::netdesign2::Contact_ContactType_descriptor();
+}
 template <> struct is_proto_enum< ::netdesign2::MessageType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::netdesign2::MessageType>() {
+  return ::netdesign2::MessageType_descriptor();
+}
 
 PROTOBUF_NAMESPACE_CLOSE
 

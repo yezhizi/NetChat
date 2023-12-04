@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 project(NetDesign2-Server)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DELPP_NO_DEFAULT_LOG_FILE -DELPP_THREAD_SAFE")
-
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(THIRD_PARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party"
         CACHE PATH "Where to install third party headers and libs")  # third party libraries
     
@@ -34,6 +34,7 @@ include(proto2cpp)
 include(libuuid)
 find_package(Threads REQUIRED)
 
+include(libsodium)
 
 set(PROTODIR  "${CMAKE_CURRENT_SOURCE_DIR}/proto")
 file(GLOB PROTO_FILES ${PROTODIR}/*.proto)
@@ -58,9 +59,9 @@ set(HEADERS ${SOURCE_DIR} ${INCLUDE_DIR} ${SERVER_DIR} ${CLIENT_DIR})
 # test
 add_executable(NetDesign2-Server ${SRC} )
 set_target_properties(NetDesign2-Server PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-target_include_directories(NetDesign2-Server PRIVATE ${EASYLOGGINGPP_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR} ${LIBUUID_INCLUDE_DIR}  ${HEADERS})
+target_include_directories(NetDesign2-Server PRIVATE ${EASYLOGGINGPP_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR} ${LIBSODIUM_INCLUDE_DIR} ${LIBUUID_INCLUDE_DIR} ${HEADERS})
 target_link_libraries(NetDesign2-Server PUBLIC easyloggingpp_imported proto_lib)
-target_link_libraries(NetDesign2-Server PUBLIC libuuid_imported )
+target_link_libraries(NetDesign2-Server PUBLIC libuuid_imported libsodium_imported)
 
 
 

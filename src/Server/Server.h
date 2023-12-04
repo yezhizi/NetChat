@@ -2,6 +2,7 @@
 #include "logging.h"
 #include "van.h"
 
+#include "message.h"
 #include <mutex>
 #include <sys/socket.h>
 #include <unordered_map>
@@ -22,7 +23,9 @@ class Server {
 
     // 临时连接池的映射  ipport -> fd
     std::unordered_map<std::string, int> _revc_socket_pool;
-    
+
+    // 保活连接池映射 userid -> fd
+    std::unordered_map<std::string, int> _keepalive_socket_pool;
 
   public:
     static Server *Get() {
@@ -30,10 +33,15 @@ class Server {
         return &server;
     }
     const Van *getVan() const { return this->_van; }
-    static inline int getRevcSocketNum() {
-        return revc_socket_pool_thread_num;
+    static inline int getRevcSocketNum() { return revc_socket_pool_thread_num; }
+
+    // 将具体的消息打包成packet
+    void packtoPacket(MessageType messagetype,google::protobuf::Message &content, Packet &packet) {
+        packet.set_packetid(static_cast<int>(messagetype));
+        google::protobuf::Any *content_ = packet.mutable_content();
+        content_->PackFrom(content);
     }
-    void processRevcSocket(int client_fd);
+    void processRevcSocket(const int client_fd);
     int Signup(std::string phone_number, const std::string &password);
     ~Server() { this->Finalize(); }
 };

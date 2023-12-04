@@ -1,7 +1,7 @@
 #include "logging.h"
-#include "Client.h"
 #include "Server.h"
 #include "uuid/uuid.h"
+#include "sodium.h"
 INITIALIZE_EASYLOGGINGPP
 using namespace ntc;
 
@@ -17,6 +17,9 @@ int main(int argc, char* argv[]) {
    uuid_t uu;
    uuid_generate(uu);
    std::cout << uu << std::endl;
+   if (sodium_init() < 0) {
+        /* panic! the library couldn't be initialized; it is not safe to use */
+    }
 
    return 0;
 }

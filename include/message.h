@@ -34,30 +34,27 @@ using namespace netdesign2;
 
 class Message {
   public:
-    enum class MessageType {
-        ServerStatusRequest ,
-        ServerStatusResponse = 1,
-        ServerStatusUpdateRequest = 6,
-        ServerStatusUpdateResponse = 7,
-        LoginPreRequest = 2,
-        LoginPreResponse = 3,
-        LoginRequest = 4,
-        LoginResponse = 5,
-        ContactListRequest = 8,
-        ClientAckResponse = 9,
-        ContactRequest = 10,
-        ServerAckResponse = 11,
-        ContactMessageRequest = 12,
-        ContactMessageResponse = 13,
-        FriendSendMessageRequest = 14,
-        FriendSendMessageResponse = 15,
-        SetupChannelRequest = 16,
-        ChannelHeartRequest = 17
-    };
-    
 };
-
-
+enum class MessageType {
+    ServerStatusRequest = 0,
+    ServerStatusResponse = 1,
+    ServerStatusUpdateRequest = 6,
+    ServerStatusUpdateResponse = 7,
+    LoginPreRequest = 2,
+    LoginPreResponse = 3,
+    LoginRequest = 4,
+    LoginResponse = 5,
+    ContactListRequest = 8,
+    ClientAckResponse = 9,
+    ContactRequest = 10,
+    ServerAckResponse = 11,
+    ContactMessageRequest = 12,
+    ContactMessageResponse = 13,
+    FriendSendMessageRequest = 14,
+    FriendSendMessageResponse = 15,
+    SetupChannelRequest = 16,
+    ChannelHeartRequest = 17
+};
 
 } // namespace ntc
 
