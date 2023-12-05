@@ -12,7 +12,7 @@ int Van::Send(const Packet &msg, const std::string to, const std::string from) {
     if (send_bytes == -1)
         return -1;
     this->send_bytes_ += send_bytes;
-    LOG(INFO) << "successfully send a packet send bytes: " << send_bytes;
+    CLOG(INFO,"Van") << "successfully send a packet send bytes: " << send_bytes;
     return send_bytes;
 }
 int Van::Send(const Packet &mag, const int fd) {
@@ -20,7 +20,7 @@ int Van::Send(const Packet &mag, const int fd) {
     if (send_bytes == -1)
         return -1;
     this->send_bytes_ += send_bytes;
-    LOG(INFO) << "successfully send a packet send bytes: " << send_bytes;
+    CLOG(INFO,"Van") << "successfully send a packet send bytes: " << send_bytes;
     return send_bytes;
 }
 int Van::Recv(const int client_fd, Packet *msg) {
@@ -33,7 +33,7 @@ int Van::Recv(const int client_fd, Packet *msg) {
 
 Van::Van() {
     this->_socket = socket(AF_INET, SOCK_STREAM, 0);
-    LOG_IF(this->_socket < 0, FATAL) << "socket() failed";
+    CLOG_IF(this->_socket < 0, FATAL,"Van") << "socket() failed";
 }
 
 } // namespace ntc

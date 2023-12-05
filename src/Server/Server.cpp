@@ -20,17 +20,18 @@ void Server::processRevcSocket(const int client_fd) const {
     this->_van->Recv(client_fd, &msg);
     int packet_id = msg.packetid();
     MessageType type = static_cast<MessageType>(packet_id);
+    LOG(INFO) << "Server received packetid: " << packet_id;
     Packet packet_back;
     switch (type) {
     case MessageType::ServerStatusRequest: {
         // ServerStatusRequest
-        LOG(INFO) << "Server received ServerStatusRequest";
         ServerStatusResponse response;
         response.set_online(true);
         response.set_registrable(false);
 
         Server::packtoPacket(MessageType::ServerStatusResponse, response,
                              packet_back);
+        break;
     }
     case MessageType::ServerStatusUpdateRequest: {
         // ServerStatusUpdateResponse
@@ -40,6 +41,7 @@ void Server::processRevcSocket(const int client_fd) const {
 
         this->packtoPacket(MessageType::ServerStatusUpdateResponse, response,
                            packet_back);
+        break;
     }
     case MessageType::LoginPreRequest: {
         // LoginResponse
@@ -60,6 +62,7 @@ void Server::processRevcSocket(const int client_fd) const {
         delete[] challenge;
         this->packtoPacket(MessageType::LoginPreResponse, response,
                            packet_back);
+        break;
     }
     case MessageType::LoginRequest: {
         // LoginResponse
@@ -87,13 +90,14 @@ void Server::processRevcSocket(const int client_fd) const {
             response.set_logined(false);
             response.set_token("wrong password");
         }
+        break;
     }
     }
     int ret = this->_van->Send(packet_back, client_fd);
-    
+
     if (ret < 0) {
         // 让server van epoll_ctl删除对应的监听事件,并关闭socket
     }
-    LOG(INFO) << "Server sent packet: "<<packet_back.packetid();
+    LOG(INFO) << "Server sent packet. id : " << packet_back.packetid();
 }
 } // namespace ntc

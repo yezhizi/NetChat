@@ -24,7 +24,7 @@ class ServerVan : public Van {
   public:
     ServerVan() : Van() {
         this->_socket = socket(AF_INET, SOCK_STREAM, 0);
-        LOG(INFO) << "ServerVan initialized";
+        CLOG(INFO,"Van")  << "ServerVan initialized";
         this->Bind();
 
         this->RevcSocketThreads_.resize(Server::getRevcSocketNum());
@@ -33,7 +33,7 @@ class ServerVan : public Van {
         // bind the working thread function
 
         int epoll_fd_ = epoll_create(MAX_EVENTS);
-        LOG_IF(epoll_fd_ < 0, FATAL) << "epoll_create failed";
+        CLOG_IF(epoll_fd_ < 0, FATAL,"Van") << "epoll_create failed";
         this->epoll_fd_ = epoll_fd_;
 
         struct epoll_event event;
@@ -42,7 +42,7 @@ class ServerVan : public Van {
 
         int ret =
             epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, this->_socket, &event);
-        LOG_IF(ret < 0, FATAL) << "epoll_ctl add server socket failed";
+        CLOG_IF(ret < 0, FATAL,"Van") << "epoll_ctl add server socket failed";
         this->accepting_thread_ = std::unique_ptr<std::thread>(
             new std::thread(&ServerVan::Accepting, this));
         LOG(INFO) << "ServerVan accepting thread started";
@@ -51,7 +51,7 @@ class ServerVan : public Van {
 
   protected:
     void Bind() override {
-        LOG_IF(this->_socket < 0, FATAL) << "create server socket failed";
+        CLOG_IF(this->_socket < 0, FATAL,"Van") << "create server socket failed";
         struct sockaddr_in server_addr;
         server_addr.sin_family = AF_INET;
         server_addr.sin_port = htons(ntc::kServerPort);
@@ -62,11 +62,11 @@ class ServerVan : public Van {
 
         int ret = bind(this->_socket, (struct sockaddr *)&server_addr,
                        sizeof(server_addr));
-        LOG_IF(ret < 0, FATAL) << "bind server socket failed";
-        LOG(INFO) << "bind server socket success";
+        CLOG_IF(ret < 0, FATAL,"Van") << "bind server socket failed";
+        CLOG(INFO,"Van") << "bind server socket success";
         ret = listen(this->_socket, 10);
-        LOG_IF(ret < 0, FATAL) << "listen server socket failed";
-        LOG(INFO) << "listen server socket success";
+        CLOG_IF(ret < 0, FATAL,"Van") << "listen server socket failed";
+        CLOG(INFO,"Van") << "listen server socket success";
     }
     void Accepting() override {
         // TODO : modify the epoll logic
@@ -84,7 +84,7 @@ class ServerVan : public Van {
                         accept(this->_socket, (struct sockaddr *)&client_addr,
                                (socklen_t *)&client_addr_len);
                     if (client_socket < 0) {
-                        LOG(WARNING) << "accept client socket failed";
+                        CLOG(WARNING,"Van") << "accept client socket failed";
                         continue;
                     }
                     char client_ip[INET_ADDRSTRLEN];
@@ -93,7 +93,7 @@ class ServerVan : public Van {
                     int client_port = ntohs(client_addr.sin_port);
                     std::string client_ip_port = std::string(client_ip) + ":" +
                                                  std::to_string(client_port);
-                    LOG(INFO) << "accept client socket success from "
+                    CLOG(INFO,"Van") << "accept client socket success from "
                               << client_ip_port;
 
                     UM::Get()->setRevcSocketMp(client_ip_port, client_socket);
@@ -101,18 +101,18 @@ class ServerVan : public Van {
                     // 设置非阻塞接收
                     int flags = fcntl(client_socket, F_GETFL, 0);
                     int ret = fcntl(client_socket, F_SETFL, flags | O_NONBLOCK);
-                    LOG_IF(ret < 0, WARNING) << "fcntl set nonblock failed";
+                    CLOG_IF(ret < 0, WARNING,"Van") << "fcntl set nonblock failed";
 
                     struct epoll_event event;
                     event.events = EPOLLIN | EPOLLET;
                     event.data.fd = client_socket;
                     ret = epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD,
                                     client_socket, &event);
-                    LOG_IF(ret < 0, FATAL)
+                    CLOG_IF(ret < 0, FATAL,"Van")
                         << "epoll_ctl add client socket failed";
                 } else {
                     // the client socket is ready to read, add to the queue
-                    LOG(DEBUG) << "client socket ready to read :" << events[i].data.fd;
+                    CLOG(DEBUG,"Van") << "client socket ready to read :" << events[i].data.fd;
                     if (events[i].events & EPOLLIN)
                         this->RevcSocketQueue_.Push(events[i].data.fd);
                 }
@@ -132,7 +132,7 @@ class ServerVan : public Van {
         while (bytes < len) {
             int size_send = send(fd, buf + bytes, len - bytes, 0);
             if (size_send < 0) {
-                LOG(ERROR) << "send message failed";
+                CLOG(ERROR,"Van") << "send message failed";
                 return -1;
             } else {
                 bytes += size_send;
@@ -151,16 +151,16 @@ class ServerVan : public Van {
                 if (errno == EAGAIN || errno == EWOULDBLOCK) {
                     break;
                 } else {
-                    LOG(WARNING) << "recv failed";
+                    CLOG(WARNING,"Van") << "recv failed";
                     return -1;
                 }
             } else if (ret == 0) {
-                LOG(WARNING) << "client closed";
+                CLOG(WARNING,"Van") << "client closed";
                 return 0;
             } else {
                 bytes += ret;
                 if (bytes >= ntc::kMaxMessageSize) {
-                    LOG(WARNING) << "message too large";
+                    CLOG(WARNING,"Van") << "message too large";
                     return -1;
                 }
             }
