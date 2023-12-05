@@ -10,10 +10,11 @@ namespace ntc {
 class Van {
   public:
     int Send(const Packet &msg, const std::string to, const std::string from);
-    int Send(const Packet &mag, const int fd);
+    int Send(const Packet &msg, const int fd);
     int Recv(const int client_fd, Packet *msg);
     Van();
     virtual ~Van() {}
+    int test_getSocket() const { return this->_socket; }
 
   protected:
     virtual void Accepting() = 0;

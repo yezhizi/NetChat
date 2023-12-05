@@ -39,7 +39,7 @@ message LoginPreRequest {
 
 //packet id = 3 server packet
 message LoginPreResponse {
-  string challenge = 1;
+  bytes challenge = 1;
 }
 
 //packet id = 4 client packet

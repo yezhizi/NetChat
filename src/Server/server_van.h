@@ -45,6 +45,7 @@ class ServerVan : public Van {
         LOG_IF(ret < 0, FATAL) << "epoll_ctl add server socket failed";
         this->accepting_thread_ = std::unique_ptr<std::thread>(
             new std::thread(&ServerVan::Accepting, this));
+        LOG(INFO) << "ServerVan accepting thread started";
     }
     ~ServerVan() { this->accepting_thread_->join(); }
 
@@ -55,6 +56,10 @@ class ServerVan : public Van {
         server_addr.sin_family = AF_INET;
         server_addr.sin_port = htons(ntc::kServerPort);
         server_addr.sin_addr.s_addr = inet_addr(ntc::kServerIP.c_str());
+        //设置端口复用
+        int opt = 1;
+        setsockopt(this->_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
         int ret = bind(this->_socket, (struct sockaddr *)&server_addr,
                        sizeof(server_addr));
         LOG_IF(ret < 0, FATAL) << "bind server socket failed";
@@ -107,6 +112,7 @@ class ServerVan : public Van {
                         << "epoll_ctl add client socket failed";
                 } else {
                     // the client socket is ready to read, add to the queue
+                    LOG(DEBUG) << "client socket ready to read :" << events[i].data.fd;
                     if (events[i].events & EPOLLIN)
                         this->RevcSocketQueue_.Push(events[i].data.fd);
                 }

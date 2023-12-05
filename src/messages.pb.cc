@@ -640,7 +640,7 @@ const char descriptor_table_protodef_messages_2eproto[] PROTOBUF_SECTION_VARIABL
   "quest\"A\n\032ServerStatusUpdateResponse\022\016\n\006o"
   "nline\030\001 \001(\010\022\023\n\013registrable\030\002 \001(\010\"#\n\017Logi"
   "nPreRequest\022\020\n\010username\030\001 \001(\t\"%\n\020LoginPr"
-  "eResponse\022\021\n\tchallenge\030\001 \001(\t\"6\n\014LoginReq"
+  "eResponse\022\021\n\tchallenge\030\001 \001(\014\"6\n\014LoginReq"
   "uest\022\020\n\010username\030\001 \001(\t\022\024\n\014hashPassword\030\002"
   " \001(\t\"/\n\rLoginResponse\022\017\n\007logined\030\001 \001(\010\022\r"
   "\n\005token\030\002 \001(\t\"\312\001\n\007Contact\022\n\n\002id\030\001 \001(\005\022\014\n"
@@ -2515,10 +2515,10 @@ const char* LoginPreResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string challenge = 1;
+      // bytes challenge = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_challenge(), ptr, ctx, "netdesign2.LoginPreResponse.challenge");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_challenge(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2552,15 +2552,11 @@ bool LoginPreResponse::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string challenge = 1;
+      // bytes challenge = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_challenge()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->challenge().data(), static_cast<int>(this->challenge().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "netdesign2.LoginPreResponse.challenge"));
         } else {
           goto handle_unusual;
         }
@@ -2594,13 +2590,9 @@ void LoginPreResponse::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string challenge = 1;
+  // bytes challenge = 1;
   if (this->challenge().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->challenge().data(), static_cast<int>(this->challenge().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.LoginPreResponse.challenge");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       1, this->challenge(), output);
   }
 
@@ -2617,14 +2609,10 @@ void LoginPreResponse::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string challenge = 1;
+  // bytes challenge = 1;
   if (this->challenge().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->challenge().data(), static_cast<int>(this->challenge().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.LoginPreResponse.challenge");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         1, this->challenge(), target);
   }
 
@@ -2649,10 +2637,10 @@ size_t LoginPreResponse::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string challenge = 1;
+  // bytes challenge = 1;
   if (this->challenge().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->challenge());
   }
 

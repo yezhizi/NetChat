@@ -1145,13 +1145,13 @@ class LoginPreResponse :
   enum : int {
     kChallengeFieldNumber = 1,
   };
-  // string challenge = 1;
+  // bytes challenge = 1;
   void clear_challenge();
   const std::string& challenge() const;
   void set_challenge(const std::string& value);
   void set_challenge(std::string&& value);
   void set_challenge(const char* value);
-  void set_challenge(const char* value, size_t size);
+  void set_challenge(const void* value, size_t size);
   std::string* mutable_challenge();
   std::string* release_challenge();
   void set_allocated_challenge(std::string* challenge);
@@ -3632,7 +3632,7 @@ inline void LoginPreRequest::set_allocated_username(std::string* username) {
 
 // LoginPreResponse
 
-// string challenge = 1;
+// bytes challenge = 1;
 inline void LoginPreResponse::clear_challenge() {
   challenge_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -3657,7 +3657,7 @@ inline void LoginPreResponse::set_challenge(const char* value) {
   challenge_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:netdesign2.LoginPreResponse.challenge)
 }
-inline void LoginPreResponse::set_challenge(const char* value, size_t size) {
+inline void LoginPreResponse::set_challenge(const void* value, size_t size) {
   
   challenge_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

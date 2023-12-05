@@ -24,6 +24,7 @@ void Server::processRevcSocket(const int client_fd) const {
     switch (type) {
     case MessageType::ServerStatusRequest: {
         // ServerStatusRequest
+        LOG(INFO) << "Server received ServerStatusRequest";
         ServerStatusResponse response;
         response.set_online(true);
         response.set_registrable(false);
@@ -89,8 +90,10 @@ void Server::processRevcSocket(const int client_fd) const {
     }
     }
     int ret = this->_van->Send(packet_back, client_fd);
+    
     if (ret < 0) {
         // 让server van epoll_ctl删除对应的监听事件,并关闭socket
     }
+    LOG(INFO) << "Server sent packet: "<<packet_back.packetid();
 }
 } // namespace ntc
