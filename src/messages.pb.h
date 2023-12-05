@@ -1294,13 +1294,13 @@ class LoginRequest :
   std::string* release_username();
   void set_allocated_username(std::string* username);
 
-  // string hashPassword = 2;
+  // bytes hashPassword = 2;
   void clear_hashpassword();
   const std::string& hashpassword() const;
   void set_hashpassword(const std::string& value);
   void set_hashpassword(std::string&& value);
   void set_hashpassword(const char* value);
-  void set_hashpassword(const char* value, size_t size);
+  void set_hashpassword(const void* value, size_t size);
   std::string* mutable_hashpassword();
   std::string* release_hashpassword();
   void set_allocated_hashpassword(std::string* hashpassword);
@@ -3738,7 +3738,7 @@ inline void LoginRequest::set_allocated_username(std::string* username) {
   // @@protoc_insertion_point(field_set_allocated:netdesign2.LoginRequest.username)
 }
 
-// string hashPassword = 2;
+// bytes hashPassword = 2;
 inline void LoginRequest::clear_hashpassword() {
   hashpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -3763,7 +3763,7 @@ inline void LoginRequest::set_hashpassword(const char* value) {
   hashpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:netdesign2.LoginRequest.hashPassword)
 }
-inline void LoginRequest::set_hashpassword(const char* value, size_t size) {
+inline void LoginRequest::set_hashpassword(const void* value, size_t size) {
   
   hashpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

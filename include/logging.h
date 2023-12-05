@@ -20,6 +20,12 @@ static void configureServerLogger() {
     defaultConf.setGlobally(el::ConfigurationType::Format,
                             "[%datetime] [%level] [%logger] %msg");
     el::Loggers::reconfigureLogger("Van", defaultConf);
+
+    //test client
+    el::Logger* clientLogger = el::Loggers::getLogger("client");
+    defaultConf.setGlobally(el::ConfigurationType::Format,
+                            "[%datetime] [%level] [%logger] %msg");
+    el::Loggers::reconfigureLogger("client", defaultConf);
 }
 } // namespace el
 

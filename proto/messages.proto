@@ -45,7 +45,7 @@ message LoginPreResponse {
 //packet id = 4 client packet
 message LoginRequest{
   string username = 1;
-  string hashPassword = 2;
+  bytes hashPassword = 2;
 }
 
 //packet id = 5 server packet

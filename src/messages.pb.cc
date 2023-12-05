@@ -642,7 +642,7 @@ const char descriptor_table_protodef_messages_2eproto[] PROTOBUF_SECTION_VARIABL
   "nPreRequest\022\020\n\010username\030\001 \001(\t\"%\n\020LoginPr"
   "eResponse\022\021\n\tchallenge\030\001 \001(\014\"6\n\014LoginReq"
   "uest\022\020\n\010username\030\001 \001(\t\022\024\n\014hashPassword\030\002"
-  " \001(\t\"/\n\rLoginResponse\022\017\n\007logined\030\001 \001(\010\022\r"
+  " \001(\014\"/\n\rLoginResponse\022\017\n\007logined\030\001 \001(\010\022\r"
   "\n\005token\030\002 \001(\t\"\312\001\n\007Contact\022\n\n\002id\030\001 \001(\005\022\014\n"
   "\004name\030\002 \001(\t\022\016\n\006online\030\003 \001(\010\022-\n\004type\030\004 \001("
   "\0162\037.netdesign2.Contact.ContactType\022$\n\007me"
@@ -2786,10 +2786,10 @@ const char* LoginRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string hashPassword = 2;
+      // bytes hashPassword = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_hashpassword(), ptr, ctx, "netdesign2.LoginRequest.hashPassword");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_hashpassword(), ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2838,15 +2838,11 @@ bool LoginRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // string hashPassword = 2;
+      // bytes hashPassword = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_hashpassword()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->hashpassword().data(), static_cast<int>(this->hashpassword().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "netdesign2.LoginRequest.hashPassword"));
         } else {
           goto handle_unusual;
         }
@@ -2890,13 +2886,9 @@ void LoginRequest::SerializeWithCachedSizes(
       1, this->username(), output);
   }
 
-  // string hashPassword = 2;
+  // bytes hashPassword = 2;
   if (this->hashpassword().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->hashpassword().data(), static_cast<int>(this->hashpassword().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.LoginRequest.hashPassword");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->hashpassword(), output);
   }
 
@@ -2924,14 +2916,10 @@ void LoginRequest::SerializeWithCachedSizes(
         1, this->username(), target);
   }
 
-  // string hashPassword = 2;
+  // bytes hashPassword = 2;
   if (this->hashpassword().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->hashpassword().data(), static_cast<int>(this->hashpassword().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.LoginRequest.hashPassword");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
         2, this->hashpassword(), target);
   }
 
@@ -2963,10 +2951,10 @@ size_t LoginRequest::ByteSizeLong() const {
         this->username());
   }
 
-  // string hashPassword = 2;
+  // bytes hashPassword = 2;
   if (this->hashpassword().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->hashpassword());
   }
 

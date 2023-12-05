@@ -20,7 +20,6 @@ void Server::processRevcSocket(const int client_fd) const {
     this->_van->Recv(client_fd, &msg);
     int packet_id = msg.packetid();
     MessageType type = static_cast<MessageType>(packet_id);
-    LOG(INFO) << "Server received packetid: " << packet_id;
     Packet packet_back;
     switch (type) {
     case MessageType::ServerStatusRequest: {
@@ -31,16 +30,23 @@ void Server::processRevcSocket(const int client_fd) const {
 
         Server::packtoPacket(MessageType::ServerStatusResponse, response,
                              packet_back);
+        LOG(INFO) << "Server sent ServerStatusResponse"
+                    << " online: " << response.online()
+                    << " registrable: " << response.registrable();
         break;
     }
     case MessageType::ServerStatusUpdateRequest: {
         // ServerStatusUpdateResponse
+        LOG(INFO) << "Server received ServerStatusUpdateRequest";
         ServerStatusUpdateResponse response;
         response.set_online(true);
         response.set_registrable(false);
 
         this->packtoPacket(MessageType::ServerStatusUpdateResponse, response,
                            packet_back);
+        LOG(INFO) << "Server sent ServerStatusUpdateResponse"
+                    << " online: " << response.online()
+                    << " registrable: " << response.registrable();
         break;
     }
     case MessageType::LoginPreRequest: {
@@ -48,6 +54,8 @@ void Server::processRevcSocket(const int client_fd) const {
         LoginPreRequest request;
         msg.content().UnpackTo(&request);
         std::string username = request.username();
+        LOG(INFO) << "Server received LoginPreRequest"
+                    << " username: " << username;
 
         LoginPreResponse response;
         char *challenge = new char[ntc::kChallengeSize];
@@ -55,6 +63,7 @@ void Server::processRevcSocket(const int client_fd) const {
         bool ret = UM::Get()->setChallengeMp(username, challenge);
         if (!ret) {
             // 发现用户未注册
+            LOG(INFO) << "User not registered";
             response.set_challenge("");
         } else {
             response.set_challenge(challenge);
@@ -62,6 +71,7 @@ void Server::processRevcSocket(const int client_fd) const {
         delete[] challenge;
         this->packtoPacket(MessageType::LoginPreResponse, response,
                            packet_back);
+        LOG(INFO) << "Server sent LoginPreResponse";
         break;
     }
     case MessageType::LoginRequest: {
@@ -90,6 +100,10 @@ void Server::processRevcSocket(const int client_fd) const {
             response.set_logined(false);
             response.set_token("wrong password");
         }
+        this->packtoPacket(MessageType::LoginResponse, response, packet_back);
+        LOG(INFO) << "Server sent LoginResponse"
+                    << " logined: " << response.logined()
+                    << " token: " << response.token();
         break;
     }
     }
