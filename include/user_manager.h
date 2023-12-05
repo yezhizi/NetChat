@@ -32,6 +32,7 @@ class UM {
     // mutex
     std::mutex _temp_socket_pool_mu;
     std::mutex _challenge_pool_mu;
+    std::mutex __keepalive_socket_pool_mu;
 
   public:
     static inline UM *Get() { return getSharedPtr().get(); }
@@ -58,19 +59,22 @@ class UM {
             return std::make_pair(-1, "");
         }
     }
-    int setUserInfo(const std::string &username, const std::string &password) {
+    int setUserInfo(const std::string &username, const int id,
+                    const std::string &password) {
 
-        this->_test_user_info[username] = std::make_pair(0, SHA256(password));
+        this->_test_user_info[username] = std::make_pair(id, SHA256(password));
         return 0;
     }
 
-    // 用户登录
+    ///// 用户登录 ////
     //  设置对应的challenge  username -> challenge threadsafe
+    // 返回用户是否注册
     bool setChallengeMp(const std::string &username,
                         const std::string &challenge) {
-        // TODO 查找对应的用户是否注册
-        if (/*not find*/ false)
+        // 查找对应的用户是否注册
+        if (this->getUserInfo(username).first == -1) {
             return false;
+        }
 
         std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
         this->server_ptr_->_challenge_pool[username] = challenge;
@@ -84,6 +88,45 @@ class UM {
             return this->server_ptr_->_challenge_pool[username];
         } else {
             return "";
+        }
+    }
+    // 删除对应的challenge  username -> challenge threadsafe
+    void delChallengeMp(const std::string &username) {
+        std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
+        if (this->server_ptr_->_challenge_pool.find(username) !=
+            this->server_ptr_->_challenge_pool.end()) {
+            this->server_ptr_->_challenge_pool.erase(username);
+        }
+    }
+
+    //保活连接池
+    // 设置对应的保活连接socket
+    void setKeepaliveSocketMp(const std::string &username, int fd,
+                              const std::string &token) {
+        std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
+        this->server_ptr_->_keepalive_socket_pool[username] = fd;
+        this->server_ptr_->_token_pool[token] = username;
+    }
+    //token->username
+    std::string getUsernameByToken(const std::string &token) {
+        if (token=="") return "";
+        std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
+        if (this->server_ptr_->_token_pool.find(token) !=
+            this->server_ptr_->_token_pool.end()) {
+            return this->server_ptr_->_token_pool[token];
+        } else {
+            return "";
+        }
+    }
+    //username->fd
+    int getfdByUsername(const std::string &username) {
+        if (username=="") return -1;
+        std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
+        if (this->server_ptr_->_keepalive_socket_pool.find(username) !=
+            this->server_ptr_->_keepalive_socket_pool.end()) {
+            return this->server_ptr_->_keepalive_socket_pool[username];
+        } else {
+            return -1;
         }
     }
 };

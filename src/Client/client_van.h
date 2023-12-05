@@ -13,12 +13,15 @@ namespace ntc {
 class ClientVan : public Van {
   public:
     ClientVan() : Van() {
-        CLOG(INFO,"Van") << "ClientVan initialized";
+        CLOG(INFO, "Van") << "ClientVan initialized";
         this->Accepting();
         // this->receiving_thread_ = std::unique_ptr<std::thread>(
         //     new std::thread(&ClientVan::Receiving, this));
     }
     ~ClientVan() {}
+    int Control(const int dst, const std::string &cmd = "") override {
+        return 0;
+    }
     enum class ClientStatus { OFFLINE, ONLINE };
 
   protected:
@@ -33,11 +36,11 @@ class ClientVan : public Van {
         int ret = connect(this->_socket, (struct sockaddr *)&server_addr,
                           sizeof(server_addr));
         if (ret < 0) {
-            CLOG(ERROR,"Van") << "connect to server " << ntc::kServerIP << ":"
-                       << ntc::kServerPort << " failed";
+            CLOG(ERROR, "Van") << "connect to server " << ntc::kServerIP << ":"
+                               << ntc::kServerPort << " failed";
         } else {
-            CLOG(INFO,"Van") << "connect to server " << ntc::kServerIP << ":"
-                      << ntc::kServerPort << " success";
+            CLOG(INFO, "Van") << "connect to server " << ntc::kServerIP << ":"
+                              << ntc::kServerPort << " success";
             this->_status = ClientStatus::ONLINE;
         }
     }
@@ -49,7 +52,7 @@ class ClientVan : public Van {
         while (bytes < len) {
             int size_send = send(fd, buf + bytes, len - bytes, 0);
             if (size_send < 0) {
-                CLOG(ERROR,"Van") << "send message failed";
+                CLOG(ERROR, "Van") << "send message failed";
                 return -1;
             } else {
                 bytes += size_send;
@@ -60,10 +63,10 @@ class ClientVan : public Van {
     int RecvMesg(const int fd, Packet *msg) override { // TODO
         char buf[ntc::kMaxMessageSize];
 
-        //阻塞接收
+        // 阻塞接收
         int bytes = recv(fd, buf, ntc::kMaxMessageSize, 0);
         if (bytes < 0) {
-            CLOG(ERROR,"Van") << "recv message failed";
+            CLOG(ERROR, "Van") << "recv message failed";
             return -1;
         }
         msg->ParseFromArray(buf, bytes);
@@ -79,9 +82,7 @@ class ClientVan : public Van {
     std::unique_ptr<std::thread> receiving_thread_;
     ClientStatus _status;
     std::mutex _mtx;
-    void Receiving() {
-
-    }
+    void Receiving() {}
 };
 
 } // namespace ntc

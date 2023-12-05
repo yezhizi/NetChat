@@ -3,7 +3,6 @@
 #include "crypto_utils.h"
 namespace ntc {
 void Client::Init() {
-    this->_client_id = ntc::kvEmpty;
     this->_van = (Van *)new ClientVan();
 }
 void Client::Finalize() {
@@ -33,6 +32,7 @@ void Client::sendServerStatusRequest() {
                          << "serverPublicKey"
                          << serverStatusResponse.serverpublickey();
 }
+
 
 void Client::sendServerStatusUpdateRequest() {
     Packet packet;
