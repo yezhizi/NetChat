@@ -93,5 +93,29 @@ void Client::login(const std::string &username, const std::string &password) {
     CLOG(DEBUG, "client") << "loginResponse: "
                           << "login: " << loginResponse.logined() << " "
                           << "token: " << loginResponse.token();
+    this->_token = loginResponse.token();
 }
+
+    void Client::setupChannel(){
+        if (this->_token.empty()) {
+            CLOG(ERROR, "client") << "token is empty";
+            return;
+        }
+        CLOG(DEBUG, "client") << "Client sent SetupChannelRequest";
+        Packet packet;
+        SetupChannelRequest setupChannelRequest;
+        setupChannelRequest.set_token(this->_token);
+        this->packtoPacket(MessageType::SetupChannelRequest, setupChannelRequest,
+                           packet);
+        this->_van->Send(packet, this->_van->test_getSocket());
+        // recv SetupChannelResponse
+        packet.Clear();
+        this->_van->Recv(this->_van->test_getSocket(), &packet);
+        ServerAckResponse serverAckResponse;
+        packet.content().UnpackTo(&serverAckResponse);
+        CLOG(INFO, "client") << "Client received packetid: " << packet.packetid();
+        CLOG(DEBUG, "client") << "ServerAckResponse: ";
+
+    }
+
 } // namespace ntc

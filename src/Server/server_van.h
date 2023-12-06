@@ -48,8 +48,15 @@ class ServerVan : public Van {
         LOG(INFO) << "ServerVan accepting thread started";
     }
     int Control(const int dst, const std::string &cmd = "") override {
-        // lazy to modify...
-        return controlEpollDel(dst);
+        if (cmd=="EPOLL_DEL_FD"){
+            LOG(INFO) << "epoll_ctl del client socket " << dst;
+            return this->controlEpollDel(dst);
+        }else if (cmd=="CLOSE_FD"){
+            LOG(INFO) << "close client socket " << dst;
+            return close(dst);
+        }else{
+            return -1;
+        }
     }
 
     // epoll 取消监听事件

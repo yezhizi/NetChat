@@ -128,15 +128,15 @@ void Server::processRevcSocket(const int client_fd) const {
         // 获取用户信息 token->username->fd
         std::string username = UM::Get()->getUsernameByToken(request.token());
         int fd = UM::Get()->getfdByUsername(username);
-        if (fd==-1 || fd !=client_fd){
+        if (fd == -1 || fd != client_fd) {
             // user not login or token error
-            LOG(INFO) << "User not login or token error. username: " << username;
+            LOG(INFO) << "User not login or token error. username: "
+                      << username;
             // TODO 暂时不处理
-    
         }
-        //  1. 通知van取消对应的监听事件 
-        this->_van->Control(client_fd);
-        //ServerAckResponse
+        //  1. 通知van取消对应的监听事件
+        this->_van->Control(client_fd, "EPOLL_DEL_FD");
+        // ServerAckResponse
         ServerAckResponse response;
         LOG(INFO) << "Server sent ServerAckResponse";
         this->packtoPacket(MessageType::ServerAckResponse, response,
@@ -145,10 +145,18 @@ void Server::processRevcSocket(const int client_fd) const {
         break;
     }
     }
+    if (!packet_back.has_content()) {
+        LOG(INFO) << "Unknown message";
+        return;
+    }
+
     int ret = this->_van->Send(packet_back, client_fd);
 
     if (ret < 0) {
+        // 发送失败
         // 让server van epoll_ctl删除对应的监听事件,并关闭socket
+        this->_van->Control(client_fd, "EPOLL_DEL_FD");
+        this->_van->Control(client_fd, "CLOSE_FD");
     }
     LOG(INFO) << "Server sent packet. id : " << packet_back.packetid();
 }

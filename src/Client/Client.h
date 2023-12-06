@@ -8,7 +8,7 @@ namespace ntc {
 class Client {
   private:
     Van *_van;
-
+    std::string _token;
     void Init();
     void Finalize();
 
@@ -27,5 +27,6 @@ class Client {
     void sendServerStatusRequest();
     void sendServerStatusUpdateRequest();
     void login(const std::string &username, const std::string &password);
+    void setupChannel();
 };
 } // namespace ntc

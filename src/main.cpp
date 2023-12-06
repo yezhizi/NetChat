@@ -23,12 +23,14 @@ int main(int argc, char *argv[]) {
         client2->sendServerStatusUpdateRequest();
         client1->login("123", "123456");
         client2->login("456", "123456");
-        for (int i = 0; i < 100; ++i) {
+        for (int i = 0; i < 10; ++i) {
             client1->sendServerStatusRequest();
             client2->sendServerStatusRequest();
             client1->sendServerStatusUpdateRequest();
             client2->sendServerStatusUpdateRequest();
         }
+        client1->setupChannel();
+        client2->setupChannel();
     });
     t1.join();
     delete client1;
