@@ -1,15 +1,8 @@
 /.vscode/
 /bin/*
 /lib/*
-/build/
-/build/CMakeFiles/
-/build/CMakeCache.txt
-/build/tmp/
-/build/.cmake/
-/build/*.log
-
-/build/*/*-build/
-/build/*/*-stamp/
+/build
+/build/*
 /third_party/
 /logs/
 
