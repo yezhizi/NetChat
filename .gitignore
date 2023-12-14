@@ -1,15 +1,14 @@
+# Ignore IDE files
 /.vscode/
+
+# Ignore build files
+/build
+/build/*
+
+# Ignore generated files
+/src/proto
+/src/proto/*
 /bin/*
 /lib/*
-/build/
-/build/CMakeFiles/
-/build/CMakeCache.txt
-/build/tmp/
-/build/.cmake/
-/build/*.log
-
-/build/*/*-build/
-/build/*/*-stamp/
-/third_party/
-/logs/
+/logs/*
 
