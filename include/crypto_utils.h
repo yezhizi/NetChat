@@ -6,6 +6,8 @@
 #include "sodium.h"
 #include <string>
 #include <uuid/uuid.h>
+#include <cstdlib>
+#include <ctime>
 
 namespace ntc {
 inline static void InitSodium() {
@@ -22,16 +24,26 @@ inline std::string bytesToHexString(const unsigned char *bytes, size_t length) {
 }
 
 inline std::string genChallenge() {
-    InitSodium();
-    char challenge[ntc::kChallengeSize];
+    // 设置随机种子
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    randombytes_buf(challenge, ntc::kChallengeSize);
+    const char charset[] =
+        "0123456789"
+        "abcdefghijklmnopqrstuvwxyz"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    // format challenge to hex string
-    std::string res =  bytesToHexString((const unsigned char *)challenge, ntc::kChallengeSize);
-    LOG(DEBUG ) << "genChallenge: " << res;
-    return res;
+    const int charsetSize = sizeof(charset) - 1;
+
+    std::string randomString;
+    randomString.reserve(ntc::kChallengeSize);
+
+    for (int i = 0; i < ntc::kChallengeSize; ++i) {
+        randomString += charset[std::rand() % charsetSize];
+    }
+
+    return randomString;
 }
+
 // SHA256
 inline std::string SHA256(const unsigned char *in, unsigned long long inlen) {
     InitSodium();
