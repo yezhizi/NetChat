@@ -76,7 +76,8 @@ target_include_directories(NetDesign2-Server PRIVATE
     ${PROTOBUF_INCLUDE_DIR}
     ${easyloggingpp_SOURCE_DIR}/src
     ${PROTO_OUT_DIR}/proto
-    ${SOURCE_DIR}
+    ${SOURCE_DIR}/Server
+    ${SOURCE_DIR}/Client
 )
 
 # Set output directories
