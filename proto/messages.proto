@@ -1,7 +1,6 @@
 syntax = "proto3";
 package netdesign2;
 option java_package = "top.focess.netdesign.proto";
-//option optimize_for = LITE_RUNTIME;
 
 import "google/protobuf/any.proto";
 
@@ -12,14 +11,12 @@ message Packet {
 
 //packet id = 0 client packet
 message ServerStatusRequest {
-  string clientPublicKey = 1;
 }
 
 //packet id = 1 server packet
 message ServerStatusResponse {
   bool online = 1;
   bool registrable = 2;
-  string serverPublicKey = 3;
 }
 
 //packet id = 6 client packet
@@ -39,19 +36,20 @@ message LoginPreRequest {
 
 //packet id = 3 server packet
 message LoginPreResponse {
-  bytes challenge = 1;
+  string challenge = 1;   //bytes
 }
 
 //packet id = 4 client packet
 message LoginRequest{
   string username = 1;
-  bytes hashPassword = 2;
+  string hashPassword = 2;  //bytes
 }
 
 //packet id = 5 server packet
 message LoginResponse {
   bool logined = 1;
-  string token = 2;
+  int32 id = 2;
+  string token = 3;
 }
 
 message Contact {
@@ -60,7 +58,7 @@ message Contact {
   bool online = 3;
   ContactType type = 4;
   repeated Contact members = 5; // optional, only if type is GROUP
-  int32 header = 6;
+   int32 header = 6;
 
   enum ContactType {
     FRIEND = 0;
@@ -71,6 +69,7 @@ message Contact {
 
 //packet id = 8 server packet0 return ClientAckResponse
 message ContactListRequest {
+  // contacts should contain the user contact itself as a Friend
   repeated Contact contacts = 1;
 }
 
@@ -84,8 +83,13 @@ message ContactRequest {
   bool delete = 2;
 }
 
-//packet id = 11 server packet
+//packet id = 11 server packet, packet0
 message ServerAckResponse {
+}
+
+message File {
+  string name = 1;
+  bytes content = 2;
 }
 
 enum MessageType {
@@ -99,7 +103,7 @@ message RawMessage {
   int32 to = 2;
   MessageType type = 3;
   string content = 4;
-  string hash = 5;
+   string hash = 5;  //bytes
 }
 
 message Message {
@@ -123,19 +127,56 @@ message ContactMessageResponse {
 
 //packet id = 14 client packet
 message FriendSendMessageRequest {
-  RawMessage message = 1;
+  string token = 1;
+  RawMessage message = 2;
 }
 
 //packet id = 15 server packet
 message FriendSendMessageResponse {
+  // server do not need to send ContactMessageListRequest, 
+  //this response has made the same effect to the ContactMessageListRequest
   Message message = 1; // fail if message.id == -1
 }
 
-//packet id = 16 client packet return ServerAckResponse
+//packet id = 16 client packet0 return ServerAckResponse
 message SetupChannelRequest {
   string token = 1;
 }
 
-//packet id = 17 server packet return ClientAckResponse
+//packet id = 17 server packet0 return ClientAckResponse
 message ChannelHeartRequest {
+}
+
+//packet id = 18 server packet0 return ClientAckResponse
+message ContactMessageListRequest {
+  repeated Message messages = 1;
+}
+
+//packet id = 19 client packet return ServerAckResponse
+message FileUploadRequest {
+  string token = 1;
+  string id = 2;
+  File file = 3;
+}
+
+//packet id = 20 client packet
+message FileDownloadRequest {
+  string token = 1;
+  string id = 2;
+}
+
+//packet id = 21 server packet
+message FileDownloadResponse {
+  File file = 1;
+}
+
+//packet id = 22 client packet
+message RegisterRequest {
+  string username = 1;
+  string rawPassword = 2;
+}
+
+//packet id = 23 server packet
+message RegisterResponse {
+  bool success = 1;
 }

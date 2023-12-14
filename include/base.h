@@ -15,6 +15,8 @@ static const int ServerID = 1;
 
 // 临时连接池工作线程的数量
 static const int revc_socket_pool_thread_num = 10;
+// 保活连接池工作线程的数量
+static const int keepalive_thread_num = 10;
 
 struct User {
     int id;

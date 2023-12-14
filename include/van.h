@@ -13,6 +13,7 @@ class Van {
     int Send(const Packet &msg, const int fd);
     int Recv(const int client_fd, Packet *msg);
     virtual int Control(const int dst, const std::string &cmd = "") = 0;
+    virtual void addSendTask(const int fd, const Packet &msg) = 0;
     Van();
     virtual ~Van() {}
     int test_getSocket() const { return this->_socket; }

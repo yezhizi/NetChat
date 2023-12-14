@@ -17,6 +17,7 @@
 #include <google/protobuf/port_def.inc>
 extern PROTOBUF_INTERNAL_EXPORT_google_2fprotobuf_2fany_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Any_google_2fprotobuf_2fany_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_messages_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Contact_messages_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_messages_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_File_messages_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_messages_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Message_messages_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_messages_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RawMessage_messages_2eproto;
 namespace netdesign2 {
@@ -76,6 +77,10 @@ class ServerAckResponseDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ServerAckResponse> _instance;
 } _ServerAckResponse_default_instance_;
+class FileDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<File> _instance;
+} _File_default_instance_;
 class RawMessageDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RawMessage> _instance;
@@ -108,6 +113,30 @@ class ChannelHeartRequestDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChannelHeartRequest> _instance;
 } _ChannelHeartRequest_default_instance_;
+class ContactMessageListRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ContactMessageListRequest> _instance;
+} _ContactMessageListRequest_default_instance_;
+class FileUploadRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<FileUploadRequest> _instance;
+} _FileUploadRequest_default_instance_;
+class FileDownloadRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<FileDownloadRequest> _instance;
+} _FileDownloadRequest_default_instance_;
+class FileDownloadResponseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<FileDownloadResponse> _instance;
+} _FileDownloadResponse_default_instance_;
+class RegisterRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RegisterRequest> _instance;
+} _RegisterRequest_default_instance_;
+class RegisterResponseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RegisterResponse> _instance;
+} _RegisterResponse_default_instance_;
 }  // namespace netdesign2
 static void InitDefaultsscc_info_ChannelHeartRequest_messages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -166,6 +195,21 @@ static void InitDefaultsscc_info_ContactListRequest_messages_2eproto() {
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_ContactListRequest_messages_2eproto}, {
       &scc_info_Contact_messages_2eproto.base,}};
 
+static void InitDefaultsscc_info_ContactMessageListRequest_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_ContactMessageListRequest_default_instance_;
+    new (ptr) ::netdesign2::ContactMessageListRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::ContactMessageListRequest::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ContactMessageListRequest_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_ContactMessageListRequest_messages_2eproto}, {
+      &scc_info_Message_messages_2eproto.base,}};
+
 static void InitDefaultsscc_info_ContactMessageRequest_messages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -209,6 +253,64 @@ static void InitDefaultsscc_info_ContactRequest_messages_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ContactRequest_messages_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_ContactRequest_messages_2eproto}, {
       &scc_info_Contact_messages_2eproto.base,}};
+
+static void InitDefaultsscc_info_File_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_File_default_instance_;
+    new (ptr) ::netdesign2::File();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::File::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_File_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_File_messages_2eproto}, {}};
+
+static void InitDefaultsscc_info_FileDownloadRequest_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_FileDownloadRequest_default_instance_;
+    new (ptr) ::netdesign2::FileDownloadRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::FileDownloadRequest::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_FileDownloadRequest_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_FileDownloadRequest_messages_2eproto}, {}};
+
+static void InitDefaultsscc_info_FileDownloadResponse_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_FileDownloadResponse_default_instance_;
+    new (ptr) ::netdesign2::FileDownloadResponse();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::FileDownloadResponse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_FileDownloadResponse_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_FileDownloadResponse_messages_2eproto}, {
+      &scc_info_File_messages_2eproto.base,}};
+
+static void InitDefaultsscc_info_FileUploadRequest_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_FileUploadRequest_default_instance_;
+    new (ptr) ::netdesign2::FileUploadRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::FileUploadRequest::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_FileUploadRequest_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_FileUploadRequest_messages_2eproto}, {
+      &scc_info_File_messages_2eproto.base,}};
 
 static void InitDefaultsscc_info_FriendSendMessageRequest_messages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -340,6 +442,34 @@ static void InitDefaultsscc_info_RawMessage_messages_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RawMessage_messages_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_RawMessage_messages_2eproto}, {}};
 
+static void InitDefaultsscc_info_RegisterRequest_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_RegisterRequest_default_instance_;
+    new (ptr) ::netdesign2::RegisterRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::RegisterRequest::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RegisterRequest_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_RegisterRequest_messages_2eproto}, {}};
+
+static void InitDefaultsscc_info_RegisterResponse_messages_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::netdesign2::_RegisterResponse_default_instance_;
+    new (ptr) ::netdesign2::RegisterResponse();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::netdesign2::RegisterResponse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RegisterResponse_messages_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_RegisterResponse_messages_2eproto}, {}};
+
 static void InitDefaultsscc_info_ServerAckResponse_messages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -424,7 +554,7 @@ static void InitDefaultsscc_info_SetupChannelRequest_messages_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SetupChannelRequest_messages_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_SetupChannelRequest_messages_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_messages_2eproto[22];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_messages_2eproto[29];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_messages_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_messages_2eproto = nullptr;
 
@@ -441,7 +571,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_messages_2eproto::offsets[] PR
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::netdesign2::ServerStatusRequest, clientpublickey_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::netdesign2::ServerStatusResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -449,7 +578,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_messages_2eproto::offsets[] PR
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::netdesign2::ServerStatusResponse, online_),
   PROTOBUF_FIELD_OFFSET(::netdesign2::ServerStatusResponse, registrable_),
-  PROTOBUF_FIELD_OFFSET(::netdesign2::ServerStatusResponse, serverpublickey_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::netdesign2::ServerStatusUpdateRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -487,6 +615,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_messages_2eproto::offsets[] PR
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::netdesign2::LoginResponse, logined_),
+  PROTOBUF_FIELD_OFFSET(::netdesign2::LoginResponse, id_),
   PROTOBUF_FIELD_OFFSET(::netdesign2::LoginResponse, token_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::netdesign2::Contact, _internal_metadata_),
@@ -522,6 +651,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_messages_2eproto::offsets[] PR
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::File, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::File, name_),
+  PROTOBUF_FIELD_OFFSET(::netdesign2::File, content_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::netdesign2::RawMessage, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -560,6 +696,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_messages_2eproto::offsets[] PR
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FriendSendMessageRequest, token_),
   PROTOBUF_FIELD_OFFSET(::netdesign2::FriendSendMessageRequest, message_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::netdesign2::FriendSendMessageResponse, _internal_metadata_),
@@ -578,30 +715,77 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_messages_2eproto::offsets[] PR
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::ContactMessageListRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::ContactMessageListRequest, messages_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileUploadRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileUploadRequest, token_),
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileUploadRequest, id_),
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileUploadRequest, file_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileDownloadRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileDownloadRequest, token_),
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileDownloadRequest, id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileDownloadResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::FileDownloadResponse, file_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::RegisterRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::RegisterRequest, username_),
+  PROTOBUF_FIELD_OFFSET(::netdesign2::RegisterRequest, rawpassword_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::RegisterResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::netdesign2::RegisterResponse, success_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::netdesign2::Packet)},
   { 7, -1, sizeof(::netdesign2::ServerStatusRequest)},
-  { 13, -1, sizeof(::netdesign2::ServerStatusResponse)},
-  { 21, -1, sizeof(::netdesign2::ServerStatusUpdateRequest)},
-  { 26, -1, sizeof(::netdesign2::ServerStatusUpdateResponse)},
-  { 33, -1, sizeof(::netdesign2::LoginPreRequest)},
-  { 39, -1, sizeof(::netdesign2::LoginPreResponse)},
-  { 45, -1, sizeof(::netdesign2::LoginRequest)},
-  { 52, -1, sizeof(::netdesign2::LoginResponse)},
-  { 59, -1, sizeof(::netdesign2::Contact)},
-  { 70, -1, sizeof(::netdesign2::ContactListRequest)},
-  { 76, -1, sizeof(::netdesign2::ClientAckResponse)},
-  { 81, -1, sizeof(::netdesign2::ContactRequest)},
-  { 88, -1, sizeof(::netdesign2::ServerAckResponse)},
-  { 93, -1, sizeof(::netdesign2::RawMessage)},
-  { 103, -1, sizeof(::netdesign2::Message)},
-  { 112, -1, sizeof(::netdesign2::ContactMessageRequest)},
-  { 120, -1, sizeof(::netdesign2::ContactMessageResponse)},
-  { 126, -1, sizeof(::netdesign2::FriendSendMessageRequest)},
-  { 132, -1, sizeof(::netdesign2::FriendSendMessageResponse)},
-  { 138, -1, sizeof(::netdesign2::SetupChannelRequest)},
-  { 144, -1, sizeof(::netdesign2::ChannelHeartRequest)},
+  { 12, -1, sizeof(::netdesign2::ServerStatusResponse)},
+  { 19, -1, sizeof(::netdesign2::ServerStatusUpdateRequest)},
+  { 24, -1, sizeof(::netdesign2::ServerStatusUpdateResponse)},
+  { 31, -1, sizeof(::netdesign2::LoginPreRequest)},
+  { 37, -1, sizeof(::netdesign2::LoginPreResponse)},
+  { 43, -1, sizeof(::netdesign2::LoginRequest)},
+  { 50, -1, sizeof(::netdesign2::LoginResponse)},
+  { 58, -1, sizeof(::netdesign2::Contact)},
+  { 69, -1, sizeof(::netdesign2::ContactListRequest)},
+  { 75, -1, sizeof(::netdesign2::ClientAckResponse)},
+  { 80, -1, sizeof(::netdesign2::ContactRequest)},
+  { 87, -1, sizeof(::netdesign2::ServerAckResponse)},
+  { 92, -1, sizeof(::netdesign2::File)},
+  { 99, -1, sizeof(::netdesign2::RawMessage)},
+  { 109, -1, sizeof(::netdesign2::Message)},
+  { 118, -1, sizeof(::netdesign2::ContactMessageRequest)},
+  { 126, -1, sizeof(::netdesign2::ContactMessageResponse)},
+  { 132, -1, sizeof(::netdesign2::FriendSendMessageRequest)},
+  { 139, -1, sizeof(::netdesign2::FriendSendMessageResponse)},
+  { 145, -1, sizeof(::netdesign2::SetupChannelRequest)},
+  { 151, -1, sizeof(::netdesign2::ChannelHeartRequest)},
+  { 156, -1, sizeof(::netdesign2::ContactMessageListRequest)},
+  { 162, -1, sizeof(::netdesign2::FileUploadRequest)},
+  { 170, -1, sizeof(::netdesign2::FileDownloadRequest)},
+  { 177, -1, sizeof(::netdesign2::FileDownloadResponse)},
+  { 183, -1, sizeof(::netdesign2::RegisterRequest)},
+  { 190, -1, sizeof(::netdesign2::RegisterResponse)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -619,6 +803,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_ClientAckResponse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_ContactRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_ServerAckResponse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_File_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_RawMessage_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_Message_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_ContactMessageRequest_default_instance_),
@@ -627,60 +812,80 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_FriendSendMessageResponse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_SetupChannelRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_ChannelHeartRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_ContactMessageListRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_FileUploadRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_FileDownloadRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_FileDownloadResponse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_RegisterRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::netdesign2::_RegisterResponse_default_instance_),
 };
 
 const char descriptor_table_protodef_messages_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016messages.proto\022\nnetdesign2\032\031google/pro"
   "tobuf/any.proto\"A\n\006Packet\022\020\n\010packetId\030\001 "
   "\001(\005\022%\n\007content\030\002 \001(\0132\024.google.protobuf.A"
-  "ny\".\n\023ServerStatusRequest\022\027\n\017clientPubli"
-  "cKey\030\001 \001(\t\"T\n\024ServerStatusResponse\022\016\n\006on"
-  "line\030\001 \001(\010\022\023\n\013registrable\030\002 \001(\010\022\027\n\017serve"
-  "rPublicKey\030\003 \001(\t\"\033\n\031ServerStatusUpdateRe"
-  "quest\"A\n\032ServerStatusUpdateResponse\022\016\n\006o"
-  "nline\030\001 \001(\010\022\023\n\013registrable\030\002 \001(\010\"#\n\017Logi"
-  "nPreRequest\022\020\n\010username\030\001 \001(\t\"%\n\020LoginPr"
-  "eResponse\022\021\n\tchallenge\030\001 \001(\014\"6\n\014LoginReq"
-  "uest\022\020\n\010username\030\001 \001(\t\022\024\n\014hashPassword\030\002"
-  " \001(\014\"/\n\rLoginResponse\022\017\n\007logined\030\001 \001(\010\022\r"
-  "\n\005token\030\002 \001(\t\"\312\001\n\007Contact\022\n\n\002id\030\001 \001(\005\022\014\n"
-  "\004name\030\002 \001(\t\022\016\n\006online\030\003 \001(\010\022-\n\004type\030\004 \001("
-  "\0162\037.netdesign2.Contact.ContactType\022$\n\007me"
-  "mbers\030\005 \003(\0132\023.netdesign2.Contact\022\016\n\006head"
-  "er\030\006 \001(\005\"0\n\013ContactType\022\n\n\006FRIEND\020\000\022\t\n\005G"
-  "ROUP\020\001\022\n\n\006MEMBER\020\002\";\n\022ContactListRequest"
-  "\022%\n\010contacts\030\001 \003(\0132\023.netdesign2.Contact\""
-  "\023\n\021ClientAckResponse\"F\n\016ContactRequest\022$"
-  "\n\007contact\030\001 \001(\0132\023.netdesign2.Contact\022\016\n\006"
-  "delete\030\002 \001(\010\"\023\n\021ServerAckResponse\"l\n\nRaw"
-  "Message\022\014\n\004from\030\001 \001(\005\022\n\n\002to\030\002 \001(\005\022%\n\004typ"
-  "e\030\003 \001(\0162\027.netdesign2.MessageType\022\017\n\007cont"
-  "ent\030\004 \001(\t\022\014\n\004hash\030\005 \001(\t\"e\n\007Message\022\'\n\007me"
-  "ssage\030\001 \001(\0132\026.netdesign2.RawMessage\022\n\n\002i"
-  "d\030\002 \001(\005\022\021\n\ttimestamp\030\003 \001(\005\022\022\n\ninternalId"
-  "\030\004 \001(\005\"F\n\025ContactMessageRequest\022\r\n\005token"
-  "\030\001 \001(\t\022\n\n\002id\030\002 \001(\005\022\022\n\ninternalId\030\003 \001(\005\">"
-  "\n\026ContactMessageResponse\022$\n\007message\030\001 \001("
-  "\0132\023.netdesign2.Message\"C\n\030FriendSendMess"
-  "ageRequest\022\'\n\007message\030\001 \001(\0132\026.netdesign2"
-  ".RawMessage\"A\n\031FriendSendMessageResponse"
-  "\022$\n\007message\030\001 \001(\0132\023.netdesign2.Message\"$"
-  "\n\023SetupChannelRequest\022\r\n\005token\030\001 \001(\t\"\025\n\023"
-  "ChannelHeartRequest*,\n\013MessageType\022\010\n\004TE"
-  "XT\020\000\022\t\n\005IMAGE\020\001\022\010\n\004FILE\020\002B\034\n\032top.focess."
-  "netdesign.protob\006proto3"
+  "ny\"\025\n\023ServerStatusRequest\";\n\024ServerStatu"
+  "sResponse\022\016\n\006online\030\001 \001(\010\022\023\n\013registrable"
+  "\030\002 \001(\010\"\033\n\031ServerStatusUpdateRequest\"A\n\032S"
+  "erverStatusUpdateResponse\022\016\n\006online\030\001 \001("
+  "\010\022\023\n\013registrable\030\002 \001(\010\"#\n\017LoginPreReques"
+  "t\022\020\n\010username\030\001 \001(\t\"%\n\020LoginPreResponse\022"
+  "\021\n\tchallenge\030\001 \001(\t\"6\n\014LoginRequest\022\020\n\010us"
+  "ername\030\001 \001(\t\022\024\n\014hashPassword\030\002 \001(\t\";\n\rLo"
+  "ginResponse\022\017\n\007logined\030\001 \001(\010\022\n\n\002id\030\002 \001(\005"
+  "\022\r\n\005token\030\003 \001(\t\"\312\001\n\007Contact\022\n\n\002id\030\001 \001(\005\022"
+  "\014\n\004name\030\002 \001(\t\022\016\n\006online\030\003 \001(\010\022-\n\004type\030\004 "
+  "\001(\0162\037.netdesign2.Contact.ContactType\022$\n\007"
+  "members\030\005 \003(\0132\023.netdesign2.Contact\022\016\n\006he"
+  "ader\030\006 \001(\005\"0\n\013ContactType\022\n\n\006FRIEND\020\000\022\t\n"
+  "\005GROUP\020\001\022\n\n\006MEMBER\020\002\";\n\022ContactListReque"
+  "st\022%\n\010contacts\030\001 \003(\0132\023.netdesign2.Contac"
+  "t\"\023\n\021ClientAckResponse\"F\n\016ContactRequest"
+  "\022$\n\007contact\030\001 \001(\0132\023.netdesign2.Contact\022\016"
+  "\n\006delete\030\002 \001(\010\"\023\n\021ServerAckResponse\"%\n\004F"
+  "ile\022\014\n\004name\030\001 \001(\t\022\017\n\007content\030\002 \001(\014\"l\n\nRa"
+  "wMessage\022\014\n\004from\030\001 \001(\005\022\n\n\002to\030\002 \001(\005\022%\n\004ty"
+  "pe\030\003 \001(\0162\027.netdesign2.MessageType\022\017\n\007con"
+  "tent\030\004 \001(\t\022\014\n\004hash\030\005 \001(\t\"e\n\007Message\022\'\n\007m"
+  "essage\030\001 \001(\0132\026.netdesign2.RawMessage\022\n\n\002"
+  "id\030\002 \001(\005\022\021\n\ttimestamp\030\003 \001(\005\022\022\n\ninternalI"
+  "d\030\004 \001(\005\"F\n\025ContactMessageRequest\022\r\n\005toke"
+  "n\030\001 \001(\t\022\n\n\002id\030\002 \001(\005\022\022\n\ninternalId\030\003 \001(\005\""
+  ">\n\026ContactMessageResponse\022$\n\007message\030\001 \001"
+  "(\0132\023.netdesign2.Message\"R\n\030FriendSendMes"
+  "sageRequest\022\r\n\005token\030\001 \001(\t\022\'\n\007message\030\002 "
+  "\001(\0132\026.netdesign2.RawMessage\"A\n\031FriendSen"
+  "dMessageResponse\022$\n\007message\030\001 \001(\0132\023.netd"
+  "esign2.Message\"$\n\023SetupChannelRequest\022\r\n"
+  "\005token\030\001 \001(\t\"\025\n\023ChannelHeartRequest\"B\n\031C"
+  "ontactMessageListRequest\022%\n\010messages\030\001 \003"
+  "(\0132\023.netdesign2.Message\"N\n\021FileUploadReq"
+  "uest\022\r\n\005token\030\001 \001(\t\022\n\n\002id\030\002 \001(\t\022\036\n\004file\030"
+  "\003 \001(\0132\020.netdesign2.File\"0\n\023FileDownloadR"
+  "equest\022\r\n\005token\030\001 \001(\t\022\n\n\002id\030\002 \001(\t\"6\n\024Fil"
+  "eDownloadResponse\022\036\n\004file\030\001 \001(\0132\020.netdes"
+  "ign2.File\"8\n\017RegisterRequest\022\020\n\010username"
+  "\030\001 \001(\t\022\023\n\013rawPassword\030\002 \001(\t\"#\n\020RegisterR"
+  "esponse\022\017\n\007success\030\001 \001(\010*,\n\013MessageType\022"
+  "\010\n\004TEXT\020\000\022\t\n\005IMAGE\020\001\022\010\n\004FILE\020\002B\034\n\032top.fo"
+  "cess.netdesign.protob\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_messages_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fany_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_messages_2eproto_sccs[22] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_messages_2eproto_sccs[29] = {
   &scc_info_ChannelHeartRequest_messages_2eproto.base,
   &scc_info_ClientAckResponse_messages_2eproto.base,
   &scc_info_Contact_messages_2eproto.base,
   &scc_info_ContactListRequest_messages_2eproto.base,
+  &scc_info_ContactMessageListRequest_messages_2eproto.base,
   &scc_info_ContactMessageRequest_messages_2eproto.base,
   &scc_info_ContactMessageResponse_messages_2eproto.base,
   &scc_info_ContactRequest_messages_2eproto.base,
+  &scc_info_File_messages_2eproto.base,
+  &scc_info_FileDownloadRequest_messages_2eproto.base,
+  &scc_info_FileDownloadResponse_messages_2eproto.base,
+  &scc_info_FileUploadRequest_messages_2eproto.base,
   &scc_info_FriendSendMessageRequest_messages_2eproto.base,
   &scc_info_FriendSendMessageResponse_messages_2eproto.base,
   &scc_info_LoginPreRequest_messages_2eproto.base,
@@ -690,6 +895,8 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_mes
   &scc_info_Message_messages_2eproto.base,
   &scc_info_Packet_messages_2eproto.base,
   &scc_info_RawMessage_messages_2eproto.base,
+  &scc_info_RegisterRequest_messages_2eproto.base,
+  &scc_info_RegisterResponse_messages_2eproto.base,
   &scc_info_ServerAckResponse_messages_2eproto.base,
   &scc_info_ServerStatusRequest_messages_2eproto.base,
   &scc_info_ServerStatusResponse_messages_2eproto.base,
@@ -700,10 +907,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_mes
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_messages_2eproto_once;
 static bool descriptor_table_messages_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_messages_2eproto = {
-  &descriptor_table_messages_2eproto_initialized, descriptor_table_protodef_messages_2eproto, "messages.proto", 1543,
-  &descriptor_table_messages_2eproto_once, descriptor_table_messages_2eproto_sccs, descriptor_table_messages_2eproto_deps, 22, 1,
+  &descriptor_table_messages_2eproto_initialized, descriptor_table_protodef_messages_2eproto, "messages.proto", 1908,
+  &descriptor_table_messages_2eproto_once, descriptor_table_messages_2eproto_sccs, descriptor_table_messages_2eproto_deps, 29, 1,
   schemas, file_default_instances, TableStruct_messages_2eproto::offsets,
-  file_level_metadata_messages_2eproto, 22, file_level_enum_descriptors_messages_2eproto, file_level_service_descriptors_messages_2eproto,
+  file_level_metadata_messages_2eproto, 29, file_level_enum_descriptors_messages_2eproto, file_level_service_descriptors_messages_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1082,16 +1289,10 @@ ServerStatusRequest::ServerStatusRequest(const ServerStatusRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  clientpublickey_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from.clientpublickey().empty()) {
-    clientpublickey_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.clientpublickey_);
-  }
   // @@protoc_insertion_point(copy_constructor:netdesign2.ServerStatusRequest)
 }
 
 void ServerStatusRequest::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ServerStatusRequest_messages_2eproto.base);
-  clientpublickey_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 ServerStatusRequest::~ServerStatusRequest() {
@@ -1100,7 +1301,6 @@ ServerStatusRequest::~ServerStatusRequest() {
 }
 
 void ServerStatusRequest::SharedDtor() {
-  clientpublickey_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ServerStatusRequest::SetCachedSize(int size) const {
@@ -1118,7 +1318,6 @@ void ServerStatusRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  clientpublickey_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -1130,15 +1329,7 @@ const char* ServerStatusRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAME
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // string clientPublicKey = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_clientpublickey(), ptr, ctx, "netdesign2.ServerStatusRequest.clientPublicKey");
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
       default: {
-      handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
           ctx->SetLastTag(tag);
           goto success;
@@ -1166,32 +1357,12 @@ bool ServerStatusRequest::MergePartialFromCodedStream(
     ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string clientPublicKey = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_clientpublickey()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->clientpublickey().data(), static_cast<int>(this->clientpublickey().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "netdesign2.ServerStatusRequest.clientPublicKey"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  handle_unusual:
+    if (tag == 0) {
+      goto success;
     }
+    DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+          input, tag, _internal_metadata_.mutable_unknown_fields()));
   }
 success:
   // @@protoc_insertion_point(parse_success:netdesign2.ServerStatusRequest)
@@ -1209,16 +1380,6 @@ void ServerStatusRequest::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string clientPublicKey = 1;
-  if (this->clientpublickey().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->clientpublickey().data(), static_cast<int>(this->clientpublickey().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.ServerStatusRequest.clientPublicKey");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->clientpublickey(), output);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -1231,17 +1392,6 @@ void ServerStatusRequest::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_to_array_start:netdesign2.ServerStatusRequest)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
-
-  // string clientPublicKey = 1;
-  if (this->clientpublickey().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->clientpublickey().data(), static_cast<int>(this->clientpublickey().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.ServerStatusRequest.clientPublicKey");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->clientpublickey(), target);
-  }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -1263,13 +1413,6 @@ size_t ServerStatusRequest::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
-
-  // string clientPublicKey = 1;
-  if (this->clientpublickey().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->clientpublickey());
-  }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -1298,10 +1441,6 @@ void ServerStatusRequest::MergeFrom(const ServerStatusRequest& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.clientpublickey().size() > 0) {
-
-    clientpublickey_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.clientpublickey_);
-  }
 }
 
 void ServerStatusRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1325,8 +1464,6 @@ bool ServerStatusRequest::IsInitialized() const {
 void ServerStatusRequest::InternalSwap(ServerStatusRequest* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  clientpublickey_.Swap(&other->clientpublickey_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ServerStatusRequest::GetMetadata() const {
@@ -1351,10 +1488,6 @@ ServerStatusResponse::ServerStatusResponse(const ServerStatusResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  serverpublickey_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from.serverpublickey().empty()) {
-    serverpublickey_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.serverpublickey_);
-  }
   ::memcpy(&online_, &from.online_,
     static_cast<size_t>(reinterpret_cast<char*>(&registrable_) -
     reinterpret_cast<char*>(&online_)) + sizeof(registrable_));
@@ -1362,8 +1495,6 @@ ServerStatusResponse::ServerStatusResponse(const ServerStatusResponse& from)
 }
 
 void ServerStatusResponse::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ServerStatusResponse_messages_2eproto.base);
-  serverpublickey_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&online_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&registrable_) -
       reinterpret_cast<char*>(&online_)) + sizeof(registrable_));
@@ -1375,7 +1506,6 @@ ServerStatusResponse::~ServerStatusResponse() {
 }
 
 void ServerStatusResponse::SharedDtor() {
-  serverpublickey_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ServerStatusResponse::SetCachedSize(int size) const {
@@ -1393,7 +1523,6 @@ void ServerStatusResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  serverpublickey_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&online_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&registrable_) -
       reinterpret_cast<char*>(&online_)) + sizeof(registrable_));
@@ -1419,13 +1548,6 @@ const char* ServerStatusResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAM
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
           registrable_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string serverPublicKey = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_serverpublickey(), ptr, ctx, "netdesign2.ServerStatusResponse.serverPublicKey");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1485,21 +1607,6 @@ bool ServerStatusResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // string serverPublicKey = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_serverpublickey()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->serverpublickey().data(), static_cast<int>(this->serverpublickey().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "netdesign2.ServerStatusResponse.serverPublicKey"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1537,16 +1644,6 @@ void ServerStatusResponse::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(2, this->registrable(), output);
   }
 
-  // string serverPublicKey = 3;
-  if (this->serverpublickey().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->serverpublickey().data(), static_cast<int>(this->serverpublickey().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.ServerStatusResponse.serverPublicKey");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->serverpublickey(), output);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -1570,17 +1667,6 @@ void ServerStatusResponse::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->registrable(), target);
   }
 
-  // string serverPublicKey = 3;
-  if (this->serverpublickey().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->serverpublickey().data(), static_cast<int>(this->serverpublickey().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "netdesign2.ServerStatusResponse.serverPublicKey");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        3, this->serverpublickey(), target);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -1601,13 +1687,6 @@ size_t ServerStatusResponse::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
-
-  // string serverPublicKey = 3;
-  if (this->serverpublickey().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->serverpublickey());
-  }
 
   // bool online = 1;
   if (this->online() != 0) {
@@ -1646,10 +1725,6 @@ void ServerStatusResponse::MergeFrom(const ServerStatusResponse& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.serverpublickey().size() > 0) {
-
-    serverpublickey_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.serverpublickey_);
-  }
   if (from.online() != 0) {
     set_online(from.online());
   }
@@ -1679,8 +1754,6 @@ bool ServerStatusResponse::IsInitialized() const {
 void ServerStatusResponse::InternalSwap(ServerStatusResponse* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  serverpublickey_.Swap(&other->serverpublickey_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   swap(online_, other->online_);
   swap(registrable_, other->registrable_);
 }
@@ -2515,10 +2588,10 @@ const char* LoginPreResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // bytes challenge = 1;
+      // string challenge = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_challenge(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_challenge(), ptr, ctx, "netdesign2.LoginPreResponse.challenge");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2552,11 +2625,15 @@ bool LoginPreResponse::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // bytes challenge = 1;
+      // string challenge = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_challenge()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->challenge().data(), static_cast<int>(this->challenge().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.LoginPreResponse.challenge"));
         } else {
           goto handle_unusual;
         }
@@ -2590,9 +2667,13 @@ void LoginPreResponse::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes challenge = 1;
+  // string challenge = 1;
   if (this->challenge().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->challenge().data(), static_cast<int>(this->challenge().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.LoginPreResponse.challenge");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->challenge(), output);
   }
 
@@ -2609,10 +2690,14 @@ void LoginPreResponse::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes challenge = 1;
+  // string challenge = 1;
   if (this->challenge().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->challenge().data(), static_cast<int>(this->challenge().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.LoginPreResponse.challenge");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         1, this->challenge(), target);
   }
 
@@ -2637,10 +2722,10 @@ size_t LoginPreResponse::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // bytes challenge = 1;
+  // string challenge = 1;
   if (this->challenge().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->challenge());
   }
 
@@ -2786,10 +2871,10 @@ const char* LoginRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // bytes hashPassword = 2;
+      // string hashPassword = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_hashpassword(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_hashpassword(), ptr, ctx, "netdesign2.LoginRequest.hashPassword");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2838,11 +2923,15 @@ bool LoginRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // bytes hashPassword = 2;
+      // string hashPassword = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_hashpassword()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->hashpassword().data(), static_cast<int>(this->hashpassword().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.LoginRequest.hashPassword"));
         } else {
           goto handle_unusual;
         }
@@ -2886,9 +2975,13 @@ void LoginRequest::SerializeWithCachedSizes(
       1, this->username(), output);
   }
 
-  // bytes hashPassword = 2;
+  // string hashPassword = 2;
   if (this->hashpassword().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->hashpassword().data(), static_cast<int>(this->hashpassword().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.LoginRequest.hashPassword");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->hashpassword(), output);
   }
 
@@ -2916,10 +3009,14 @@ void LoginRequest::SerializeWithCachedSizes(
         1, this->username(), target);
   }
 
-  // bytes hashPassword = 2;
+  // string hashPassword = 2;
   if (this->hashpassword().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->hashpassword().data(), static_cast<int>(this->hashpassword().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.LoginRequest.hashPassword");
     target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         2, this->hashpassword(), target);
   }
 
@@ -2951,10 +3048,10 @@ size_t LoginRequest::ByteSizeLong() const {
         this->username());
   }
 
-  // bytes hashPassword = 2;
+  // string hashPassword = 2;
   if (this->hashpassword().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->hashpassword());
   }
 
@@ -3048,14 +3145,18 @@ LoginResponse::LoginResponse(const LoginResponse& from)
   if (!from.token().empty()) {
     token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
   }
-  logined_ = from.logined_;
+  ::memcpy(&logined_, &from.logined_,
+    static_cast<size_t>(reinterpret_cast<char*>(&id_) -
+    reinterpret_cast<char*>(&logined_)) + sizeof(id_));
   // @@protoc_insertion_point(copy_constructor:netdesign2.LoginResponse)
 }
 
 void LoginResponse::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_LoginResponse_messages_2eproto.base);
   token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  logined_ = false;
+  ::memset(&logined_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&id_) -
+      reinterpret_cast<char*>(&logined_)) + sizeof(id_));
 }
 
 LoginResponse::~LoginResponse() {
@@ -3083,7 +3184,9 @@ void LoginResponse::Clear() {
   (void) cached_has_bits;
 
   token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  logined_ = false;
+  ::memset(&logined_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&id_) -
+      reinterpret_cast<char*>(&logined_)) + sizeof(id_));
   _internal_metadata_.Clear();
 }
 
@@ -3102,9 +3205,16 @@ const char* LoginResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string token = 2;
+      // int32 id = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string token = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_token(), ptr, ctx, "netdesign2.LoginResponse.token");
           CHK_(ptr);
         } else goto handle_unusual;
@@ -3152,9 +3262,22 @@ bool LoginResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // string token = 2;
+      // int32 id = 2;
       case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
+                 input, &id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string token = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_token()));
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
@@ -3199,14 +3322,19 @@ void LoginResponse::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->logined(), output);
   }
 
-  // string token = 2;
+  // int32 id = 2;
+  if (this->id() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(2, this->id(), output);
+  }
+
+  // string token = 3;
   if (this->token().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->token().data(), static_cast<int>(this->token().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "netdesign2.LoginResponse.token");
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->token(), output);
+      3, this->token(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3227,7 +3355,12 @@ void LoginResponse::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->logined(), target);
   }
 
-  // string token = 2;
+  // int32 id = 2;
+  if (this->id() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->id(), target);
+  }
+
+  // string token = 3;
   if (this->token().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->token().data(), static_cast<int>(this->token().length()),
@@ -3235,7 +3368,7 @@ void LoginResponse::SerializeWithCachedSizes(
       "netdesign2.LoginResponse.token");
     target =
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        2, this->token(), target);
+        3, this->token(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3259,7 +3392,7 @@ size_t LoginResponse::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string token = 2;
+  // string token = 3;
   if (this->token().size() > 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
@@ -3269,6 +3402,13 @@ size_t LoginResponse::ByteSizeLong() const {
   // bool logined = 1;
   if (this->logined() != 0) {
     total_size += 1 + 1;
+  }
+
+  // int32 id = 2;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->id());
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -3305,6 +3445,9 @@ void LoginResponse::MergeFrom(const LoginResponse& from) {
   if (from.logined() != 0) {
     set_logined(from.logined());
   }
+  if (from.id() != 0) {
+    set_id(from.id());
+  }
 }
 
 void LoginResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -3331,6 +3474,7 @@ void LoginResponse::InternalSwap(LoginResponse* other) {
   token_.Swap(&other->token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(logined_, other->logined_);
+  swap(id_, other->id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata LoginResponse::GetMetadata() const {
@@ -4800,6 +4944,326 @@ void ServerAckResponse::InternalSwap(ServerAckResponse* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ServerAckResponse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void File::InitAsDefaultInstance() {
+}
+class File::_Internal {
+ public:
+};
+
+File::File()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.File)
+}
+File::File(const File& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.name().empty()) {
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  content_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.content().empty()) {
+    content_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.content_);
+  }
+  // @@protoc_insertion_point(copy_constructor:netdesign2.File)
+}
+
+void File::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_File_messages_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  content_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+File::~File() {
+  // @@protoc_insertion_point(destructor:netdesign2.File)
+  SharedDtor();
+}
+
+void File::SharedDtor() {
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  content_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void File::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const File& File::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_File_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void File::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.File)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  content_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* File::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_name(), ptr, ctx, "netdesign2.File.name");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes content = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(mutable_content(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool File::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.File)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string name = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), static_cast<int>(this->name().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.File.name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bytes content = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_content()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.File)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.File)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void File::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.File)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.File.name");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // bytes content = 2;
+  if (this->content().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesMaybeAliased(
+      2, this->content(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.File)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* File::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.File)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->name().data(), static_cast<int>(this->name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.File.name");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // bytes content = 2;
+  if (this->content().size() > 0) {
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBytesToArray(
+        2, this->content(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.File)
+  return target;
+}
+
+size_t File::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.File)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->name());
+  }
+
+  // bytes content = 2;
+  if (this->content().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->content());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void File::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.File)
+  GOOGLE_DCHECK_NE(&from, this);
+  const File* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<File>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.File)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.File)
+    MergeFrom(*source);
+  }
+}
+
+void File::MergeFrom(const File& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.File)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.content().size() > 0) {
+
+    content_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.content_);
+  }
+}
+
+void File::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.File)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void File::CopyFrom(const File& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.File)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool File::IsInitialized() const {
+  return true;
+}
+
+void File::InternalSwap(File* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  content_.Swap(&other->content_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata File::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -6318,6 +6782,10 @@ FriendSendMessageRequest::FriendSendMessageRequest(const FriendSendMessageReques
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.token().empty()) {
+    token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
   if (from.has_message()) {
     message_ = new ::netdesign2::RawMessage(*from.message_);
   } else {
@@ -6328,6 +6796,7 @@ FriendSendMessageRequest::FriendSendMessageRequest(const FriendSendMessageReques
 
 void FriendSendMessageRequest::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FriendSendMessageRequest_messages_2eproto.base);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   message_ = nullptr;
 }
 
@@ -6337,6 +6806,7 @@ FriendSendMessageRequest::~FriendSendMessageRequest() {
 }
 
 void FriendSendMessageRequest::SharedDtor() {
+  token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete message_;
 }
 
@@ -6355,6 +6825,7 @@ void FriendSendMessageRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && message_ != nullptr) {
     delete message_;
   }
@@ -6370,9 +6841,16 @@ const char* FriendSendMessageRequest::_InternalParse(const char* ptr, ::PROTOBUF
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .netdesign2.RawMessage message = 1;
+      // string token = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_token(), ptr, ctx, "netdesign2.FriendSendMessageRequest.token");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .netdesign2.RawMessage message = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(mutable_message(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -6407,9 +6885,24 @@ bool FriendSendMessageRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .netdesign2.RawMessage message = 1;
+      // string token = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->token().data(), static_cast<int>(this->token().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.FriendSendMessageRequest.token"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .netdesign2.RawMessage message = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_message()));
         } else {
@@ -6445,10 +6938,20 @@ void FriendSendMessageRequest::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .netdesign2.RawMessage message = 1;
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FriendSendMessageRequest.token");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->token(), output);
+  }
+
+  // .netdesign2.RawMessage message = 2;
   if (this->has_message()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, _Internal::message(this), output);
+      2, _Internal::message(this), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -6464,11 +6967,22 @@ void FriendSendMessageRequest::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .netdesign2.RawMessage message = 1;
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FriendSendMessageRequest.token");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
+  }
+
+  // .netdesign2.RawMessage message = 2;
   if (this->has_message()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, _Internal::message(this), target);
+        2, _Internal::message(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -6492,7 +7006,14 @@ size_t FriendSendMessageRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .netdesign2.RawMessage message = 1;
+  // string token = 1;
+  if (this->token().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->token());
+  }
+
+  // .netdesign2.RawMessage message = 2;
   if (this->has_message()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -6526,6 +7047,10 @@ void FriendSendMessageRequest::MergeFrom(const FriendSendMessageRequest& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.token().size() > 0) {
+
+    token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
   if (from.has_message()) {
     mutable_message()->::netdesign2::RawMessage::MergeFrom(from.message());
   }
@@ -6552,6 +7077,8 @@ bool FriendSendMessageRequest::IsInitialized() const {
 void FriendSendMessageRequest::InternalSwap(FriendSendMessageRequest* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  token_.Swap(&other->token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(message_, other->message_);
 }
 
@@ -7294,6 +7821,1836 @@ void ChannelHeartRequest::InternalSwap(ChannelHeartRequest* other) {
 }
 
 
+// ===================================================================
+
+void ContactMessageListRequest::InitAsDefaultInstance() {
+}
+class ContactMessageListRequest::_Internal {
+ public:
+};
+
+ContactMessageListRequest::ContactMessageListRequest()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.ContactMessageListRequest)
+}
+ContactMessageListRequest::ContactMessageListRequest(const ContactMessageListRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      messages_(from.messages_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:netdesign2.ContactMessageListRequest)
+}
+
+void ContactMessageListRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ContactMessageListRequest_messages_2eproto.base);
+}
+
+ContactMessageListRequest::~ContactMessageListRequest() {
+  // @@protoc_insertion_point(destructor:netdesign2.ContactMessageListRequest)
+  SharedDtor();
+}
+
+void ContactMessageListRequest::SharedDtor() {
+}
+
+void ContactMessageListRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ContactMessageListRequest& ContactMessageListRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ContactMessageListRequest_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ContactMessageListRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.ContactMessageListRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  messages_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* ContactMessageListRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // repeated .netdesign2.Message messages = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_messages(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool ContactMessageListRequest::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.ContactMessageListRequest)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .netdesign2.Message messages = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_messages()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.ContactMessageListRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.ContactMessageListRequest)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void ContactMessageListRequest::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.ContactMessageListRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .netdesign2.Message messages = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->messages_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->messages(static_cast<int>(i)),
+      output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.ContactMessageListRequest)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ContactMessageListRequest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.ContactMessageListRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .netdesign2.Message messages = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->messages_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->messages(static_cast<int>(i)), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.ContactMessageListRequest)
+  return target;
+}
+
+size_t ContactMessageListRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.ContactMessageListRequest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .netdesign2.Message messages = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->messages_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->messages(static_cast<int>(i)));
+    }
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ContactMessageListRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.ContactMessageListRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ContactMessageListRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ContactMessageListRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.ContactMessageListRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.ContactMessageListRequest)
+    MergeFrom(*source);
+  }
+}
+
+void ContactMessageListRequest::MergeFrom(const ContactMessageListRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.ContactMessageListRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  messages_.MergeFrom(from.messages_);
+}
+
+void ContactMessageListRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.ContactMessageListRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ContactMessageListRequest::CopyFrom(const ContactMessageListRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.ContactMessageListRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ContactMessageListRequest::IsInitialized() const {
+  return true;
+}
+
+void ContactMessageListRequest::InternalSwap(ContactMessageListRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  CastToBase(&messages_)->InternalSwap(CastToBase(&other->messages_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ContactMessageListRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void FileUploadRequest::InitAsDefaultInstance() {
+  ::netdesign2::_FileUploadRequest_default_instance_._instance.get_mutable()->file_ = const_cast< ::netdesign2::File*>(
+      ::netdesign2::File::internal_default_instance());
+}
+class FileUploadRequest::_Internal {
+ public:
+  static const ::netdesign2::File& file(const FileUploadRequest* msg);
+};
+
+const ::netdesign2::File&
+FileUploadRequest::_Internal::file(const FileUploadRequest* msg) {
+  return *msg->file_;
+}
+FileUploadRequest::FileUploadRequest()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.FileUploadRequest)
+}
+FileUploadRequest::FileUploadRequest(const FileUploadRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.token().empty()) {
+    token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.id().empty()) {
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.has_file()) {
+    file_ = new ::netdesign2::File(*from.file_);
+  } else {
+    file_ = nullptr;
+  }
+  // @@protoc_insertion_point(copy_constructor:netdesign2.FileUploadRequest)
+}
+
+void FileUploadRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FileUploadRequest_messages_2eproto.base);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  file_ = nullptr;
+}
+
+FileUploadRequest::~FileUploadRequest() {
+  // @@protoc_insertion_point(destructor:netdesign2.FileUploadRequest)
+  SharedDtor();
+}
+
+void FileUploadRequest::SharedDtor() {
+  token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete file_;
+}
+
+void FileUploadRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const FileUploadRequest& FileUploadRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_FileUploadRequest_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void FileUploadRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.FileUploadRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == nullptr && file_ != nullptr) {
+    delete file_;
+  }
+  file_ = nullptr;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* FileUploadRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string token = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_token(), ptr, ctx, "netdesign2.FileUploadRequest.token");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_id(), ptr, ctx, "netdesign2.FileUploadRequest.id");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .netdesign2.File file = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(mutable_file(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool FileUploadRequest::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.FileUploadRequest)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string token = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->token().data(), static_cast<int>(this->token().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.FileUploadRequest.token"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string id = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_id()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->id().data(), static_cast<int>(this->id().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.FileUploadRequest.id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .netdesign2.File file = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_file()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.FileUploadRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.FileUploadRequest)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void FileUploadRequest::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.FileUploadRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileUploadRequest.token");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->token(), output);
+  }
+
+  // string id = 2;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileUploadRequest.id");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->id(), output);
+  }
+
+  // .netdesign2.File file = 3;
+  if (this->has_file()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, _Internal::file(this), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.FileUploadRequest)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* FileUploadRequest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.FileUploadRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileUploadRequest.token");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
+  }
+
+  // string id = 2;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileUploadRequest.id");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        2, this->id(), target);
+  }
+
+  // .netdesign2.File file = 3;
+  if (this->has_file()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, _Internal::file(this), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.FileUploadRequest)
+  return target;
+}
+
+size_t FileUploadRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.FileUploadRequest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->token());
+  }
+
+  // string id = 2;
+  if (this->id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->id());
+  }
+
+  // .netdesign2.File file = 3;
+  if (this->has_file()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *file_);
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void FileUploadRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.FileUploadRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FileUploadRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FileUploadRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.FileUploadRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.FileUploadRequest)
+    MergeFrom(*source);
+  }
+}
+
+void FileUploadRequest::MergeFrom(const FileUploadRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.FileUploadRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.token().size() > 0) {
+
+    token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
+  if (from.id().size() > 0) {
+
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.has_file()) {
+    mutable_file()->::netdesign2::File::MergeFrom(from.file());
+  }
+}
+
+void FileUploadRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.FileUploadRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FileUploadRequest::CopyFrom(const FileUploadRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.FileUploadRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FileUploadRequest::IsInitialized() const {
+  return true;
+}
+
+void FileUploadRequest::InternalSwap(FileUploadRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  token_.Swap(&other->token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  id_.Swap(&other->id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(file_, other->file_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata FileUploadRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void FileDownloadRequest::InitAsDefaultInstance() {
+}
+class FileDownloadRequest::_Internal {
+ public:
+};
+
+FileDownloadRequest::FileDownloadRequest()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.FileDownloadRequest)
+}
+FileDownloadRequest::FileDownloadRequest(const FileDownloadRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.token().empty()) {
+    token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.id().empty()) {
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  // @@protoc_insertion_point(copy_constructor:netdesign2.FileDownloadRequest)
+}
+
+void FileDownloadRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FileDownloadRequest_messages_2eproto.base);
+  token_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+FileDownloadRequest::~FileDownloadRequest() {
+  // @@protoc_insertion_point(destructor:netdesign2.FileDownloadRequest)
+  SharedDtor();
+}
+
+void FileDownloadRequest::SharedDtor() {
+  token_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void FileDownloadRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const FileDownloadRequest& FileDownloadRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_FileDownloadRequest_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void FileDownloadRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.FileDownloadRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* FileDownloadRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string token = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_token(), ptr, ctx, "netdesign2.FileDownloadRequest.token");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_id(), ptr, ctx, "netdesign2.FileDownloadRequest.id");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool FileDownloadRequest::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.FileDownloadRequest)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string token = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->token().data(), static_cast<int>(this->token().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.FileDownloadRequest.token"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string id = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_id()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->id().data(), static_cast<int>(this->id().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.FileDownloadRequest.id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.FileDownloadRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.FileDownloadRequest)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void FileDownloadRequest::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.FileDownloadRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileDownloadRequest.token");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->token(), output);
+  }
+
+  // string id = 2;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileDownloadRequest.id");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->id(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.FileDownloadRequest)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* FileDownloadRequest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.FileDownloadRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->token().data(), static_cast<int>(this->token().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileDownloadRequest.token");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
+  }
+
+  // string id = 2;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.FileDownloadRequest.id");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        2, this->id(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.FileDownloadRequest)
+  return target;
+}
+
+size_t FileDownloadRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.FileDownloadRequest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string token = 1;
+  if (this->token().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->token());
+  }
+
+  // string id = 2;
+  if (this->id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->id());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void FileDownloadRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.FileDownloadRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FileDownloadRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FileDownloadRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.FileDownloadRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.FileDownloadRequest)
+    MergeFrom(*source);
+  }
+}
+
+void FileDownloadRequest::MergeFrom(const FileDownloadRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.FileDownloadRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.token().size() > 0) {
+
+    token_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.token_);
+  }
+  if (from.id().size() > 0) {
+
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+}
+
+void FileDownloadRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.FileDownloadRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FileDownloadRequest::CopyFrom(const FileDownloadRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.FileDownloadRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FileDownloadRequest::IsInitialized() const {
+  return true;
+}
+
+void FileDownloadRequest::InternalSwap(FileDownloadRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  token_.Swap(&other->token_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  id_.Swap(&other->id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata FileDownloadRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void FileDownloadResponse::InitAsDefaultInstance() {
+  ::netdesign2::_FileDownloadResponse_default_instance_._instance.get_mutable()->file_ = const_cast< ::netdesign2::File*>(
+      ::netdesign2::File::internal_default_instance());
+}
+class FileDownloadResponse::_Internal {
+ public:
+  static const ::netdesign2::File& file(const FileDownloadResponse* msg);
+};
+
+const ::netdesign2::File&
+FileDownloadResponse::_Internal::file(const FileDownloadResponse* msg) {
+  return *msg->file_;
+}
+FileDownloadResponse::FileDownloadResponse()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.FileDownloadResponse)
+}
+FileDownloadResponse::FileDownloadResponse(const FileDownloadResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_file()) {
+    file_ = new ::netdesign2::File(*from.file_);
+  } else {
+    file_ = nullptr;
+  }
+  // @@protoc_insertion_point(copy_constructor:netdesign2.FileDownloadResponse)
+}
+
+void FileDownloadResponse::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FileDownloadResponse_messages_2eproto.base);
+  file_ = nullptr;
+}
+
+FileDownloadResponse::~FileDownloadResponse() {
+  // @@protoc_insertion_point(destructor:netdesign2.FileDownloadResponse)
+  SharedDtor();
+}
+
+void FileDownloadResponse::SharedDtor() {
+  if (this != internal_default_instance()) delete file_;
+}
+
+void FileDownloadResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const FileDownloadResponse& FileDownloadResponse::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_FileDownloadResponse_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void FileDownloadResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.FileDownloadResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == nullptr && file_ != nullptr) {
+    delete file_;
+  }
+  file_ = nullptr;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* FileDownloadResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .netdesign2.File file = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(mutable_file(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool FileDownloadResponse::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.FileDownloadResponse)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .netdesign2.File file = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_file()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.FileDownloadResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.FileDownloadResponse)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void FileDownloadResponse::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.FileDownloadResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .netdesign2.File file = 1;
+  if (this->has_file()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, _Internal::file(this), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.FileDownloadResponse)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* FileDownloadResponse::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.FileDownloadResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .netdesign2.File file = 1;
+  if (this->has_file()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, _Internal::file(this), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.FileDownloadResponse)
+  return target;
+}
+
+size_t FileDownloadResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.FileDownloadResponse)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .netdesign2.File file = 1;
+  if (this->has_file()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *file_);
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void FileDownloadResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.FileDownloadResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FileDownloadResponse* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FileDownloadResponse>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.FileDownloadResponse)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.FileDownloadResponse)
+    MergeFrom(*source);
+  }
+}
+
+void FileDownloadResponse::MergeFrom(const FileDownloadResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.FileDownloadResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_file()) {
+    mutable_file()->::netdesign2::File::MergeFrom(from.file());
+  }
+}
+
+void FileDownloadResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.FileDownloadResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FileDownloadResponse::CopyFrom(const FileDownloadResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.FileDownloadResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FileDownloadResponse::IsInitialized() const {
+  return true;
+}
+
+void FileDownloadResponse::InternalSwap(FileDownloadResponse* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(file_, other->file_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata FileDownloadResponse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void RegisterRequest::InitAsDefaultInstance() {
+}
+class RegisterRequest::_Internal {
+ public:
+};
+
+RegisterRequest::RegisterRequest()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.RegisterRequest)
+}
+RegisterRequest::RegisterRequest(const RegisterRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  username_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.username().empty()) {
+    username_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  rawpassword_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.rawpassword().empty()) {
+    rawpassword_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.rawpassword_);
+  }
+  // @@protoc_insertion_point(copy_constructor:netdesign2.RegisterRequest)
+}
+
+void RegisterRequest::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RegisterRequest_messages_2eproto.base);
+  username_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  rawpassword_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+RegisterRequest::~RegisterRequest() {
+  // @@protoc_insertion_point(destructor:netdesign2.RegisterRequest)
+  SharedDtor();
+}
+
+void RegisterRequest::SharedDtor() {
+  username_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  rawpassword_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void RegisterRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const RegisterRequest& RegisterRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RegisterRequest_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void RegisterRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.RegisterRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  username_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  rawpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* RegisterRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // string username = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_username(), ptr, ctx, "netdesign2.RegisterRequest.username");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string rawPassword = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_rawpassword(), ptr, ctx, "netdesign2.RegisterRequest.rawPassword");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool RegisterRequest::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.RegisterRequest)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string username = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_username()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->username().data(), static_cast<int>(this->username().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.RegisterRequest.username"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string rawPassword = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_rawpassword()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->rawpassword().data(), static_cast<int>(this->rawpassword().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "netdesign2.RegisterRequest.rawPassword"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.RegisterRequest)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.RegisterRequest)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void RegisterRequest::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.RegisterRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string username = 1;
+  if (this->username().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->username().data(), static_cast<int>(this->username().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.RegisterRequest.username");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->username(), output);
+  }
+
+  // string rawPassword = 2;
+  if (this->rawpassword().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->rawpassword().data(), static_cast<int>(this->rawpassword().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.RegisterRequest.rawPassword");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->rawpassword(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.RegisterRequest)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* RegisterRequest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.RegisterRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string username = 1;
+  if (this->username().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->username().data(), static_cast<int>(this->username().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.RegisterRequest.username");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        1, this->username(), target);
+  }
+
+  // string rawPassword = 2;
+  if (this->rawpassword().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->rawpassword().data(), static_cast<int>(this->rawpassword().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "netdesign2.RegisterRequest.rawPassword");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        2, this->rawpassword(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.RegisterRequest)
+  return target;
+}
+
+size_t RegisterRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.RegisterRequest)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string username = 1;
+  if (this->username().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->username());
+  }
+
+  // string rawPassword = 2;
+  if (this->rawpassword().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->rawpassword());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RegisterRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.RegisterRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RegisterRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<RegisterRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.RegisterRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.RegisterRequest)
+    MergeFrom(*source);
+  }
+}
+
+void RegisterRequest::MergeFrom(const RegisterRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.RegisterRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.username().size() > 0) {
+
+    username_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.username_);
+  }
+  if (from.rawpassword().size() > 0) {
+
+    rawpassword_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.rawpassword_);
+  }
+}
+
+void RegisterRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.RegisterRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RegisterRequest::CopyFrom(const RegisterRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.RegisterRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RegisterRequest::IsInitialized() const {
+  return true;
+}
+
+void RegisterRequest::InternalSwap(RegisterRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  username_.Swap(&other->username_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  rawpassword_.Swap(&other->rawpassword_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata RegisterRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void RegisterResponse::InitAsDefaultInstance() {
+}
+class RegisterResponse::_Internal {
+ public:
+};
+
+RegisterResponse::RegisterResponse()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:netdesign2.RegisterResponse)
+}
+RegisterResponse::RegisterResponse(const RegisterResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  success_ = from.success_;
+  // @@protoc_insertion_point(copy_constructor:netdesign2.RegisterResponse)
+}
+
+void RegisterResponse::SharedCtor() {
+  success_ = false;
+}
+
+RegisterResponse::~RegisterResponse() {
+  // @@protoc_insertion_point(destructor:netdesign2.RegisterResponse)
+  SharedDtor();
+}
+
+void RegisterResponse::SharedDtor() {
+}
+
+void RegisterResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const RegisterResponse& RegisterResponse::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RegisterResponse_messages_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void RegisterResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:netdesign2.RegisterResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  success_ = false;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* RegisterResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool RegisterResponse::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:netdesign2.RegisterResponse)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // bool success = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &success_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:netdesign2.RegisterResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:netdesign2.RegisterResponse)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void RegisterResponse::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:netdesign2.RegisterResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->success(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:netdesign2.RegisterResponse)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* RegisterResponse::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:netdesign2.RegisterResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->success(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:netdesign2.RegisterResponse)
+  return target;
+}
+
+size_t RegisterResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:netdesign2.RegisterResponse)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RegisterResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:netdesign2.RegisterResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RegisterResponse* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<RegisterResponse>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:netdesign2.RegisterResponse)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:netdesign2.RegisterResponse)
+    MergeFrom(*source);
+  }
+}
+
+void RegisterResponse::MergeFrom(const RegisterResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:netdesign2.RegisterResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.success() != 0) {
+    set_success(from.success());
+  }
+}
+
+void RegisterResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:netdesign2.RegisterResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RegisterResponse::CopyFrom(const RegisterResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:netdesign2.RegisterResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RegisterResponse::IsInitialized() const {
+  return true;
+}
+
+void RegisterResponse::InternalSwap(RegisterResponse* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(success_, other->success_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata RegisterResponse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace netdesign2
 PROTOBUF_NAMESPACE_OPEN
@@ -7339,6 +9696,9 @@ template<> PROTOBUF_NOINLINE ::netdesign2::ContactRequest* Arena::CreateMaybeMes
 template<> PROTOBUF_NOINLINE ::netdesign2::ServerAckResponse* Arena::CreateMaybeMessage< ::netdesign2::ServerAckResponse >(Arena* arena) {
   return Arena::CreateInternal< ::netdesign2::ServerAckResponse >(arena);
 }
+template<> PROTOBUF_NOINLINE ::netdesign2::File* Arena::CreateMaybeMessage< ::netdesign2::File >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::File >(arena);
+}
 template<> PROTOBUF_NOINLINE ::netdesign2::RawMessage* Arena::CreateMaybeMessage< ::netdesign2::RawMessage >(Arena* arena) {
   return Arena::CreateInternal< ::netdesign2::RawMessage >(arena);
 }
@@ -7362,6 +9722,24 @@ template<> PROTOBUF_NOINLINE ::netdesign2::SetupChannelRequest* Arena::CreateMay
 }
 template<> PROTOBUF_NOINLINE ::netdesign2::ChannelHeartRequest* Arena::CreateMaybeMessage< ::netdesign2::ChannelHeartRequest >(Arena* arena) {
   return Arena::CreateInternal< ::netdesign2::ChannelHeartRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::netdesign2::ContactMessageListRequest* Arena::CreateMaybeMessage< ::netdesign2::ContactMessageListRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::ContactMessageListRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::netdesign2::FileUploadRequest* Arena::CreateMaybeMessage< ::netdesign2::FileUploadRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::FileUploadRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::netdesign2::FileDownloadRequest* Arena::CreateMaybeMessage< ::netdesign2::FileDownloadRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::FileDownloadRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::netdesign2::FileDownloadResponse* Arena::CreateMaybeMessage< ::netdesign2::FileDownloadResponse >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::FileDownloadResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::netdesign2::RegisterRequest* Arena::CreateMaybeMessage< ::netdesign2::RegisterRequest >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::RegisterRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::netdesign2::RegisterResponse* Arena::CreateMaybeMessage< ::netdesign2::RegisterResponse >(Arena* arena) {
+  return Arena::CreateInternal< ::netdesign2::RegisterResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

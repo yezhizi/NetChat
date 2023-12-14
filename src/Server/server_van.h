@@ -23,7 +23,6 @@ const int MAX_EVENTS = 10;
 class ServerVan : public Van {
   public:
     ServerVan() : Van() {
-        this->_socket = socket(AF_INET, SOCK_STREAM, 0);
         CLOG(INFO, "Van") << "ServerVan initialized";
         this->Bind();
 
@@ -31,6 +30,9 @@ class ServerVan : public Van {
         for (auto &t : this->RevcSocketThreads_)
             t = std::thread(&ServerVan::RevcSocketThreadFunc_, this);
         // bind the working thread function
+        this->KeepAliveThreads_.resize(Server::getKeepAliveNum());
+        for (auto &t : this->KeepAliveThreads_)
+            t = std::thread(&ServerVan::KeepAliveSendThreadsFunc_, this);
 
         int epoll_fd_ = epoll_create(MAX_EVENTS);
         CLOG_IF(epoll_fd_ < 0, FATAL, "Van") << "epoll_create failed";
@@ -47,14 +49,14 @@ class ServerVan : public Van {
             new std::thread(&ServerVan::Accepting, this));
         LOG(INFO) << "ServerVan accepting thread started";
     }
+
     int Control(const int dst, const std::string &cmd = "") override {
-        if (cmd=="EPOLL_DEL_FD"){
-            LOG(INFO) << "epoll_ctl del client socket " << dst;
+        if (cmd == "EPOLL_DEL_FD") {
             return this->controlEpollDel(dst);
-        }else if (cmd=="CLOSE_FD"){
+        } else if (cmd == "CLOSE_FD") {
             LOG(INFO) << "close client socket " << dst;
             return close(dst);
-        }else{
+        } else {
             return -1;
         }
     }
@@ -65,11 +67,22 @@ class ServerVan : public Van {
         struct epoll_event event;
         event.events = EPOLLIN;
         event.data.fd = fd;
+
         int ret = epoll_ctl(this->epoll_fd_, EPOLL_CTL_DEL, fd, &event);
         CLOG_IF(ret < 0, FATAL, "Van") << "epoll_ctl del client socket failed";
         return ret;
     }
-    ~ServerVan() { this->accepting_thread_->join(); }
+    ~ServerVan() {
+        this->accepting_thread_->join();
+        for (auto &t : this->RevcSocketThreads_)
+            t.join();
+        for (auto &t : this->KeepAliveThreads_)
+            t.join();
+        // TODO : need to do
+    }
+    void addSendTask(int fd, const Packet &msg) override {
+        this->KeepAliveQueue_.Push(std::make_pair(fd, msg));
+    }
 
   protected:
     void Bind() override {
@@ -78,7 +91,7 @@ class ServerVan : public Van {
         struct sockaddr_in server_addr;
         server_addr.sin_family = AF_INET;
         server_addr.sin_port = htons(ntc::kServerPort);
-        server_addr.sin_addr.s_addr = inet_addr(ntc::kServerIP.c_str());
+        server_addr.sin_addr.s_addr = INADDR_ANY;
         int opt = 1;
         setsockopt(this->_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
@@ -90,8 +103,8 @@ class ServerVan : public Van {
         CLOG_IF(ret < 0, FATAL, "Van") << "listen server socket failed";
         CLOG(INFO, "Van") << "listen server socket success";
     }
+
     void Accepting() override {
-        // TODO : modify the epoll logic
         while (true) {
             struct epoll_event events[MAX_EVENTS];
             int num_events =
@@ -179,8 +192,8 @@ class ServerVan : public Van {
                     return -1;
                 }
             } else if (ret == 0) {
-                CLOG(WARNING, "Van") << "client closed";
-                return 0;
+                break;
+
             } else {
                 bytes += ret;
                 if (bytes >= ntc::kMaxMessageSize) {
@@ -190,6 +203,7 @@ class ServerVan : public Van {
             }
         }
         msg->ParseFromArray(buf, bytes);
+
         return bytes;
     }
 
@@ -202,6 +216,8 @@ class ServerVan : public Van {
 
     // 保活连接池 待发送的消息队列
     ThreadsafeQueue<std::pair<int, Packet>> KeepAliveQueue_;
+    std::vector<std::thread> KeepAliveSendThreads_;
+
     // 工作在保活连接池的工作线程
     std::vector<std::thread> KeepAliveThreads_;
     int epoll_fd_;
@@ -213,6 +229,13 @@ class ServerVan : public Van {
             int client_fd;
             this->RevcSocketQueue_.WaitAndPop(&client_fd);
             Server::Get()->processRevcSocket(client_fd);
+        }
+    }
+    void KeepAliveSendThreadsFunc_() {
+        while (true) {
+            std::pair<int, Packet> p;
+            this->KeepAliveQueue_.WaitAndPop(&p);
+            this->SendMesg(p.second, p.first);
         }
     }
 };

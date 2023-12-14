@@ -13,7 +13,7 @@ namespace ntc {
 class ClientVan : public Van {
   public:
     ClientVan() : Van() {
-        CLOG(INFO, "Van") << "ClientVan initialized";
+        CLOG(INFO, "Van") << "ClientVan initialized "<<this->_socket;
         this->Accepting();
         // this->receiving_thread_ = std::unique_ptr<std::thread>(
         //     new std::thread(&ClientVan::Receiving, this));
@@ -23,12 +23,11 @@ class ClientVan : public Van {
         return 0;
     }
     enum class ClientStatus { OFFLINE, ONLINE };
+    void addSendTask(const int fd, const Packet &msg) override {
+    }
 
   protected:
     void Accepting() override {
-        if (this->_status == ClientStatus::ONLINE) {
-            return;
-        }
         struct sockaddr_in server_addr;
         server_addr.sin_family = AF_INET;
         server_addr.sin_port = htons(ntc::kServerPort);

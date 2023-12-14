@@ -49,7 +49,7 @@ struct TableStruct_messages_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[22]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[29]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -69,6 +69,9 @@ extern ContactDefaultTypeInternal _Contact_default_instance_;
 class ContactListRequest;
 class ContactListRequestDefaultTypeInternal;
 extern ContactListRequestDefaultTypeInternal _ContactListRequest_default_instance_;
+class ContactMessageListRequest;
+class ContactMessageListRequestDefaultTypeInternal;
+extern ContactMessageListRequestDefaultTypeInternal _ContactMessageListRequest_default_instance_;
 class ContactMessageRequest;
 class ContactMessageRequestDefaultTypeInternal;
 extern ContactMessageRequestDefaultTypeInternal _ContactMessageRequest_default_instance_;
@@ -78,6 +81,18 @@ extern ContactMessageResponseDefaultTypeInternal _ContactMessageResponse_default
 class ContactRequest;
 class ContactRequestDefaultTypeInternal;
 extern ContactRequestDefaultTypeInternal _ContactRequest_default_instance_;
+class File;
+class FileDefaultTypeInternal;
+extern FileDefaultTypeInternal _File_default_instance_;
+class FileDownloadRequest;
+class FileDownloadRequestDefaultTypeInternal;
+extern FileDownloadRequestDefaultTypeInternal _FileDownloadRequest_default_instance_;
+class FileDownloadResponse;
+class FileDownloadResponseDefaultTypeInternal;
+extern FileDownloadResponseDefaultTypeInternal _FileDownloadResponse_default_instance_;
+class FileUploadRequest;
+class FileUploadRequestDefaultTypeInternal;
+extern FileUploadRequestDefaultTypeInternal _FileUploadRequest_default_instance_;
 class FriendSendMessageRequest;
 class FriendSendMessageRequestDefaultTypeInternal;
 extern FriendSendMessageRequestDefaultTypeInternal _FriendSendMessageRequest_default_instance_;
@@ -105,6 +120,12 @@ extern PacketDefaultTypeInternal _Packet_default_instance_;
 class RawMessage;
 class RawMessageDefaultTypeInternal;
 extern RawMessageDefaultTypeInternal _RawMessage_default_instance_;
+class RegisterRequest;
+class RegisterRequestDefaultTypeInternal;
+extern RegisterRequestDefaultTypeInternal _RegisterRequest_default_instance_;
+class RegisterResponse;
+class RegisterResponseDefaultTypeInternal;
+extern RegisterResponseDefaultTypeInternal _RegisterResponse_default_instance_;
 class ServerAckResponse;
 class ServerAckResponseDefaultTypeInternal;
 extern ServerAckResponseDefaultTypeInternal _ServerAckResponse_default_instance_;
@@ -129,9 +150,14 @@ template<> ::netdesign2::ChannelHeartRequest* Arena::CreateMaybeMessage<::netdes
 template<> ::netdesign2::ClientAckResponse* Arena::CreateMaybeMessage<::netdesign2::ClientAckResponse>(Arena*);
 template<> ::netdesign2::Contact* Arena::CreateMaybeMessage<::netdesign2::Contact>(Arena*);
 template<> ::netdesign2::ContactListRequest* Arena::CreateMaybeMessage<::netdesign2::ContactListRequest>(Arena*);
+template<> ::netdesign2::ContactMessageListRequest* Arena::CreateMaybeMessage<::netdesign2::ContactMessageListRequest>(Arena*);
 template<> ::netdesign2::ContactMessageRequest* Arena::CreateMaybeMessage<::netdesign2::ContactMessageRequest>(Arena*);
 template<> ::netdesign2::ContactMessageResponse* Arena::CreateMaybeMessage<::netdesign2::ContactMessageResponse>(Arena*);
 template<> ::netdesign2::ContactRequest* Arena::CreateMaybeMessage<::netdesign2::ContactRequest>(Arena*);
+template<> ::netdesign2::File* Arena::CreateMaybeMessage<::netdesign2::File>(Arena*);
+template<> ::netdesign2::FileDownloadRequest* Arena::CreateMaybeMessage<::netdesign2::FileDownloadRequest>(Arena*);
+template<> ::netdesign2::FileDownloadResponse* Arena::CreateMaybeMessage<::netdesign2::FileDownloadResponse>(Arena*);
+template<> ::netdesign2::FileUploadRequest* Arena::CreateMaybeMessage<::netdesign2::FileUploadRequest>(Arena*);
 template<> ::netdesign2::FriendSendMessageRequest* Arena::CreateMaybeMessage<::netdesign2::FriendSendMessageRequest>(Arena*);
 template<> ::netdesign2::FriendSendMessageResponse* Arena::CreateMaybeMessage<::netdesign2::FriendSendMessageResponse>(Arena*);
 template<> ::netdesign2::LoginPreRequest* Arena::CreateMaybeMessage<::netdesign2::LoginPreRequest>(Arena*);
@@ -141,6 +167,8 @@ template<> ::netdesign2::LoginResponse* Arena::CreateMaybeMessage<::netdesign2::
 template<> ::netdesign2::Message* Arena::CreateMaybeMessage<::netdesign2::Message>(Arena*);
 template<> ::netdesign2::Packet* Arena::CreateMaybeMessage<::netdesign2::Packet>(Arena*);
 template<> ::netdesign2::RawMessage* Arena::CreateMaybeMessage<::netdesign2::RawMessage>(Arena*);
+template<> ::netdesign2::RegisterRequest* Arena::CreateMaybeMessage<::netdesign2::RegisterRequest>(Arena*);
+template<> ::netdesign2::RegisterResponse* Arena::CreateMaybeMessage<::netdesign2::RegisterResponse>(Arena*);
 template<> ::netdesign2::ServerAckResponse* Arena::CreateMaybeMessage<::netdesign2::ServerAckResponse>(Arena*);
 template<> ::netdesign2::ServerStatusRequest* Arena::CreateMaybeMessage<::netdesign2::ServerStatusRequest>(Arena*);
 template<> ::netdesign2::ServerStatusResponse* Arena::CreateMaybeMessage<::netdesign2::ServerStatusResponse>(Arena*);
@@ -457,26 +485,11 @@ class ServerStatusRequest :
 
   // accessors -------------------------------------------------------
 
-  enum : int {
-    kClientPublicKeyFieldNumber = 1,
-  };
-  // string clientPublicKey = 1;
-  void clear_clientpublickey();
-  const std::string& clientpublickey() const;
-  void set_clientpublickey(const std::string& value);
-  void set_clientpublickey(std::string&& value);
-  void set_clientpublickey(const char* value);
-  void set_clientpublickey(const char* value, size_t size);
-  std::string* mutable_clientpublickey();
-  std::string* release_clientpublickey();
-  void set_allocated_clientpublickey(std::string* clientpublickey);
-
   // @@protoc_insertion_point(class_scope:netdesign2.ServerStatusRequest)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clientpublickey_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
@@ -595,21 +608,9 @@ class ServerStatusResponse :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kServerPublicKeyFieldNumber = 3,
     kOnlineFieldNumber = 1,
     kRegistrableFieldNumber = 2,
   };
-  // string serverPublicKey = 3;
-  void clear_serverpublickey();
-  const std::string& serverpublickey() const;
-  void set_serverpublickey(const std::string& value);
-  void set_serverpublickey(std::string&& value);
-  void set_serverpublickey(const char* value);
-  void set_serverpublickey(const char* value, size_t size);
-  std::string* mutable_serverpublickey();
-  std::string* release_serverpublickey();
-  void set_allocated_serverpublickey(std::string* serverpublickey);
-
   // bool online = 1;
   void clear_online();
   bool online() const;
@@ -625,7 +626,6 @@ class ServerStatusResponse :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr serverpublickey_;
   bool online_;
   bool registrable_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1145,13 +1145,13 @@ class LoginPreResponse :
   enum : int {
     kChallengeFieldNumber = 1,
   };
-  // bytes challenge = 1;
+  // string challenge = 1;
   void clear_challenge();
   const std::string& challenge() const;
   void set_challenge(const std::string& value);
   void set_challenge(std::string&& value);
   void set_challenge(const char* value);
-  void set_challenge(const void* value, size_t size);
+  void set_challenge(const char* value, size_t size);
   std::string* mutable_challenge();
   std::string* release_challenge();
   void set_allocated_challenge(std::string* challenge);
@@ -1294,13 +1294,13 @@ class LoginRequest :
   std::string* release_username();
   void set_allocated_username(std::string* username);
 
-  // bytes hashPassword = 2;
+  // string hashPassword = 2;
   void clear_hashpassword();
   const std::string& hashpassword() const;
   void set_hashpassword(const std::string& value);
   void set_hashpassword(std::string&& value);
   void set_hashpassword(const char* value);
-  void set_hashpassword(const void* value, size_t size);
+  void set_hashpassword(const char* value, size_t size);
   std::string* mutable_hashpassword();
   std::string* release_hashpassword();
   void set_allocated_hashpassword(std::string* hashpassword);
@@ -1430,10 +1430,11 @@ class LoginResponse :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kTokenFieldNumber = 2,
+    kTokenFieldNumber = 3,
     kLoginedFieldNumber = 1,
+    kIdFieldNumber = 2,
   };
-  // string token = 2;
+  // string token = 3;
   void clear_token();
   const std::string& token() const;
   void set_token(const std::string& value);
@@ -1449,6 +1450,11 @@ class LoginResponse :
   bool logined() const;
   void set_logined(bool value);
 
+  // int32 id = 2;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
   // @@protoc_insertion_point(class_scope:netdesign2.LoginResponse)
  private:
   class _Internal;
@@ -1456,6 +1462,7 @@ class LoginResponse :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
   bool logined_;
+  ::PROTOBUF_NAMESPACE_ID::int32 id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
@@ -2193,6 +2200,156 @@ class ServerAckResponse :
 };
 // -------------------------------------------------------------------
 
+class File :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.File) */ {
+ public:
+  File();
+  virtual ~File();
+
+  File(const File& from);
+  File(File&& from) noexcept
+    : File() {
+    *this = ::std::move(from);
+  }
+
+  inline File& operator=(const File& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline File& operator=(File&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const File& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const File* internal_default_instance() {
+    return reinterpret_cast<const File*>(
+               &_File_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    14;
+
+  friend void swap(File& a, File& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(File* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline File* New() const final {
+    return CreateMaybeMessage<File>(nullptr);
+  }
+
+  File* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<File>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const File& from);
+  void MergeFrom(const File& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(File* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.File";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNameFieldNumber = 1,
+    kContentFieldNumber = 2,
+  };
+  // string name = 1;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+
+  // bytes content = 2;
+  void clear_content();
+  const std::string& content() const;
+  void set_content(const std::string& value);
+  void set_content(std::string&& value);
+  void set_content(const char* value);
+  void set_content(const void* value, size_t size);
+  std::string* mutable_content();
+  std::string* release_content();
+  void set_allocated_content(std::string* content);
+
+  // @@protoc_insertion_point(class_scope:netdesign2.File)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr content_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
 class RawMessage :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.RawMessage) */ {
  public:
@@ -2235,7 +2392,7 @@ class RawMessage :
                &_RawMessage_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(RawMessage& a, RawMessage& b) {
     a.Swap(&b);
@@ -2406,7 +2563,7 @@ class Message :
                &_Message_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(Message& a, Message& b) {
     a.Swap(&b);
@@ -2561,7 +2718,7 @@ class ContactMessageRequest :
                &_ContactMessageRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   friend void swap(ContactMessageRequest& a, ContactMessageRequest& b) {
     a.Swap(&b);
@@ -2712,7 +2869,7 @@ class ContactMessageResponse :
                &_ContactMessageResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    18;
 
   friend void swap(ContactMessageResponse& a, ContactMessageResponse& b) {
     a.Swap(&b);
@@ -2846,7 +3003,7 @@ class FriendSendMessageRequest :
                &_FriendSendMessageRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    19;
 
   friend void swap(FriendSendMessageRequest& a, FriendSendMessageRequest& b) {
     a.Swap(&b);
@@ -2917,9 +3074,21 @@ class FriendSendMessageRequest :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMessageFieldNumber = 1,
+    kTokenFieldNumber = 1,
+    kMessageFieldNumber = 2,
   };
-  // .netdesign2.RawMessage message = 1;
+  // string token = 1;
+  void clear_token();
+  const std::string& token() const;
+  void set_token(const std::string& value);
+  void set_token(std::string&& value);
+  void set_token(const char* value);
+  void set_token(const char* value, size_t size);
+  std::string* mutable_token();
+  std::string* release_token();
+  void set_allocated_token(std::string* token);
+
+  // .netdesign2.RawMessage message = 2;
   bool has_message() const;
   void clear_message();
   const ::netdesign2::RawMessage& message() const;
@@ -2932,6 +3101,7 @@ class FriendSendMessageRequest :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
   ::netdesign2::RawMessage* message_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
@@ -2980,7 +3150,7 @@ class FriendSendMessageResponse :
                &_FriendSendMessageResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   friend void swap(FriendSendMessageResponse& a, FriendSendMessageResponse& b) {
     a.Swap(&b);
@@ -3114,7 +3284,7 @@ class SetupChannelRequest :
                &_SetupChannelRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    21;
 
   friend void swap(SetupChannelRequest& a, SetupChannelRequest& b) {
     a.Swap(&b);
@@ -3251,7 +3421,7 @@ class ChannelHeartRequest :
                &_ChannelHeartRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    22;
 
   friend void swap(ChannelHeartRequest& a, ChannelHeartRequest& b) {
     a.Swap(&b);
@@ -3329,6 +3499,868 @@ class ChannelHeartRequest :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_messages_2eproto;
 };
+// -------------------------------------------------------------------
+
+class ContactMessageListRequest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.ContactMessageListRequest) */ {
+ public:
+  ContactMessageListRequest();
+  virtual ~ContactMessageListRequest();
+
+  ContactMessageListRequest(const ContactMessageListRequest& from);
+  ContactMessageListRequest(ContactMessageListRequest&& from) noexcept
+    : ContactMessageListRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ContactMessageListRequest& operator=(const ContactMessageListRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ContactMessageListRequest& operator=(ContactMessageListRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ContactMessageListRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ContactMessageListRequest* internal_default_instance() {
+    return reinterpret_cast<const ContactMessageListRequest*>(
+               &_ContactMessageListRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    23;
+
+  friend void swap(ContactMessageListRequest& a, ContactMessageListRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ContactMessageListRequest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ContactMessageListRequest* New() const final {
+    return CreateMaybeMessage<ContactMessageListRequest>(nullptr);
+  }
+
+  ContactMessageListRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ContactMessageListRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ContactMessageListRequest& from);
+  void MergeFrom(const ContactMessageListRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ContactMessageListRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.ContactMessageListRequest";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMessagesFieldNumber = 1,
+  };
+  // repeated .netdesign2.Message messages = 1;
+  int messages_size() const;
+  void clear_messages();
+  ::netdesign2::Message* mutable_messages(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Message >*
+      mutable_messages();
+  const ::netdesign2::Message& messages(int index) const;
+  ::netdesign2::Message* add_messages();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Message >&
+      messages() const;
+
+  // @@protoc_insertion_point(class_scope:netdesign2.ContactMessageListRequest)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Message > messages_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class FileUploadRequest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.FileUploadRequest) */ {
+ public:
+  FileUploadRequest();
+  virtual ~FileUploadRequest();
+
+  FileUploadRequest(const FileUploadRequest& from);
+  FileUploadRequest(FileUploadRequest&& from) noexcept
+    : FileUploadRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline FileUploadRequest& operator=(const FileUploadRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FileUploadRequest& operator=(FileUploadRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FileUploadRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const FileUploadRequest* internal_default_instance() {
+    return reinterpret_cast<const FileUploadRequest*>(
+               &_FileUploadRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    24;
+
+  friend void swap(FileUploadRequest& a, FileUploadRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FileUploadRequest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FileUploadRequest* New() const final {
+    return CreateMaybeMessage<FileUploadRequest>(nullptr);
+  }
+
+  FileUploadRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FileUploadRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FileUploadRequest& from);
+  void MergeFrom(const FileUploadRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FileUploadRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.FileUploadRequest";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTokenFieldNumber = 1,
+    kIdFieldNumber = 2,
+    kFileFieldNumber = 3,
+  };
+  // string token = 1;
+  void clear_token();
+  const std::string& token() const;
+  void set_token(const std::string& value);
+  void set_token(std::string&& value);
+  void set_token(const char* value);
+  void set_token(const char* value, size_t size);
+  std::string* mutable_token();
+  std::string* release_token();
+  void set_allocated_token(std::string* token);
+
+  // string id = 2;
+  void clear_id();
+  const std::string& id() const;
+  void set_id(const std::string& value);
+  void set_id(std::string&& value);
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  std::string* mutable_id();
+  std::string* release_id();
+  void set_allocated_id(std::string* id);
+
+  // .netdesign2.File file = 3;
+  bool has_file() const;
+  void clear_file();
+  const ::netdesign2::File& file() const;
+  ::netdesign2::File* release_file();
+  ::netdesign2::File* mutable_file();
+  void set_allocated_file(::netdesign2::File* file);
+
+  // @@protoc_insertion_point(class_scope:netdesign2.FileUploadRequest)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr id_;
+  ::netdesign2::File* file_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class FileDownloadRequest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.FileDownloadRequest) */ {
+ public:
+  FileDownloadRequest();
+  virtual ~FileDownloadRequest();
+
+  FileDownloadRequest(const FileDownloadRequest& from);
+  FileDownloadRequest(FileDownloadRequest&& from) noexcept
+    : FileDownloadRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline FileDownloadRequest& operator=(const FileDownloadRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FileDownloadRequest& operator=(FileDownloadRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FileDownloadRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const FileDownloadRequest* internal_default_instance() {
+    return reinterpret_cast<const FileDownloadRequest*>(
+               &_FileDownloadRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    25;
+
+  friend void swap(FileDownloadRequest& a, FileDownloadRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FileDownloadRequest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FileDownloadRequest* New() const final {
+    return CreateMaybeMessage<FileDownloadRequest>(nullptr);
+  }
+
+  FileDownloadRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FileDownloadRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FileDownloadRequest& from);
+  void MergeFrom(const FileDownloadRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FileDownloadRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.FileDownloadRequest";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTokenFieldNumber = 1,
+    kIdFieldNumber = 2,
+  };
+  // string token = 1;
+  void clear_token();
+  const std::string& token() const;
+  void set_token(const std::string& value);
+  void set_token(std::string&& value);
+  void set_token(const char* value);
+  void set_token(const char* value, size_t size);
+  std::string* mutable_token();
+  std::string* release_token();
+  void set_allocated_token(std::string* token);
+
+  // string id = 2;
+  void clear_id();
+  const std::string& id() const;
+  void set_id(const std::string& value);
+  void set_id(std::string&& value);
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  std::string* mutable_id();
+  std::string* release_id();
+  void set_allocated_id(std::string* id);
+
+  // @@protoc_insertion_point(class_scope:netdesign2.FileDownloadRequest)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr token_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class FileDownloadResponse :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.FileDownloadResponse) */ {
+ public:
+  FileDownloadResponse();
+  virtual ~FileDownloadResponse();
+
+  FileDownloadResponse(const FileDownloadResponse& from);
+  FileDownloadResponse(FileDownloadResponse&& from) noexcept
+    : FileDownloadResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline FileDownloadResponse& operator=(const FileDownloadResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline FileDownloadResponse& operator=(FileDownloadResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const FileDownloadResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const FileDownloadResponse* internal_default_instance() {
+    return reinterpret_cast<const FileDownloadResponse*>(
+               &_FileDownloadResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    26;
+
+  friend void swap(FileDownloadResponse& a, FileDownloadResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(FileDownloadResponse* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FileDownloadResponse* New() const final {
+    return CreateMaybeMessage<FileDownloadResponse>(nullptr);
+  }
+
+  FileDownloadResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FileDownloadResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const FileDownloadResponse& from);
+  void MergeFrom(const FileDownloadResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(FileDownloadResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.FileDownloadResponse";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFileFieldNumber = 1,
+  };
+  // .netdesign2.File file = 1;
+  bool has_file() const;
+  void clear_file();
+  const ::netdesign2::File& file() const;
+  ::netdesign2::File* release_file();
+  ::netdesign2::File* mutable_file();
+  void set_allocated_file(::netdesign2::File* file);
+
+  // @@protoc_insertion_point(class_scope:netdesign2.FileDownloadResponse)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::netdesign2::File* file_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RegisterRequest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.RegisterRequest) */ {
+ public:
+  RegisterRequest();
+  virtual ~RegisterRequest();
+
+  RegisterRequest(const RegisterRequest& from);
+  RegisterRequest(RegisterRequest&& from) noexcept
+    : RegisterRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline RegisterRequest& operator=(const RegisterRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RegisterRequest& operator=(RegisterRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RegisterRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RegisterRequest* internal_default_instance() {
+    return reinterpret_cast<const RegisterRequest*>(
+               &_RegisterRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    27;
+
+  friend void swap(RegisterRequest& a, RegisterRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RegisterRequest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RegisterRequest* New() const final {
+    return CreateMaybeMessage<RegisterRequest>(nullptr);
+  }
+
+  RegisterRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RegisterRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RegisterRequest& from);
+  void MergeFrom(const RegisterRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RegisterRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.RegisterRequest";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUsernameFieldNumber = 1,
+    kRawPasswordFieldNumber = 2,
+  };
+  // string username = 1;
+  void clear_username();
+  const std::string& username() const;
+  void set_username(const std::string& value);
+  void set_username(std::string&& value);
+  void set_username(const char* value);
+  void set_username(const char* value, size_t size);
+  std::string* mutable_username();
+  std::string* release_username();
+  void set_allocated_username(std::string* username);
+
+  // string rawPassword = 2;
+  void clear_rawpassword();
+  const std::string& rawpassword() const;
+  void set_rawpassword(const std::string& value);
+  void set_rawpassword(std::string&& value);
+  void set_rawpassword(const char* value);
+  void set_rawpassword(const char* value, size_t size);
+  std::string* mutable_rawpassword();
+  std::string* release_rawpassword();
+  void set_allocated_rawpassword(std::string* rawpassword);
+
+  // @@protoc_insertion_point(class_scope:netdesign2.RegisterRequest)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr rawpassword_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RegisterResponse :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:netdesign2.RegisterResponse) */ {
+ public:
+  RegisterResponse();
+  virtual ~RegisterResponse();
+
+  RegisterResponse(const RegisterResponse& from);
+  RegisterResponse(RegisterResponse&& from) noexcept
+    : RegisterResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline RegisterResponse& operator=(const RegisterResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RegisterResponse& operator=(RegisterResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RegisterResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RegisterResponse* internal_default_instance() {
+    return reinterpret_cast<const RegisterResponse*>(
+               &_RegisterResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    28;
+
+  friend void swap(RegisterResponse& a, RegisterResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RegisterResponse* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RegisterResponse* New() const final {
+    return CreateMaybeMessage<RegisterResponse>(nullptr);
+  }
+
+  RegisterResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RegisterResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RegisterResponse& from);
+  void MergeFrom(const RegisterResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RegisterResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "netdesign2.RegisterResponse";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_messages_2eproto);
+    return ::descriptor_table_messages_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+
+  // @@protoc_insertion_point(class_scope:netdesign2.RegisterResponse)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  bool success_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_messages_2eproto;
+};
 // ===================================================================
 
 
@@ -3403,57 +4435,6 @@ inline void Packet::set_allocated_content(PROTOBUF_NAMESPACE_ID::Any* content) {
 
 // ServerStatusRequest
 
-// string clientPublicKey = 1;
-inline void ServerStatusRequest::clear_clientpublickey() {
-  clientpublickey_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& ServerStatusRequest::clientpublickey() const {
-  // @@protoc_insertion_point(field_get:netdesign2.ServerStatusRequest.clientPublicKey)
-  return clientpublickey_.GetNoArena();
-}
-inline void ServerStatusRequest::set_clientpublickey(const std::string& value) {
-  
-  clientpublickey_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:netdesign2.ServerStatusRequest.clientPublicKey)
-}
-inline void ServerStatusRequest::set_clientpublickey(std::string&& value) {
-  
-  clientpublickey_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:netdesign2.ServerStatusRequest.clientPublicKey)
-}
-inline void ServerStatusRequest::set_clientpublickey(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  clientpublickey_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:netdesign2.ServerStatusRequest.clientPublicKey)
-}
-inline void ServerStatusRequest::set_clientpublickey(const char* value, size_t size) {
-  
-  clientpublickey_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:netdesign2.ServerStatusRequest.clientPublicKey)
-}
-inline std::string* ServerStatusRequest::mutable_clientpublickey() {
-  
-  // @@protoc_insertion_point(field_mutable:netdesign2.ServerStatusRequest.clientPublicKey)
-  return clientpublickey_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ServerStatusRequest::release_clientpublickey() {
-  // @@protoc_insertion_point(field_release:netdesign2.ServerStatusRequest.clientPublicKey)
-  
-  return clientpublickey_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ServerStatusRequest::set_allocated_clientpublickey(std::string* clientpublickey) {
-  if (clientpublickey != nullptr) {
-    
-  } else {
-    
-  }
-  clientpublickey_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), clientpublickey);
-  // @@protoc_insertion_point(field_set_allocated:netdesign2.ServerStatusRequest.clientPublicKey)
-}
-
 // -------------------------------------------------------------------
 
 // ServerStatusResponse
@@ -3484,57 +4465,6 @@ inline void ServerStatusResponse::set_registrable(bool value) {
   
   registrable_ = value;
   // @@protoc_insertion_point(field_set:netdesign2.ServerStatusResponse.registrable)
-}
-
-// string serverPublicKey = 3;
-inline void ServerStatusResponse::clear_serverpublickey() {
-  serverpublickey_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& ServerStatusResponse::serverpublickey() const {
-  // @@protoc_insertion_point(field_get:netdesign2.ServerStatusResponse.serverPublicKey)
-  return serverpublickey_.GetNoArena();
-}
-inline void ServerStatusResponse::set_serverpublickey(const std::string& value) {
-  
-  serverpublickey_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:netdesign2.ServerStatusResponse.serverPublicKey)
-}
-inline void ServerStatusResponse::set_serverpublickey(std::string&& value) {
-  
-  serverpublickey_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:netdesign2.ServerStatusResponse.serverPublicKey)
-}
-inline void ServerStatusResponse::set_serverpublickey(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  serverpublickey_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:netdesign2.ServerStatusResponse.serverPublicKey)
-}
-inline void ServerStatusResponse::set_serverpublickey(const char* value, size_t size) {
-  
-  serverpublickey_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:netdesign2.ServerStatusResponse.serverPublicKey)
-}
-inline std::string* ServerStatusResponse::mutable_serverpublickey() {
-  
-  // @@protoc_insertion_point(field_mutable:netdesign2.ServerStatusResponse.serverPublicKey)
-  return serverpublickey_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ServerStatusResponse::release_serverpublickey() {
-  // @@protoc_insertion_point(field_release:netdesign2.ServerStatusResponse.serverPublicKey)
-  
-  return serverpublickey_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ServerStatusResponse::set_allocated_serverpublickey(std::string* serverpublickey) {
-  if (serverpublickey != nullptr) {
-    
-  } else {
-    
-  }
-  serverpublickey_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), serverpublickey);
-  // @@protoc_insertion_point(field_set_allocated:netdesign2.ServerStatusResponse.serverPublicKey)
 }
 
 // -------------------------------------------------------------------
@@ -3632,7 +4562,7 @@ inline void LoginPreRequest::set_allocated_username(std::string* username) {
 
 // LoginPreResponse
 
-// bytes challenge = 1;
+// string challenge = 1;
 inline void LoginPreResponse::clear_challenge() {
   challenge_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -3657,7 +4587,7 @@ inline void LoginPreResponse::set_challenge(const char* value) {
   challenge_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:netdesign2.LoginPreResponse.challenge)
 }
-inline void LoginPreResponse::set_challenge(const void* value, size_t size) {
+inline void LoginPreResponse::set_challenge(const char* value, size_t size) {
   
   challenge_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -3738,7 +4668,7 @@ inline void LoginRequest::set_allocated_username(std::string* username) {
   // @@protoc_insertion_point(field_set_allocated:netdesign2.LoginRequest.username)
 }
 
-// bytes hashPassword = 2;
+// string hashPassword = 2;
 inline void LoginRequest::clear_hashpassword() {
   hashpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -3763,7 +4693,7 @@ inline void LoginRequest::set_hashpassword(const char* value) {
   hashpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:netdesign2.LoginRequest.hashPassword)
 }
-inline void LoginRequest::set_hashpassword(const void* value, size_t size) {
+inline void LoginRequest::set_hashpassword(const char* value, size_t size) {
   
   hashpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
@@ -3807,7 +4737,21 @@ inline void LoginResponse::set_logined(bool value) {
   // @@protoc_insertion_point(field_set:netdesign2.LoginResponse.logined)
 }
 
-// string token = 2;
+// int32 id = 2;
+inline void LoginResponse::clear_id() {
+  id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 LoginResponse::id() const {
+  // @@protoc_insertion_point(field_get:netdesign2.LoginResponse.id)
+  return id_;
+}
+inline void LoginResponse::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  id_ = value;
+  // @@protoc_insertion_point(field_set:netdesign2.LoginResponse.id)
+}
+
+// string token = 3;
 inline void LoginResponse::clear_token() {
   token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -4109,6 +5053,112 @@ inline void ContactRequest::set_delete_(bool value) {
 // -------------------------------------------------------------------
 
 // ServerAckResponse
+
+// -------------------------------------------------------------------
+
+// File
+
+// string name = 1;
+inline void File::clear_name() {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& File::name() const {
+  // @@protoc_insertion_point(field_get:netdesign2.File.name)
+  return name_.GetNoArena();
+}
+inline void File::set_name(const std::string& value) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.File.name)
+}
+inline void File::set_name(std::string&& value) {
+  
+  name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.File.name)
+}
+inline void File::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.File.name)
+}
+inline void File::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.File.name)
+}
+inline std::string* File::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.File.name)
+  return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* File::release_name() {
+  // @@protoc_insertion_point(field_release:netdesign2.File.name)
+  
+  return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void File::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.File.name)
+}
+
+// bytes content = 2;
+inline void File::clear_content() {
+  content_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& File::content() const {
+  // @@protoc_insertion_point(field_get:netdesign2.File.content)
+  return content_.GetNoArena();
+}
+inline void File::set_content(const std::string& value) {
+  
+  content_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.File.content)
+}
+inline void File::set_content(std::string&& value) {
+  
+  content_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.File.content)
+}
+inline void File::set_content(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  content_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.File.content)
+}
+inline void File::set_content(const void* value, size_t size) {
+  
+  content_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.File.content)
+}
+inline std::string* File::mutable_content() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.File.content)
+  return content_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* File::release_content() {
+  // @@protoc_insertion_point(field_release:netdesign2.File.content)
+  
+  return content_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void File::set_allocated_content(std::string* content) {
+  if (content != nullptr) {
+    
+  } else {
+    
+  }
+  content_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), content);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.File.content)
+}
 
 // -------------------------------------------------------------------
 
@@ -4497,7 +5547,58 @@ inline void ContactMessageResponse::set_allocated_message(::netdesign2::Message*
 
 // FriendSendMessageRequest
 
-// .netdesign2.RawMessage message = 1;
+// string token = 1;
+inline void FriendSendMessageRequest::clear_token() {
+  token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& FriendSendMessageRequest::token() const {
+  // @@protoc_insertion_point(field_get:netdesign2.FriendSendMessageRequest.token)
+  return token_.GetNoArena();
+}
+inline void FriendSendMessageRequest::set_token(const std::string& value) {
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.FriendSendMessageRequest.token)
+}
+inline void FriendSendMessageRequest::set_token(std::string&& value) {
+  
+  token_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.FriendSendMessageRequest.token)
+}
+inline void FriendSendMessageRequest::set_token(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.FriendSendMessageRequest.token)
+}
+inline void FriendSendMessageRequest::set_token(const char* value, size_t size) {
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.FriendSendMessageRequest.token)
+}
+inline std::string* FriendSendMessageRequest::mutable_token() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.FriendSendMessageRequest.token)
+  return token_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* FriendSendMessageRequest::release_token() {
+  // @@protoc_insertion_point(field_release:netdesign2.FriendSendMessageRequest.token)
+  
+  return token_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void FriendSendMessageRequest::set_allocated_token(std::string* token) {
+  if (token != nullptr) {
+    
+  } else {
+    
+  }
+  token_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), token);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FriendSendMessageRequest.token)
+}
+
+// .netdesign2.RawMessage message = 2;
 inline bool FriendSendMessageRequest::has_message() const {
   return this != internal_default_instance() && message_ != nullptr;
 }
@@ -4662,9 +5763,499 @@ inline void SetupChannelRequest::set_allocated_token(std::string* token) {
 
 // ChannelHeartRequest
 
+// -------------------------------------------------------------------
+
+// ContactMessageListRequest
+
+// repeated .netdesign2.Message messages = 1;
+inline int ContactMessageListRequest::messages_size() const {
+  return messages_.size();
+}
+inline void ContactMessageListRequest::clear_messages() {
+  messages_.Clear();
+}
+inline ::netdesign2::Message* ContactMessageListRequest::mutable_messages(int index) {
+  // @@protoc_insertion_point(field_mutable:netdesign2.ContactMessageListRequest.messages)
+  return messages_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Message >*
+ContactMessageListRequest::mutable_messages() {
+  // @@protoc_insertion_point(field_mutable_list:netdesign2.ContactMessageListRequest.messages)
+  return &messages_;
+}
+inline const ::netdesign2::Message& ContactMessageListRequest::messages(int index) const {
+  // @@protoc_insertion_point(field_get:netdesign2.ContactMessageListRequest.messages)
+  return messages_.Get(index);
+}
+inline ::netdesign2::Message* ContactMessageListRequest::add_messages() {
+  // @@protoc_insertion_point(field_add:netdesign2.ContactMessageListRequest.messages)
+  return messages_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::netdesign2::Message >&
+ContactMessageListRequest::messages() const {
+  // @@protoc_insertion_point(field_list:netdesign2.ContactMessageListRequest.messages)
+  return messages_;
+}
+
+// -------------------------------------------------------------------
+
+// FileUploadRequest
+
+// string token = 1;
+inline void FileUploadRequest::clear_token() {
+  token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& FileUploadRequest::token() const {
+  // @@protoc_insertion_point(field_get:netdesign2.FileUploadRequest.token)
+  return token_.GetNoArena();
+}
+inline void FileUploadRequest::set_token(const std::string& value) {
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.FileUploadRequest.token)
+}
+inline void FileUploadRequest::set_token(std::string&& value) {
+  
+  token_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.FileUploadRequest.token)
+}
+inline void FileUploadRequest::set_token(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.FileUploadRequest.token)
+}
+inline void FileUploadRequest::set_token(const char* value, size_t size) {
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.FileUploadRequest.token)
+}
+inline std::string* FileUploadRequest::mutable_token() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.FileUploadRequest.token)
+  return token_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* FileUploadRequest::release_token() {
+  // @@protoc_insertion_point(field_release:netdesign2.FileUploadRequest.token)
+  
+  return token_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void FileUploadRequest::set_allocated_token(std::string* token) {
+  if (token != nullptr) {
+    
+  } else {
+    
+  }
+  token_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), token);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FileUploadRequest.token)
+}
+
+// string id = 2;
+inline void FileUploadRequest::clear_id() {
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& FileUploadRequest::id() const {
+  // @@protoc_insertion_point(field_get:netdesign2.FileUploadRequest.id)
+  return id_.GetNoArena();
+}
+inline void FileUploadRequest::set_id(const std::string& value) {
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.FileUploadRequest.id)
+}
+inline void FileUploadRequest::set_id(std::string&& value) {
+  
+  id_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.FileUploadRequest.id)
+}
+inline void FileUploadRequest::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.FileUploadRequest.id)
+}
+inline void FileUploadRequest::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.FileUploadRequest.id)
+}
+inline std::string* FileUploadRequest::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.FileUploadRequest.id)
+  return id_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* FileUploadRequest::release_id() {
+  // @@protoc_insertion_point(field_release:netdesign2.FileUploadRequest.id)
+  
+  return id_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void FileUploadRequest::set_allocated_id(std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FileUploadRequest.id)
+}
+
+// .netdesign2.File file = 3;
+inline bool FileUploadRequest::has_file() const {
+  return this != internal_default_instance() && file_ != nullptr;
+}
+inline void FileUploadRequest::clear_file() {
+  if (GetArenaNoVirtual() == nullptr && file_ != nullptr) {
+    delete file_;
+  }
+  file_ = nullptr;
+}
+inline const ::netdesign2::File& FileUploadRequest::file() const {
+  const ::netdesign2::File* p = file_;
+  // @@protoc_insertion_point(field_get:netdesign2.FileUploadRequest.file)
+  return p != nullptr ? *p : *reinterpret_cast<const ::netdesign2::File*>(
+      &::netdesign2::_File_default_instance_);
+}
+inline ::netdesign2::File* FileUploadRequest::release_file() {
+  // @@protoc_insertion_point(field_release:netdesign2.FileUploadRequest.file)
+  
+  ::netdesign2::File* temp = file_;
+  file_ = nullptr;
+  return temp;
+}
+inline ::netdesign2::File* FileUploadRequest::mutable_file() {
+  
+  if (file_ == nullptr) {
+    auto* p = CreateMaybeMessage<::netdesign2::File>(GetArenaNoVirtual());
+    file_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:netdesign2.FileUploadRequest.file)
+  return file_;
+}
+inline void FileUploadRequest::set_allocated_file(::netdesign2::File* file) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete file_;
+  }
+  if (file) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      file = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, file, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  file_ = file;
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FileUploadRequest.file)
+}
+
+// -------------------------------------------------------------------
+
+// FileDownloadRequest
+
+// string token = 1;
+inline void FileDownloadRequest::clear_token() {
+  token_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& FileDownloadRequest::token() const {
+  // @@protoc_insertion_point(field_get:netdesign2.FileDownloadRequest.token)
+  return token_.GetNoArena();
+}
+inline void FileDownloadRequest::set_token(const std::string& value) {
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.FileDownloadRequest.token)
+}
+inline void FileDownloadRequest::set_token(std::string&& value) {
+  
+  token_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.FileDownloadRequest.token)
+}
+inline void FileDownloadRequest::set_token(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.FileDownloadRequest.token)
+}
+inline void FileDownloadRequest::set_token(const char* value, size_t size) {
+  
+  token_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.FileDownloadRequest.token)
+}
+inline std::string* FileDownloadRequest::mutable_token() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.FileDownloadRequest.token)
+  return token_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* FileDownloadRequest::release_token() {
+  // @@protoc_insertion_point(field_release:netdesign2.FileDownloadRequest.token)
+  
+  return token_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void FileDownloadRequest::set_allocated_token(std::string* token) {
+  if (token != nullptr) {
+    
+  } else {
+    
+  }
+  token_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), token);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FileDownloadRequest.token)
+}
+
+// string id = 2;
+inline void FileDownloadRequest::clear_id() {
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& FileDownloadRequest::id() const {
+  // @@protoc_insertion_point(field_get:netdesign2.FileDownloadRequest.id)
+  return id_.GetNoArena();
+}
+inline void FileDownloadRequest::set_id(const std::string& value) {
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.FileDownloadRequest.id)
+}
+inline void FileDownloadRequest::set_id(std::string&& value) {
+  
+  id_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.FileDownloadRequest.id)
+}
+inline void FileDownloadRequest::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.FileDownloadRequest.id)
+}
+inline void FileDownloadRequest::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.FileDownloadRequest.id)
+}
+inline std::string* FileDownloadRequest::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.FileDownloadRequest.id)
+  return id_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* FileDownloadRequest::release_id() {
+  // @@protoc_insertion_point(field_release:netdesign2.FileDownloadRequest.id)
+  
+  return id_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void FileDownloadRequest::set_allocated_id(std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FileDownloadRequest.id)
+}
+
+// -------------------------------------------------------------------
+
+// FileDownloadResponse
+
+// .netdesign2.File file = 1;
+inline bool FileDownloadResponse::has_file() const {
+  return this != internal_default_instance() && file_ != nullptr;
+}
+inline void FileDownloadResponse::clear_file() {
+  if (GetArenaNoVirtual() == nullptr && file_ != nullptr) {
+    delete file_;
+  }
+  file_ = nullptr;
+}
+inline const ::netdesign2::File& FileDownloadResponse::file() const {
+  const ::netdesign2::File* p = file_;
+  // @@protoc_insertion_point(field_get:netdesign2.FileDownloadResponse.file)
+  return p != nullptr ? *p : *reinterpret_cast<const ::netdesign2::File*>(
+      &::netdesign2::_File_default_instance_);
+}
+inline ::netdesign2::File* FileDownloadResponse::release_file() {
+  // @@protoc_insertion_point(field_release:netdesign2.FileDownloadResponse.file)
+  
+  ::netdesign2::File* temp = file_;
+  file_ = nullptr;
+  return temp;
+}
+inline ::netdesign2::File* FileDownloadResponse::mutable_file() {
+  
+  if (file_ == nullptr) {
+    auto* p = CreateMaybeMessage<::netdesign2::File>(GetArenaNoVirtual());
+    file_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:netdesign2.FileDownloadResponse.file)
+  return file_;
+}
+inline void FileDownloadResponse::set_allocated_file(::netdesign2::File* file) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete file_;
+  }
+  if (file) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      file = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, file, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  file_ = file;
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.FileDownloadResponse.file)
+}
+
+// -------------------------------------------------------------------
+
+// RegisterRequest
+
+// string username = 1;
+inline void RegisterRequest::clear_username() {
+  username_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& RegisterRequest::username() const {
+  // @@protoc_insertion_point(field_get:netdesign2.RegisterRequest.username)
+  return username_.GetNoArena();
+}
+inline void RegisterRequest::set_username(const std::string& value) {
+  
+  username_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.RegisterRequest.username)
+}
+inline void RegisterRequest::set_username(std::string&& value) {
+  
+  username_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.RegisterRequest.username)
+}
+inline void RegisterRequest::set_username(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  username_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.RegisterRequest.username)
+}
+inline void RegisterRequest::set_username(const char* value, size_t size) {
+  
+  username_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.RegisterRequest.username)
+}
+inline std::string* RegisterRequest::mutable_username() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.RegisterRequest.username)
+  return username_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* RegisterRequest::release_username() {
+  // @@protoc_insertion_point(field_release:netdesign2.RegisterRequest.username)
+  
+  return username_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterRequest::set_allocated_username(std::string* username) {
+  if (username != nullptr) {
+    
+  } else {
+    
+  }
+  username_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), username);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.RegisterRequest.username)
+}
+
+// string rawPassword = 2;
+inline void RegisterRequest::clear_rawpassword() {
+  rawpassword_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& RegisterRequest::rawpassword() const {
+  // @@protoc_insertion_point(field_get:netdesign2.RegisterRequest.rawPassword)
+  return rawpassword_.GetNoArena();
+}
+inline void RegisterRequest::set_rawpassword(const std::string& value) {
+  
+  rawpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:netdesign2.RegisterRequest.rawPassword)
+}
+inline void RegisterRequest::set_rawpassword(std::string&& value) {
+  
+  rawpassword_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:netdesign2.RegisterRequest.rawPassword)
+}
+inline void RegisterRequest::set_rawpassword(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  rawpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:netdesign2.RegisterRequest.rawPassword)
+}
+inline void RegisterRequest::set_rawpassword(const char* value, size_t size) {
+  
+  rawpassword_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:netdesign2.RegisterRequest.rawPassword)
+}
+inline std::string* RegisterRequest::mutable_rawpassword() {
+  
+  // @@protoc_insertion_point(field_mutable:netdesign2.RegisterRequest.rawPassword)
+  return rawpassword_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* RegisterRequest::release_rawpassword() {
+  // @@protoc_insertion_point(field_release:netdesign2.RegisterRequest.rawPassword)
+  
+  return rawpassword_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterRequest::set_allocated_rawpassword(std::string* rawpassword) {
+  if (rawpassword != nullptr) {
+    
+  } else {
+    
+  }
+  rawpassword_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), rawpassword);
+  // @@protoc_insertion_point(field_set_allocated:netdesign2.RegisterRequest.rawPassword)
+}
+
+// -------------------------------------------------------------------
+
+// RegisterResponse
+
+// bool success = 1;
+inline void RegisterResponse::clear_success() {
+  success_ = false;
+}
+inline bool RegisterResponse::success() const {
+  // @@protoc_insertion_point(field_get:netdesign2.RegisterResponse.success)
+  return success_;
+}
+inline void RegisterResponse::set_success(bool value) {
+  
+  success_ = value;
+  // @@protoc_insertion_point(field_set:netdesign2.RegisterResponse.success)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

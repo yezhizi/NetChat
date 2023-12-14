@@ -46,26 +46,45 @@ class UM {
         std::lock_guard<std::mutex> lock(this->_temp_socket_pool_mu);
         this->server_ptr_->_revc_socket_pool[ipport] = fd;
     }
-
-    // 用户数据  username->str id->int32 pass->str(sha256 hash)
+    /////////////////////////////////////////////////////////////////////////
+    // 用户数据 id->int32  username->str  pass->str(sha256 hash)
+    // 在线状态 id->int32 token -> str ("" for offline)
     //  TODO 换成数据库接口
     std::unordered_map<std::string, std::pair<int, std::string>>
         _test_user_info;
     std::pair<int, std::string> getUserInfo(const std::string &username) {
         if (this->_test_user_info.find(username) !=
             this->_test_user_info.end()) {
-            return this->_test_user_info[username];
+            auto pair = this->_test_user_info[username];
+            LOG(INFO) << "getUserInfo: " << pair.first << " " << pair.second;
+            return pair;
         } else {
             return std::make_pair(-1, "");
         }
     }
     int setUserInfo(const std::string &username, const int id,
                     const std::string &password) {
-
+        LOG(DEBUG) << "setUserInfo: " << username << " " << id << " "
+                           << SHA256(password);
         this->_test_user_info[username] = std::make_pair(id, SHA256(password));
         return 0;
     }
+        //token->username
+    std::string getUsernameByToken(const std::string &token) {
+        if (token=="") return "";
+        std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
+        if (this->server_ptr_->_token_pool.find(token) !=
+            this->server_ptr_->_token_pool.end()) {
+            return this->server_ptr_->_token_pool[token];
+        } else {
+            return "";
+        }
+    }
+    //消息
 
+
+
+    /////////////////////////////////////////////////////////////////////////
     ///// 用户登录 ////
     //  设置对应的challenge  username -> challenge threadsafe
     // 返回用户是否注册
@@ -107,17 +126,7 @@ class UM {
         this->server_ptr_->_keepalive_socket_pool[username] = fd;
         this->server_ptr_->_token_pool[token] = username;
     }
-    //token->username
-    std::string getUsernameByToken(const std::string &token) {
-        if (token=="") return "";
-        std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
-        if (this->server_ptr_->_token_pool.find(token) !=
-            this->server_ptr_->_token_pool.end()) {
-            return this->server_ptr_->_token_pool[token];
-        } else {
-            return "";
-        }
-    }
+
     //username->fd
     int getfdByUsername(const std::string &username) {
         if (username=="") return -1;

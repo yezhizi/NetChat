@@ -20,6 +20,7 @@ void Server::processRevcSocket(const int client_fd) const {
     this->_van->Recv(client_fd, &msg);
     int packet_id = msg.packetid();
     MessageType type = static_cast<MessageType>(packet_id);
+    LOG(INFO) << "Server received packet. id : " << packet_id;
     Packet packet_back;
     switch (type) {
     case MessageType::ServerStatusRequest: {
@@ -30,9 +31,6 @@ void Server::processRevcSocket(const int client_fd) const {
 
         Server::packtoPacket(MessageType::ServerStatusResponse, response,
                              packet_back);
-        LOG(INFO) << "Server sent ServerStatusResponse"
-                  << " online: " << response.online()
-                  << " registrable: " << response.registrable();
         break;
     }
     case MessageType::ServerStatusUpdateRequest: {
@@ -44,9 +42,6 @@ void Server::processRevcSocket(const int client_fd) const {
 
         this->packtoPacket(MessageType::ServerStatusUpdateResponse, response,
                            packet_back);
-        LOG(INFO) << "Server sent ServerStatusUpdateResponse"
-                  << " online: " << response.online()
-                  << " registrable: " << response.registrable();
         break;
     }
     case MessageType::LoginPreRequest: {
@@ -58,8 +53,7 @@ void Server::processRevcSocket(const int client_fd) const {
                   << " username: " << username;
 
         LoginPreResponse response;
-        char *challenge = new char[ntc::kChallengeSize];
-        ntc::genChallenge(challenge);
+        std::string challenge =  ntc::genChallenge();
         bool ret = UM::Get()->setChallengeMp(username, challenge);
         if (!ret) {
             // 发现用户未注册
@@ -68,7 +62,6 @@ void Server::processRevcSocket(const int client_fd) const {
         } else {
             response.set_challenge(challenge);
         }
-        delete[] challenge;
         this->packtoPacket(MessageType::LoginPreResponse, response,
                            packet_back);
         LOG(INFO) << "Server sent LoginPreResponse";
@@ -132,7 +125,9 @@ void Server::processRevcSocket(const int client_fd) const {
             // user not login or token error
             LOG(INFO) << "User not login or token error. username: "
                       << username;
-            // TODO 暂时不处理
+            this->_van->Control(client_fd, "EPOLL_DEL_FD");
+            this->_van->Control(client_fd, "CLOSE_FD");
+            break;
         }
         //  1. 通知van取消对应的监听事件
         this->_van->Control(client_fd, "EPOLL_DEL_FD");
@@ -141,7 +136,22 @@ void Server::processRevcSocket(const int client_fd) const {
         LOG(INFO) << "Server sent ServerAckResponse";
         this->packtoPacket(MessageType::ServerAckResponse, response,
                            packet_back);
-        // TODO 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
+        // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
+        UM::Get()->setKeepaliveSocketMp(username, client_fd, request.token());
+        // 发送联系人列表
+        ContactListRequest contact_list_request;
+        // TODO: 获取联系人列表
+        Contact contact;
+        contact.set_id(111);
+        contact.set_name("test");
+        contact.set_online(true);
+        contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
+        contact_list_request.add_contacts()->CopyFrom(contact);
+
+        this->packtoPacket(MessageType::ContactListRequest, contact_list_request,
+                           packet_back);
+        this->_van->addSendTask(client_fd, packet_back);
+
         break;
     }
     }

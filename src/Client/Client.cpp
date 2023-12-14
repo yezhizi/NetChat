@@ -6,6 +6,7 @@ void Client::Init() {
     this->_van = (Van *)new ClientVan();
 }
 void Client::Finalize() {
+    
     delete this->_van;
     CLOG(INFO, "client") << "Client closed";
 }
@@ -28,9 +29,7 @@ void Client::sendServerStatusRequest() {
     CLOG(INFO, "client") << "ServerStatusResponse: "
                          << "online: " << serverStatusResponse.online() << " "
                          << "registrable" << serverStatusResponse.registrable()
-                         << " "
-                         << "serverPublicKey"
-                         << serverStatusResponse.serverpublickey();
+                         << " ";
 }
 
 
@@ -115,6 +114,25 @@ void Client::login(const std::string &username, const std::string &password) {
         packet.content().UnpackTo(&serverAckResponse);
         CLOG(INFO, "client") << "Client received packetid: " << packet.packetid();
         CLOG(DEBUG, "client") << "ServerAckResponse: ";
+
+        //recv ContactListRequest
+        packet.Clear();
+        this->_van->Recv(this->_van->test_getSocket(), &packet);
+        ContactListRequest contactListRequest;
+        packet.content().UnpackTo(&contactListRequest);
+        CLOG(INFO, "client") << "Client received packetid: " << packet.packetid();
+        for (int i = 0; i < contactListRequest.contacts_size(); i++) {
+            CLOG(DEBUG, "client") << "ContactListRequest: "
+                                  << "id: " << contactListRequest.contacts(i).id()
+                                  << " "
+                                  << "name: " << contactListRequest.contacts(i).name()
+                                  << " "
+                                  << "online: " << contactListRequest.contacts(i).online()
+                                  << " "
+                                  << "type: " << contactListRequest.contacts(i).type()
+                                  << " "
+                                  << "header: " << contactListRequest.contacts(i).header();
+        }
 
     }
 
