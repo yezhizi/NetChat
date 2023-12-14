@@ -1,8 +1,14 @@
+# Ignore IDE files
 /.vscode/
-/bin/*
-/lib/*
+
+# Ignore build files
 /build
 /build/*
-/third_party/
-/logs/
+
+# Ignore generated files
+/src/proto
+/src/proto/*
+/bin/*
+/lib/*
+/logs/*
 

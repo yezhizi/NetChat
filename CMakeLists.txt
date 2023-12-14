@@ -36,6 +36,7 @@ FetchContent_Declare(
 FetchContent_Declare(Sodium
     GIT_REPOSITORY https://github.com/robinlinden/libsodium-cmake.git
     GIT_TAG f568ff02f1bed155ea598c0e803ef3c9db2703d2
+    GIT_SHALLOW TRUE
 )
 set(SODIUM_DISABLE_TESTS ON)
 
@@ -52,7 +53,7 @@ FetchContent_MakeAvailable(easyloggingpp Sodium libuuid)
 file(GLOB_RECURSE SOURCES "${SOURCE_DIR}/*.cpp")
 
 # NetDesign2-Server executable
-add_executable(NetDesign2-Server ${SOURCES})
+add_executable(NetDesign2-Server ${SOURCES} ${easyloggingpp_SOURCE_DIR}/src/easylogging++.cc)
 
 protobuf_generate(
     TARGET NetDesign2-Server
@@ -66,16 +67,14 @@ target_link_libraries(NetDesign2-Server
     ${PROTOBUF_LIBRARY} 
     Threads::Threads
     uuid::uuid
-    easyloggingpp
     sodium
 )
 
 # Include directories
 target_include_directories(NetDesign2-Server PRIVATE
     ${INCLUDE_DIR}
-    ${PROTOBUF_INCLUDE_DIR}
+    ${PROTO_OUT_DIR}
     ${easyloggingpp_SOURCE_DIR}/src
-    ${PROTO_OUT_DIR}/proto
     ${SOURCE_DIR}/Server
     ${SOURCE_DIR}/Client
 )
