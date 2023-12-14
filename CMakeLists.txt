@@ -13,14 +13,7 @@ set(LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 # Protobuf Directories
 set(PROTO_SRC_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/proto")
 file(GLOB PROTO_FILES "${PROTO_SRC_DIR}/*.proto")
-
-set(SERVER_DIR "${SOURCE_DIR}/Server")
-set(CLIENT_DIR "${SOURCE_DIR}/Client")
-
-
-# CMake module paths
-list(APPEND CMAKE_MODULE_PATH ${MYCMAKE_DIR})
-list(APPEND CMAKE_MODULE_PATH ${MYCMAKE_DIR}/third-party)
+set(PROTO_OUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 # Threads
 find_package(Threads REQUIRED)
@@ -40,51 +33,50 @@ FetchContent_Declare(
 )
 
 # libsodium
-FetchContent_Declare(
-    libsodium
-    URL https://github.com/jedisct1/libsodium/releases/download/1.0.19-RELEASE/libsodium-1.0.19.tar.gz
-    INACTIVITY_TIMEOUT 5
+FetchContent_Declare(Sodium
+    GIT_REPOSITORY https://github.com/robinlinden/libsodium-cmake.git
+    GIT_TAG f568ff02f1bed155ea598c0e803ef3c9db2703d2
 )
+set(SODIUM_DISABLE_TESTS ON)
 
 # libuuid
-FetchContent_Declare(
-    libuuid
-    URL https://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz
-    INACTIVITY_TIMEOUT 5
+FetchContent_Declare(libuuid
+    GIT_REPOSITORY  https://github.com/gershnik/libuuid-cmake.git
+    GIT_TAG         v2.39.3
+    GIT_SHALLOW     TRUE
 )
 
-FetchContent_MakeAvailable(easyloggingpp libsodium libuuid)
+FetchContent_MakeAvailable(easyloggingpp Sodium libuuid)
 
 # Source files
-set(SRC_FILES
-    ${SOURCE_DIR}/main.cpp
-    ${SERVER_DIR}/server_van.h
-    ${SERVER_DIR}/Server.h
-    ${SERVER_DIR}/Server.cpp
-)
+file(GLOB_RECURSE SOURCES "${SOURCE_DIR}/*.cpp")
 
 # NetDesign2-Server executable
-add_executable(NetDesign2-Server ${SRC_FILES})
+add_executable(NetDesign2-Server ${SOURCES})
 
 protobuf_generate(
     TARGET NetDesign2-Server
     PROTOS ${PROTO_FILES}
-    OUT_VAR PB_SRCS
+    PROTOC_OUT_DIR ${PROTO_OUT_DIR}
+    OUT_VAR PROTO_SRCS
 )
 
 # Link libraries
 target_link_libraries(NetDesign2-Server 
     ${PROTOBUF_LIBRARY} 
     Threads::Threads
+    uuid::uuid
     easyloggingpp
     sodium
-    uuid
 )
 
 # Include directories
 target_include_directories(NetDesign2-Server PRIVATE
     ${INCLUDE_DIR}
     ${PROTOBUF_INCLUDE_DIR}
+    ${easyloggingpp_SOURCE_DIR}/src
+    ${PROTO_OUT_DIR}/proto
+    ${SOURCE_DIR}
 )
 
 # Set output directories
