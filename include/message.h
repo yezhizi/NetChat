@@ -2,7 +2,7 @@
 #define _MESSAGE_H_
 
 #include "base.h"
-#include "messages.pb.h"
+#include "proto/messages.pb.h"
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/message.h>
 #include <memory>
