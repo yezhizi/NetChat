@@ -10,28 +10,6 @@
 #include <unordered_map>
 namespace ntc {
 using namespace netdesign2;
-
-// class Message {
-//   public:
-//     std::shared_ptr<google::protobuf::Message>
-//     getMessageByName(const std::string &msgType) {
-//         auto desc = google::protobuf::DescriptorPool::generated_pool()
-//                         ->FindMessageTypeByName(msgType);
-//         if (!desc)
-//             return std::shared_ptr<google::protobuf::Message>(nullptr);
-//         auto instance =
-//             google::protobuf::MessageFactory::generated_factory()->GetPrototype(
-//                 desc);
-//         if (!instance)
-//             return std::shared_ptr<google::protobuf::Message>(nullptr);
-//         std::shared_ptr<google::protobuf::Message> msg =
-//             std::shared_ptr<google::protobuf::Message>(instance->New());
-//         return msg;
-//     };
-// };
-
-// ... (Previous code remains unchanged)
-
 class Message {
   public:
 };

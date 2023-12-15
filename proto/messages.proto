@@ -36,13 +36,13 @@ message LoginPreRequest {
 
 //packet id = 3 server packet
 message LoginPreResponse {
-  string challenge = 1;   //bytes
+  string challenge = 1;  
 }
 
 //packet id = 4 client packet
 message LoginRequest{
   string username = 1;
-  string hashPassword = 2;  //bytes
+  string hashPassword = 2;  
 }
 
 //packet id = 5 server packet
@@ -103,7 +103,7 @@ message RawMessage {
   int32 to = 2;
   MessageType type = 3;
   string content = 4;
-   string hash = 5;  //bytes
+   string hash = 5;  
 }
 
 message Message {
