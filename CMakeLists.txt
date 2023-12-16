@@ -25,14 +25,14 @@ find_package(Threads REQUIRED)
 include(FindProtobuf)
 find_package(Protobuf REQUIRED)
 
-# Use FetchContent to download third party dependencies
+# Use FetchContent to download other third party dependencies
 include(FetchContent)
 
 # easyloggingpp
-FetchContent_Declare(
-    easyloggingpp
-    URL https://github.com/abumq/easyloggingpp/archive/refs/tags/v9.97.1.tar.gz
-    INACTIVITY_TIMEOUT 5
+FetchContent_Declare(easyloggingpp
+    GIT_REPOSITORY https://github.com/abumq/easyloggingpp.git
+    GIT_TAG v9.97.1
+    GIT_SHALLOW TRUE
 )
 
 # libsodium
@@ -50,7 +50,14 @@ FetchContent_Declare(libuuid
     GIT_SHALLOW     TRUE
 )
 
-FetchContent_MakeAvailable(easyloggingpp Sodium libuuid)
+# SqliteCpp
+FetchContent_Declare(SQLiteCpp
+    GIT_REPOSITORY https://github.com/SRombauts/SQLiteCpp.git
+    GIT_TAG       3.3.1
+    GIT_SHALLOW   TRUE
+)
+
+FetchContent_MakeAvailable(easyloggingpp Sodium libuuid SQLiteCpp)
 
 # Source files
 file(GLOB_RECURSE SOURCES "${SOURCE_DIR}/*.cpp")
@@ -71,6 +78,7 @@ target_link_libraries(NetDesign2-Server
     Threads::Threads
     uuid::uuid
     sodium
+    SQLiteCpp
 )
 
 # Include directories
