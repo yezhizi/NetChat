@@ -228,7 +228,7 @@ class ServerVan : public Van {
         while (true) {
             int client_fd;
             this->RevcSocketQueue_.WaitAndPop(&client_fd);
-            Server::Get()->processRevcSocket(client_fd);
+            Server::Get().processRevcSocket(client_fd);
         }
     }
     void KeepAliveSendThreadsFunc_() {

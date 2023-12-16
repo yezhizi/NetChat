@@ -18,7 +18,7 @@ class DataAccess {
     checkAndCreateTables();
   }
 
-  // 禁止拷贝和赋值，单例模式
+  // 禁止拷贝和赋值
   DataAccess(const DataAccess &) = delete;
   DataAccess &operator=(const DataAccess &) = delete;
 
@@ -96,7 +96,8 @@ class DataAccess {
   }
 };
 
-// 全局的数据库操作对象
+// 全局的数据库操作对象，由于初始化需要参数，不适用 Get 形式的单例模式
+// 需要保证在 main 函数中初始化
 std::unique_ptr<DataAccess> g_db;
 
 }  // namespace ntc
