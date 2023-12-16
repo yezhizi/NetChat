@@ -4,7 +4,7 @@
 #include <SQLiteCpp/SQLiteCpp.h>
 
 namespace ntc {
-
+/* 数据库访问类 */
 class DataAccess {
  private:
   SQLite::Database db;
@@ -29,8 +29,7 @@ class DataAccess {
           "CREATE TABLE users ("
           "user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
           "username TEXT NOT NULL UNIQUE, "
-          "email TEXT, "
-          "phone TEXT)");
+          "password TEXT NOT NULL)");
     }
 
     // 检查并创建群组表
@@ -81,9 +80,9 @@ class DataAccess {
           "FOREIGN KEY (file_id) REFERENCES files (file_id))");
     }
   }
-
-  // 其他成员函数...
 };
+
+DataAccess* Db;  // 全局数据库访问对象
 
 }  // namespace ntc
 
