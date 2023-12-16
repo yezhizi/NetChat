@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "db_access.h"
 #include "Server.h"
 
 namespace ntc {
