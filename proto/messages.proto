@@ -103,7 +103,7 @@ message RawMessage {
   int32 to = 2;
   MessageType type = 3;
   string content = 4;
-   string hash = 5;  
+  string hash = 5;  
 }
 
 message Message {
