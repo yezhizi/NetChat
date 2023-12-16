@@ -10,6 +10,7 @@
 #include "logging.h"
 #include "message.h"
 #include "van.h"
+#include "db_access.h"
 
 // libsodium init
 namespace ntc {
