@@ -37,9 +37,9 @@ class Server {
   Server(const Server &) = delete;
   Server &operator=(const Server &) = delete;
   // 将具体的消息打包成packet
-  static void packtoPacket(MessageType messagetype,
-                           google::protobuf::Message &content, Packet &packet) {
-    packet.set_packetid(static_cast<int>(messagetype));
+  static void packtoPacket(PacketType ptype, google::protobuf::Message &content,
+                           Packet &packet) {
+    packet.set_packetid(static_cast<int>(ptype));
     google::protobuf::Any *content_ = packet.mutable_content();
     content_->PackFrom(content);
   }

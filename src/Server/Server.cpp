@@ -21,32 +21,32 @@ void Server::processRevcSocket(const int client_fd) const {
   Packet msg;
   this->_van->Recv(client_fd, &msg);
   int packet_id = msg.packetid();
-  MessageType type = static_cast<MessageType>(packet_id);
+  PacketType type = static_cast<PacketType>(packet_id);
   LOG(INFO) << "Server received packet. id : " << packet_id;
   Packet packet_back;
   switch (type) {
-    case MessageType::ServerStatusRequest: {
+    case PacketType::ServerStatusRequest: {
       // ServerStatusRequest
       ServerStatusResponse response;
       response.set_online(true);
       response.set_registrable(false);
 
-      Server::packtoPacket(MessageType::ServerStatusResponse, response,
+      Server::packtoPacket(PacketType::ServerStatusResponse, response,
                            packet_back);
       break;
     }
-    case MessageType::ServerStatusUpdateRequest: {
+    case PacketType::ServerStatusUpdateRequest: {
       // ServerStatusUpdateResponse
       LOG(INFO) << "Server received ServerStatusUpdateRequest";
       ServerStatusUpdateResponse response;
       response.set_online(true);
       response.set_registrable(false);
 
-      this->packtoPacket(MessageType::ServerStatusUpdateResponse, response,
+      this->packtoPacket(PacketType::ServerStatusUpdateResponse, response,
                          packet_back);
       break;
     }
-    case MessageType::LoginPreRequest: {
+    case PacketType::LoginPreRequest: {
       // LoginResponse
       LoginPreRequest request;
       msg.content().UnpackTo(&request);
@@ -64,11 +64,11 @@ void Server::processRevcSocket(const int client_fd) const {
       } else {
         response.set_challenge(challenge);
       }
-      this->packtoPacket(MessageType::LoginPreResponse, response, packet_back);
+      this->packtoPacket(PacketType::LoginPreResponse, response, packet_back);
       LOG(INFO) << "Server sent LoginPreResponse";
       break;
     }
-    case MessageType::LoginRequest: {
+    case PacketType::LoginRequest: {
       // LoginResponse
       LoginRequest request;
       LoginResponse response;
@@ -83,7 +83,7 @@ void Server::processRevcSocket(const int client_fd) const {
         LOG(INFO) << "User not found. username: " << username;
         response.set_logined(false);
         response.set_token("illegal user");
-        this->packtoPacket(MessageType::LoginResponse, response, packet_back);
+        this->packtoPacket(PacketType::LoginResponse, response, packet_back);
         break;
       }
 
@@ -109,14 +109,14 @@ void Server::processRevcSocket(const int client_fd) const {
         response.set_logined(false);
         response.set_token("wrong password");
       }
-      this->packtoPacket(MessageType::LoginResponse, response, packet_back);
+      this->packtoPacket(PacketType::LoginResponse, response, packet_back);
       LOG(INFO) << "Server sent LoginResponse"
                 << " logined: " << response.logined()
                 << " token: " << response.token();
       UM::Get()->delChallengeMp(username);  // 删除记录的challenge
       break;
     }
-    case MessageType::SetupChannelRequest: {
+    case PacketType::SetupChannelRequest: {
       // SetupChannelResponse
       SetupChannelRequest request;
       msg.content().UnpackTo(&request);
@@ -137,7 +137,7 @@ void Server::processRevcSocket(const int client_fd) const {
       // ServerAckResponse
       ServerAckResponse response;
       LOG(INFO) << "Server sent ServerAckResponse";
-      this->packtoPacket(MessageType::ServerAckResponse, response, packet_back);
+      this->packtoPacket(PacketType::ServerAckResponse, response, packet_back);
       // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
       UM::Get()->setKeepaliveSocketMp(username, client_fd, request.token());
       // 发送联系人列表
@@ -150,7 +150,7 @@ void Server::processRevcSocket(const int client_fd) const {
       contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
       contact_list_request.add_contacts()->CopyFrom(contact);
 
-      this->packtoPacket(MessageType::ContactListRequest, contact_list_request,
+      this->packtoPacket(PacketType::ContactListRequest, contact_list_request,
                          packet_back);
       this->_van->addSendTask(client_fd, packet_back);
 
