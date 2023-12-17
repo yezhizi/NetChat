@@ -24,14 +24,14 @@ class Server {
   // 临时连接池的映射  ipport -> fd
   std::unordered_map<std::string, int> _revc_socket_pool;
 
-  // 登录时challenge的映射  username -> challenge
-  std::unordered_map<std::string, std::string> _challenge_pool;
+  // 登录时challenge的映射  userid -> challenge
+  std::unordered_map<int, std::string> _challenge_pool;
 
-  // 保活连接池映射 username -> fd
-  std::unordered_map<std::string, int> _keepalive_socket_pool;
+  // 保活连接池映射 userid -> fd
+  std::unordered_map<int, int> _keepalive_socket_pool;
 
-  // token -> username
-  std::unordered_map<std::string, std::string> _token_pool;
+  // token -> userid
+  std::unordered_map<std::string, int> _token_pool;
 
   void Init();
   void Finalize();

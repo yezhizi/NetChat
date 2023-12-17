@@ -87,7 +87,6 @@ target_include_directories(NetDesign2-Server PRIVATE
     ${PROTO_OUT_DIR}
     ${easyloggingpp_SOURCE_DIR}/src
     ${SOURCE_DIR}/Server
-    ${SOURCE_DIR}/Client
 )
 
 # Set output directories

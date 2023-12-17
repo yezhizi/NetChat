@@ -94,7 +94,6 @@ namespace ntc {
     m.mutable_message()->set_from(query.getColumn("sender_id").getInt());
     m.mutable_message()->set_to(query.getColumn("receiver_id").getInt());
     m.mutable_message()->set_content(query.getColumn("content").getString());
-    m.mutable_message()->set_hash(query.getColumn("hash").getString());
     m.mutable_message()->set_type(
         static_cast<netdesign2::MessageType>(query.getColumn("type").getInt()));
 
@@ -148,7 +147,6 @@ bool DataAccess::createSavedMessage(const netdesign2::Message &m) {
   query.bind(1, m.message().from());
   query.bind(2, m.message().to());
   query.bind(3, m.message().content());
-  query.bind(4, m.message().hash());
   query.bind(5, static_cast<int>(m.message().type()));
   query.bind(6, m.internalid());
   query.bind(7, m.timestamp());

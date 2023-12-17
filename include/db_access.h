@@ -8,9 +8,9 @@
 #include <stdexcept>
 
 #include "group.h"
-#include "utils/logging.h"
 #include "proto/messages.pb.h"
 #include "user.h"
+#include "utils/logging.h"
 
 namespace ntc {
 /* 数据库访问类 */
@@ -42,7 +42,7 @@ class DataAccess {
 
   [[nodiscard]] std::optional<Group> getGroup(const int &id);
 
-  [[nodiscard]] std::vector<Group> getAllGroups(); 
+  [[nodiscard]] std::vector<Group> getAllGroups();
 
   // Not implemented
   [[nodiscard]] std::vector<Group> getUserGroups(const int &user_id);
@@ -52,6 +52,9 @@ class DataAccess {
 
   [[nodiscard]] std::optional<netdesign2::Message> getSavedMessage(
       const int &sender_id, const int &receiver_id, const int &internal_id);
+
+  [[nodiscard]] std::vector<netdesign2::Message> getAllSavedMessage(
+      const int &sender_id, const int &receiver_id);
 
   [[nodiscard]] std::optional<netdesign2::File> getFile(const int &id);
 
@@ -119,9 +122,8 @@ class DataAccess {
           "receiver_id INTEGER NOT NULL, "
           "type INTEGER NOT NULL, "  // oneof TEXT, IMAGE or FILE
           "internal_id INTEGER, "    // 用于标识对话内部的消息
-          "content TEXT NOT NULL, "  // TEXT/IMAGE 类型的消息内容
+          "content TEXT, "           // TEXT/IMAGE 类型的消息内容
           "file_id INTEGER, "        // FILE 类型外键
-          "hash TEXT NOT NULL, "
           "timestamp INTEGER NOT NULL, "
           "FOREIGN KEY (sender_id) REFERENCES users (user_id), "
           "FOREIGN KEY (receiver_id) REFERENCES users (user_id), "

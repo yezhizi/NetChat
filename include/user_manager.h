@@ -7,7 +7,6 @@
 #include <unordered_map>
 
 #include "Server.h"
-#include "db_access.h"
 
 namespace ntc {
 
@@ -53,75 +52,62 @@ class UM {
     this->server_ptr_->_revc_socket_pool[ipport] = fd;
   }
 
-  // 用户数据 id->int32  username->str  pass->str(sha256 hash)
+  // 用户数据 id->int32  userid->str  pass->str(sha256 hash)
   // 在线状态 id->int32 token -> str ("" for offline)
-  // token->username
-  std::string getUsernameByToken(const std::string &token) {
-    if (token == "") return "";
+  // token->userid
+  int getUserIdByToken(const std::string &token) {
+    if (token == "") return 0;
     std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
     if (this->server_ptr_->_token_pool.find(token) !=
         this->server_ptr_->_token_pool.end()) {
       return this->server_ptr_->_token_pool[token];
     } else {
-      return "";
+      return 0;
     }
   }
-  
-  // 消息
 
-  /////////////////////////////////////////////////////////////////////////
   ///// 用户登录 ////
-  //  设置对应的challenge  username -> challenge threadsafe
-  // 返回用户是否注册
-  bool setChallengeMp(const std::string &username,
-                      const std::string &challenge) {
-    // 查找对应的用户是否注册
-    auto result = g_db->getUser(username);
-    if (!result.has_value()) {
-      return false;
-    }
-
+  // 设置对应的challenge  userid -> challenge threadsafe
+  void setChallengeMp(const int &id, const std::string &challenge) {
     std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
-    this->server_ptr_->_challenge_pool[username] = challenge;
-    return true;
+    this->server_ptr_->_challenge_pool[id] = challenge;
   }
 
-  // 获取对应的challenge  username -> challenge threadsafe
-  std::string getChallengeMp(const std::string &username) {
+  // 获取对应的challenge  id -> challenge threadsafe
+  std::string getChallengeMp(const int &id) {
     std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
-    if (this->server_ptr_->_challenge_pool.find(username) !=
+    if (this->server_ptr_->_challenge_pool.find(id) !=
         this->server_ptr_->_challenge_pool.end()) {
-      return this->server_ptr_->_challenge_pool[username];
+      return this->server_ptr_->_challenge_pool[id];
     } else {
       return "";
     }
   }
 
-  // 删除对应的challenge  username -> challenge threadsafe
-  void delChallengeMp(const std::string &username) {
+  // 删除对应的challenge  id -> challenge threadsafe
+  void delChallengeMp(const int &id) {
     std::lock_guard<std::mutex> lock(this->_challenge_pool_mu);
-    if (this->server_ptr_->_challenge_pool.find(username) !=
+    if (this->server_ptr_->_challenge_pool.find(id) !=
         this->server_ptr_->_challenge_pool.end()) {
-      this->server_ptr_->_challenge_pool.erase(username);
+      this->server_ptr_->_challenge_pool.erase(id);
     }
   }
 
   // 保活连接池
-  //  设置对应的保活连接socket
-  void setKeepaliveSocketMp(const std::string &username, int fd,
-                            const std::string &token) {
+  // 设置对应的保活连接socket
+  void setKeepaliveSocketMp(const int &id, int fd, const std::string &token) {
     std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
-    this->server_ptr_->_keepalive_socket_pool[username] = fd;
-    this->server_ptr_->_token_pool[token] = username;
+    this->server_ptr_->_keepalive_socket_pool[id] = fd;
+    this->server_ptr_->_token_pool[token] = id;
   }
 
-  // username->fd
-  int getfdByUsername(const std::string &username) {
-    if (username == "") return -1;
+  // id->fd
+  int getfdByUserId(const int &id) {
+    if (id == 0) return -1;
     std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
-    if (this->server_ptr_->_keepalive_socket_pool.find(username) !=
+    if (this->server_ptr_->_keepalive_socket_pool.find(id) !=
         this->server_ptr_->_keepalive_socket_pool.end()) {
-      return this->server_ptr_->_keepalive_socket_pool[username];
+      return this->server_ptr_->_keepalive_socket_pool[id];
     } else {
       return -1;
     }

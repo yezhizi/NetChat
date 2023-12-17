@@ -2,13 +2,14 @@
 #include <thread>
 
 #include "Server.h"
-#include "utils/logging.h"
+#include "db_access.h"
 #include "user_manager.h"
+#include "utils/logging.h"
 
 INITIALIZE_EASYLOGGINGPP
 
 namespace ntc {
-  std::unique_ptr<DataAccess> g_db = nullptr;
+std::unique_ptr<DataAccess> g_db = nullptr;
 }
 
 int main(int argc, char *argv[]) {

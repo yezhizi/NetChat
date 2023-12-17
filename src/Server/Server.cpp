@@ -54,7 +54,8 @@ void Server::processRecvSocket(const int client_fd) const {
       break;
     }
     case PacketType::LoginPreRequest: {
-      // LoginResponse
+      // LoginPreRequest 用户请求登录前的 challenge
+      // reply LoginPreResponse
       LoginPreRequest request;
       LoginPreResponse response;
 
@@ -63,16 +64,19 @@ void Server::processRecvSocket(const int client_fd) const {
       LOG(INFO) << "Server received LoginPreRequest"
                 << " username: " << username;
 
-      // 生成 challenge
-      std::string challenge = utils::crypto::genChallenge();
-      bool ret = UM::Get()->setChallengeMp(username, challenge);
-      if (!ret) {
-        // 发现用户未注册
+      // 判断用户是否存在
+      auto result = g_db->getUser(username);
+      if (!result.has_value()) {
         LOG(INFO) << "User not registered. username: " << username;
         response.set_challenge("");
-      } else {
-        response.set_challenge(challenge);
       }
+
+      auto user = std::move(result.value());
+
+      // 生成 challenge
+      std::string challenge = utils::crypto::genChallenge();
+      UM::Get()->setChallengeMp(user.getId(), challenge);
+      response.set_challenge(challenge);
 
       // 写入回复包
       this->packToPacket(PacketType::LoginPreResponse, response, pkt_reply);
@@ -81,18 +85,17 @@ void Server::processRecvSocket(const int client_fd) const {
       break;
     }
     case PacketType::LoginRequest: {
-      // LoginResponse
+      // LoginRequest 用户经过 challenge 计算后发送的登录请求
+      // reply LoginResponse
       LoginRequest request;
       LoginResponse response;
 
       pkt.content().UnpackTo(&request);
 
-      std::string username = request.username();
-      std::string challenge = UM::Get()->getChallengeMp(username);
-
       // 判断用户是否存在
+      std::string username = request.username();
       auto result = g_db->getUser(username);
-      if (!result.has_value() || challenge == "") {
+      if (!result.has_value()) {
         LOG(INFO) << "User not found. username: " << username;
         response.set_logined(false);
         response.set_token("illegal user");
@@ -100,23 +103,24 @@ void Server::processRecvSocket(const int client_fd) const {
         break;
       }
 
-      // 获取 user
-      auto user = result.value();
+      // 获取 challenge
+      auto user = std::move(result.value());
+      std::string challenge = UM::Get()->getChallengeMp(user.getId());
 
       // 计算(pass.sha256+challenge).sha256
       std::string hashPassword = request.hashpassword();
       std::string pass_challenge_sha256 =
           utils::crypto::SHA256(user.getPassword() + challenge);
+
       // 比较
       if (pass_challenge_sha256 == hashPassword) {
         // 登录成功
-        // 重复登录问题 ?
+        // TODO: 重复登录问题 ?
         std::string token = utils::crypto::genToken();
         response.set_logined(true);
         response.set_token(token);
         //  设置用户信息
-        UM::Get()->setKeepaliveSocketMp(username, client_fd, token);
-
+        UM::Get()->setKeepaliveSocketMp(user.getId(), client_fd, token);
       } else {
         // 登录失败
         response.set_logined(false);
@@ -128,7 +132,9 @@ void Server::processRecvSocket(const int client_fd) const {
       LOG(INFO) << "Server sent LoginResponse"
                 << " logined: " << response.logined()
                 << " token: " << response.token();
-      UM::Get()->delChallengeMp(username);  // 删除记录的challenge
+
+      // 删除记录的 challenge
+      UM::Get()->delChallengeMp(user.getId());
 
       break;
     }
@@ -139,12 +145,12 @@ void Server::processRecvSocket(const int client_fd) const {
       LOG(INFO) << "Server received SetupChannelRequest"
                 << " token: " << request.token();
 
-      // 获取用户信息 token->username->fd
-      std::string username = UM::Get()->getUsernameByToken(request.token());
-      int fd = UM::Get()->getfdByUsername(username);
+      // 获取用户信息 token->userId->fd
+      auto uid = UM::Get()->getUserIdByToken(request.token());
+      int fd = UM::Get()->getfdByUserId(uid);
       if (fd == -1 || fd != client_fd) {
         // user not login or token error
-        LOG(INFO) << "User not login or token error. username: " << username;
+        LOG(INFO) << "User not login or token error. user id: " << uid;
         this->_van->Control(client_fd, "EPOLL_DEL_FD");
         this->_van->Control(client_fd, "CLOSE_FD");
         break;
@@ -158,7 +164,7 @@ void Server::processRecvSocket(const int client_fd) const {
       this->packToPacket(PacketType::ServerAckResponse, response, pkt_reply);
 
       // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
-      UM::Get()->setKeepaliveSocketMp(username, client_fd, request.token());
+      UM::Get()->setKeepaliveSocketMp(uid, client_fd, request.token());
 
       // 发送联系人列表
       ContactListRequest contact_list_request;
@@ -181,8 +187,25 @@ void Server::processRecvSocket(const int client_fd) const {
 
       break;
     }
+    case PacketType::SendMessageRequest: {
+      // User request to send message
+      // reply: SendMessageResponse
+      SendMessageRequest request;
+      pkt.content().UnpackTo(&request);
+      
+      // 获取用户信息 token->uid
+      auto token = request.token();
+      auto uid = UM::Get()->getUserIdByToken(token);
+
+      // Not implemented...
+
+      break;
+    }
+    default:  // 未知消息
+      LOG(INFO) << "Unknown message";
+      return;
   }
-  
+
   if (!pkt_reply.has_content()) {
     LOG(INFO) << "Unknown message";
     return;
