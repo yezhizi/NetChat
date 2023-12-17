@@ -33,7 +33,16 @@ enum class PacketType {
   FriendSendMessageRequest = 14,
   FriendSendMessageResponse = 15,
   SetupChannelRequest = 16,
-  ChannelHeartRequest = 17
+  ChannelHeartRequest = 17,
+  ContactMessageListRequest = 18,
+  FileUploadRequest = 19,
+  FileUploadResponse = 24,
+  FileDownloadRequest = 20,
+  FileDownloadResponse = 21,
+  RegisterRequest = 22,
+  RegisterResponse = 23,
+  DeleteMessageRequest = 25,
+  DeleteMessageResponse = 26,
 };
 
 }  // namespace ntc
