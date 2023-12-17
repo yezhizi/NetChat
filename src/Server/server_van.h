@@ -26,8 +26,8 @@ class ServerVan : public Van {
     CLOG(INFO, "Van") << "ServerVan initialized";
     this->Bind();
 
-    this->RevcSocketThreads_.resize(Server::getRevcSocketNum());
-    for (auto &t : this->RevcSocketThreads_)
+    this->RecvSocketThreads_.resize(Server::getRecvSocketNum());
+    for (auto &t : this->RecvSocketThreads_)
       t = std::thread(&ServerVan::RevcSocketThreadFunc_, this);
     // bind the working thread function
     this->KeepAliveThreads_.resize(Server::getKeepAliveNum());
@@ -73,7 +73,7 @@ class ServerVan : public Van {
   }
   ~ServerVan() {
     this->accepting_thread_->join();
-    for (auto &t : this->RevcSocketThreads_) t.join();
+    for (auto &t : this->RecvSocketThreads_) t.join();
     for (auto &t : this->KeepAliveThreads_) t.join();
     // TODO : need to do
   }
@@ -144,7 +144,7 @@ class ServerVan : public Van {
           CLOG(DEBUG, "Van")
               << "client socket ready to read :" << events[i].data.fd;
           if (events[i].events & EPOLLIN)
-            this->RevcSocketQueue_.Push(events[i].data.fd);
+            this->RecvSocketQueue_.Push(events[i].data.fd);
         }
       }
     }
@@ -203,9 +203,9 @@ class ServerVan : public Van {
  private:
   std::unique_ptr<std::thread> accepting_thread_;
   // 临时连接池
-  ThreadsafeQueue<int> RevcSocketQueue_;
+  ThreadsafeQueue<int> RecvSocketQueue_;
   // 工作在临时连接池的工作线程
-  std::vector<std::thread> RevcSocketThreads_;
+  std::vector<std::thread> RecvSocketThreads_;
 
   // 保活连接池 待发送的消息队列
   ThreadsafeQueue<std::pair<int, Packet>> KeepAliveQueue_;
@@ -220,8 +220,8 @@ class ServerVan : public Van {
   void RevcSocketThreadFunc_() {
     while (true) {
       int client_fd;
-      this->RevcSocketQueue_.WaitAndPop(&client_fd);
-      Server::Get().processRevcSocket(client_fd);
+      this->RecvSocketQueue_.WaitAndPop(&client_fd);
+      Server::Get().processRecvSocket(client_fd);
     }
   }
   void KeepAliveSendThreadsFunc_() {

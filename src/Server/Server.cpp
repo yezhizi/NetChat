@@ -18,7 +18,7 @@ void Server::Finalize() {
 }
 
 // 收到临时连接池的请求
-void Server::processRevcSocket(const int client_fd) const {
+void Server::processRecvSocket(const int client_fd) const {
   using namespace netdesign2;
   // TODO
   Packet pkt;
@@ -56,13 +56,14 @@ void Server::processRevcSocket(const int client_fd) const {
     case PacketType::LoginPreRequest: {
       // LoginResponse
       LoginPreRequest request;
-      pkt.content().UnpackTo(&request);
+      LoginPreResponse response;
 
+      pkt.content().UnpackTo(&request);
       std::string username = request.username();
       LOG(INFO) << "Server received LoginPreRequest"
                 << " username: " << username;
 
-      LoginPreResponse response;
+      // 生成 challenge
       std::string challenge = utils::crypto::genChallenge();
       bool ret = UM::Get()->setChallengeMp(username, challenge);
       if (!ret) {
@@ -72,8 +73,11 @@ void Server::processRevcSocket(const int client_fd) const {
       } else {
         response.set_challenge(challenge);
       }
+
+      // 写入回复包
       this->packToPacket(PacketType::LoginPreResponse, response, pkt_reply);
       LOG(INFO) << "Server sent LoginPreResponse";
+
       break;
     }
     case PacketType::LoginRequest: {
@@ -83,9 +87,10 @@ void Server::processRevcSocket(const int client_fd) const {
 
       pkt.content().UnpackTo(&request);
 
-      // 判断用户是否存在
       std::string username = request.username();
       std::string challenge = UM::Get()->getChallengeMp(username);
+
+      // 判断用户是否存在
       auto result = g_db->getUser(username);
       if (!result.has_value() || challenge == "") {
         LOG(INFO) << "User not found. username: " << username;
@@ -105,9 +110,9 @@ void Server::processRevcSocket(const int client_fd) const {
       // 比较
       if (pass_challenge_sha256 == hashPassword) {
         // 登录成功
-        // 重复登录问题
-        response.set_logined(true);
+        // 重复登录问题 ?
         std::string token = utils::crypto::genToken();
+        response.set_logined(true);
         response.set_token(token);
         //  设置用户信息
         UM::Get()->setKeepaliveSocketMp(username, client_fd, token);
@@ -117,11 +122,14 @@ void Server::processRevcSocket(const int client_fd) const {
         response.set_logined(false);
         response.set_token("wrong password");
       }
+
+      // 写入回复包
       this->packToPacket(PacketType::LoginResponse, response, pkt_reply);
       LOG(INFO) << "Server sent LoginResponse"
                 << " logined: " << response.logined()
                 << " token: " << response.token();
       UM::Get()->delChallengeMp(username);  // 删除记录的challenge
+
       break;
     }
     case PacketType::SetupChannelRequest: {
@@ -130,6 +138,7 @@ void Server::processRevcSocket(const int client_fd) const {
       pkt.content().UnpackTo(&request);
       LOG(INFO) << "Server received SetupChannelRequest"
                 << " token: " << request.token();
+
       // 获取用户信息 token->username->fd
       std::string username = UM::Get()->getUsernameByToken(request.token());
       int fd = UM::Get()->getfdByUsername(username);
@@ -140,12 +149,14 @@ void Server::processRevcSocket(const int client_fd) const {
         this->_van->Control(client_fd, "CLOSE_FD");
         break;
       }
+
       //  1. 通知van取消对应的监听事件
       this->_van->Control(client_fd, "EPOLL_DEL_FD");
       // ServerAckResponse
       ServerAckResponse response;
       LOG(INFO) << "Server sent ServerAckResponse";
       this->packToPacket(PacketType::ServerAckResponse, response, pkt_reply);
+
       // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
       UM::Get()->setKeepaliveSocketMp(username, client_fd, request.token());
 
@@ -171,6 +182,7 @@ void Server::processRevcSocket(const int client_fd) const {
       break;
     }
   }
+  
   if (!pkt_reply.has_content()) {
     LOG(INFO) << "Unknown message";
     return;

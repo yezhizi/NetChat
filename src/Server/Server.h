@@ -12,7 +12,6 @@
 #include "utils/logging.h"
 #include "van.h"
 
-// libsodium init
 namespace ntc {
 
 class Server {
@@ -30,6 +29,7 @@ class Server {
 
   // 保活连接池映射 username -> fd
   std::unordered_map<std::string, int> _keepalive_socket_pool;
+
   // token -> username
   std::unordered_map<std::string, std::string> _token_pool;
 
@@ -56,10 +56,10 @@ class Server {
     return server;
   }
   const Van *getVan() const { return this->_van; }
-  static inline int getRevcSocketNum() { return revc_socket_pool_thread_num; }
+  static inline int getRecvSocketNum() { return revc_socket_pool_thread_num; }
   static inline int getKeepAliveNum() { return keepalive_thread_num; }
 
-  void processRevcSocket(const int client_fd) const;
+  void processRecvSocket(const int client_fd) const;
 };
 
 }  // namespace ntc
