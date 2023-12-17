@@ -43,11 +43,15 @@ class DataAccess {
   [[nodiscard]] std::optional<netdesign2::Message> getSavedMessage(
       const int &sender_id, const int &receiver_id, const int &internal_id);
 
+  [[nodiscard]] std::optional<netdesign2::File> getFile(const int &id);
+
   bool createUser(const User &u);
 
   bool createGroup(const Group &g);
 
   bool createSavedMessage(const netdesign2::Message &m);
+
+  bool createFile(const netdesign2::File &f);
 
  private:
   SQLite::Database db_;

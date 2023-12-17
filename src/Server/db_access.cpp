@@ -77,6 +77,21 @@ namespace ntc {
   return {};
 }
 
+[[nodiscard]] std::optional<netdesign2::File> DataAccess::getFile(
+    const int &id) {
+  SQLite::Statement query(db_, "SELECT * FROM files WHERE file_id = ?");
+  query.bind(1, id);
+  if (query.executeStep()) {
+    netdesign2::File f;
+    // TODO: ID?
+    // TODO: read content from disk?
+    // TODO: hash? should from client side...
+    f.set_name(query.getColumn("filename").getString());
+    return f;
+  }
+  return {};
+}
+
 // Id is auto-incremented
 bool DataAccess::createUser(const User &u) {
   SQLite::Statement query(db_,
@@ -107,6 +122,13 @@ bool DataAccess::createSavedMessage(const netdesign2::Message &m) {
   query.bind(5, static_cast<int>(m.message().type()));
   query.bind(6, m.internalid());
   query.bind(7, m.timestamp());
+  return query.exec() == 1;
+}
+
+// Id is auto-incremented
+bool DataAccess::createFile(const netdesign2::File &f) {
+  SQLite::Statement query(db_, "INSERT INTO files (filename) VALUES (?)");
+  query.bind(1, f.name());
   return query.exec() == 1;
 }
 
