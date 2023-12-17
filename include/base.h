@@ -1,6 +1,15 @@
 #ifndef _BASE_H
 #define _BASE_H
+
+// Public headers
+#include <memory>
+#include <optional>
+#include <stdexcept>
 #include <string>
+#include <unordered_map>
+#include <vector>
+
+// 常量定义
 namespace ntc {
 static const int kvEmpty = 0;
 

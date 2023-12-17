@@ -2,6 +2,8 @@
 
 namespace ntc {
 
+/* Users */
+
 [[nodiscard]] std::optional<User> DataAccess::getUser(
     std::string_view username) {
   SQLite::Statement query(db_, "SELECT * FROM users WHERE username = ?");
@@ -27,6 +29,21 @@ namespace ntc {
   return {};
 }
 
+// Return with RVO
+[[nodiscard]] std::vector<User> DataAccess::getAllUsers() {
+  std::vector<User> users;
+  SQLite::Statement query(db_, "SELECT * FROM users");
+  while (query.executeStep()) {
+    User u(query.getColumn("user_id").getInt(),
+           query.getColumn("username").getString(),
+           query.getColumn("password").getString());
+    users.push_back(u);
+  }
+  return users;
+}
+
+/* Groups */
+
 [[nodiscard]] std::optional<Group> DataAccess::getGroup(std::string_view name) {
   SQLite::Statement query(db_, "SELECT * FROM groups WHERE group_name = ?");
   query.bind(1, name.data());
@@ -48,6 +65,19 @@ namespace ntc {
   }
   return {};
 }
+
+[[nodiscard]] std::vector<Group> DataAccess::getAllGroups() {
+  std::vector<Group> groups;
+  SQLite::Statement query(db_, "SELECT * FROM groups");
+  while (query.executeStep()) {
+    Group g(query.getColumn("group_id").getInt(),
+            query.getColumn("group_name").getString());
+    groups.push_back(g);
+  }
+  return groups;
+}
+
+/* Messages */
 
 [[nodiscard]] std::optional<netdesign2::Message> DataAccess::getSavedMessage(
     const int &sender_id, const int &receiver_id, const int &internal_id) {

@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 #include "group.h"
-#include "logging.h"
+#include "utils/logging.h"
 #include "proto/messages.pb.h"
 #include "user.h"
 
@@ -36,9 +36,19 @@ class DataAccess {
 
   [[nodiscard]] std::optional<User> getUser(const int &id);
 
+  [[nodiscard]] std::vector<User> getAllUsers();
+
   [[nodiscard]] std::optional<Group> getGroup(std::string_view name);
 
   [[nodiscard]] std::optional<Group> getGroup(const int &id);
+
+  [[nodiscard]] std::vector<Group> getAllGroups(); 
+
+  // Not implemented
+  [[nodiscard]] std::vector<Group> getUserGroups(const int &user_id);
+
+  // Not implemented
+  [[nodiscard]] std::vector<User> getGroupUsers(const int &group_id);
 
   [[nodiscard]] std::optional<netdesign2::Message> getSavedMessage(
       const int &sender_id, const int &receiver_id, const int &internal_id);

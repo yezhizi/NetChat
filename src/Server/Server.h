@@ -6,15 +6,18 @@
 #include <mutex>
 #include <unordered_map>
 
-#include "crypto_utils.h"
-#include "logging.h"
+#include "base.h"
 #include "message.h"
+#include "utils/crypto.h"
+#include "utils/logging.h"
 #include "van.h"
 
 // libsodium init
 namespace ntc {
 
 class Server {
+  using Packet = netdesign2::Packet;
+
   friend class UM;
 
  private:
@@ -36,8 +39,9 @@ class Server {
   Server() { this->Init(); }
   Server(const Server &) = delete;
   Server &operator=(const Server &) = delete;
+
   // 将具体的消息打包成packet
-  static void packtoPacket(PacketType ptype, google::protobuf::Message &content,
+  static void packToPacket(PacketType ptype, google::protobuf::Message &content,
                            Packet &packet) {
     packet.set_packetid(static_cast<int>(ptype));
     google::protobuf::Any *content_ = packet.mutable_content();

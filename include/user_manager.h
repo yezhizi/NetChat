@@ -1,13 +1,13 @@
 #ifndef _USER_MANNAER_H
 #define _USER_MANNAER_H
-// TODO UM类，提供数据库接口，存放用户信息（账号、密码、昵称）、缓存消息
+// TODO UM类，缓存消息
 // 连接管理，用户与socket的映射,直接存内存
 #include <memory>
 #include <string>
 #include <unordered_map>
 
-#include "db_access.h"
 #include "Server.h"
+#include "db_access.h"
 
 namespace ntc {
 
@@ -42,8 +42,10 @@ class UM {
 
   // TODO 在表中找到对应的长连接socket
   int getLongLifeSocket(const std::string &user_id) { return 0; }
+
   // TODO 在表中设置对应的长连接socket
   int setLongLifeSocket(const std::string &user_id, int fd) { return 0; }
+
   // 临时连接池
   // 设置对应的临时连接socket  ipport -> fd threadsafe
   void setRevcSocketMp(const std::string &ipport, int fd) {
@@ -64,6 +66,7 @@ class UM {
       return "";
     }
   }
+  
   // 消息
 
   /////////////////////////////////////////////////////////////////////////

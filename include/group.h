@@ -1,7 +1,7 @@
 #ifndef GROUP_H
 #define GROUP_H
 
-#include "user.h"
+#include "base.h"
 
 namespace ntc {
 class Group {

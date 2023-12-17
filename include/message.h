@@ -4,16 +4,8 @@
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/message.h>
 
-#include <memory>
-#include <string>
-#include <unordered_map>
-
-#include "base.h"
 #include "proto/messages.pb.h"
-#include "user.h"
 namespace ntc {
-
-using namespace netdesign2;
 
 enum class PacketType {
   ServerStatusRequest = 0,

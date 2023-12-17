@@ -1,9 +1,6 @@
 #ifndef USER_H
 #define USER_H
 
-#include <memory>
-#include <string>
-
 #include "base.h"
 
 namespace ntc {

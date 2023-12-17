@@ -2,6 +2,7 @@
 
 #include "db_access.h"
 #include "server_van.h"
+
 namespace ntc {
 
 void Server::Init() {
@@ -15,15 +16,21 @@ void Server::Finalize() {
   delete this->_van;
   LOG(INFO) << "Server closed";
 }
+
 // 收到临时连接池的请求
 void Server::processRevcSocket(const int client_fd) const {
+  using namespace netdesign2;
   // TODO
   Packet pkt;
   this->_van->Recv(client_fd, &pkt);
-  int packet_id = pkt.packetid();
-  PacketType type = static_cast<PacketType>(packet_id);
-  LOG(INFO) << "Server received packet. id : " << packet_id;
-  Packet packet_back;
+
+  // 解析包
+  int pkt_id = pkt.packetid();
+  auto type = static_cast<PacketType>(pkt_id);
+  LOG(INFO) << "Server received packet. id : " << pkt_id;
+
+  // 生成回复包
+  Packet pkt_reply;
   switch (type) {
     case PacketType::ServerStatusRequest: {
       // ServerStatusRequest
@@ -31,8 +38,8 @@ void Server::processRevcSocket(const int client_fd) const {
       response.set_online(true);
       response.set_registrable(false);
 
-      Server::packtoPacket(PacketType::ServerStatusResponse, response,
-                           packet_back);
+      Server::packToPacket(PacketType::ServerStatusResponse, response,
+                           pkt_reply);
       break;
     }
     case PacketType::ServerStatusUpdateRequest: {
@@ -42,20 +49,21 @@ void Server::processRevcSocket(const int client_fd) const {
       response.set_online(true);
       response.set_registrable(false);
 
-      this->packtoPacket(PacketType::ServerStatusUpdateResponse, response,
-                         packet_back);
+      this->packToPacket(PacketType::ServerStatusUpdateResponse, response,
+                         pkt_reply);
       break;
     }
     case PacketType::LoginPreRequest: {
       // LoginResponse
       LoginPreRequest request;
       pkt.content().UnpackTo(&request);
+
       std::string username = request.username();
       LOG(INFO) << "Server received LoginPreRequest"
                 << " username: " << username;
 
       LoginPreResponse response;
-      std::string challenge = ntc::genChallenge();
+      std::string challenge = utils::crypto::genChallenge();
       bool ret = UM::Get()->setChallengeMp(username, challenge);
       if (!ret) {
         // 发现用户未注册
@@ -64,7 +72,7 @@ void Server::processRevcSocket(const int client_fd) const {
       } else {
         response.set_challenge(challenge);
       }
-      this->packtoPacket(PacketType::LoginPreResponse, response, packet_back);
+      this->packToPacket(PacketType::LoginPreResponse, response, pkt_reply);
       LOG(INFO) << "Server sent LoginPreResponse";
       break;
     }
@@ -83,7 +91,7 @@ void Server::processRevcSocket(const int client_fd) const {
         LOG(INFO) << "User not found. username: " << username;
         response.set_logined(false);
         response.set_token("illegal user");
-        this->packtoPacket(PacketType::LoginResponse, response, packet_back);
+        this->packToPacket(PacketType::LoginResponse, response, pkt_reply);
         break;
       }
 
@@ -93,13 +101,13 @@ void Server::processRevcSocket(const int client_fd) const {
       // 计算(pass.sha256+challenge).sha256
       std::string hashPassword = request.hashpassword();
       std::string pass_challenge_sha256 =
-          ntc::SHA256(user.getPassword() + challenge);
+          utils::crypto::SHA256(user.getPassword() + challenge);
       // 比较
       if (pass_challenge_sha256 == hashPassword) {
         // 登录成功
         // 重复登录问题
         response.set_logined(true);
-        std::string token = ntc::genToken();
+        std::string token = utils::crypto::genToken();
         response.set_token(token);
         //  设置用户信息
         UM::Get()->setKeepaliveSocketMp(username, client_fd, token);
@@ -109,7 +117,7 @@ void Server::processRevcSocket(const int client_fd) const {
         response.set_logined(false);
         response.set_token("wrong password");
       }
-      this->packtoPacket(PacketType::LoginResponse, response, packet_back);
+      this->packToPacket(PacketType::LoginResponse, response, pkt_reply);
       LOG(INFO) << "Server sent LoginResponse"
                 << " logined: " << response.logined()
                 << " token: " << response.token();
@@ -137,32 +145,38 @@ void Server::processRevcSocket(const int client_fd) const {
       // ServerAckResponse
       ServerAckResponse response;
       LOG(INFO) << "Server sent ServerAckResponse";
-      this->packtoPacket(PacketType::ServerAckResponse, response, packet_back);
+      this->packToPacket(PacketType::ServerAckResponse, response, pkt_reply);
       // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
       UM::Get()->setKeepaliveSocketMp(username, client_fd, request.token());
+
       // 发送联系人列表
       ContactListRequest contact_list_request;
-      // TODO: 获取联系人列表
-      Contact contact;
-      contact.set_id(111);
-      contact.set_name("test");
-      contact.set_online(true);
-      contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
-      contact_list_request.add_contacts()->CopyFrom(contact);
 
-      this->packtoPacket(PacketType::ContactListRequest, contact_list_request,
-                         packet_back);
-      this->_van->addSendTask(client_fd, packet_back);
+      // 获取联系人列表
+      auto users = g_db->getAllUsers();
+      for (auto u : users) {
+        Contact contact;
+        contact.set_id(u.getId());
+        contact.set_name(u.getUsername());
+        contact.set_online(true);
+        contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
+
+        contact_list_request.add_contacts()->CopyFrom(contact);
+      }
+
+      this->packToPacket(PacketType::ContactListRequest, contact_list_request,
+                         pkt_reply);
+      this->_van->addSendTask(client_fd, pkt_reply);
 
       break;
     }
   }
-  if (!packet_back.has_content()) {
+  if (!pkt_reply.has_content()) {
     LOG(INFO) << "Unknown message";
     return;
   }
 
-  int ret = this->_van->Send(packet_back, client_fd);
+  int ret = this->_van->Send(pkt_reply, client_fd);
 
   if (ret < 0) {
     // 发送失败
@@ -170,6 +184,6 @@ void Server::processRevcSocket(const int client_fd) const {
     this->_van->Control(client_fd, "EPOLL_DEL_FD");
     this->_van->Control(client_fd, "CLOSE_FD");
   }
-  LOG(INFO) << "Server sent packet. id : " << packet_back.packetid();
+  LOG(INFO) << "Server sent packet. id : " << pkt_reply.packetid();
 }
 }  // namespace ntc

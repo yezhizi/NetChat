@@ -2,7 +2,7 @@
 #include <thread>
 
 #include "Server.h"
-#include "logging.h"
+#include "utils/logging.h"
 #include "user_manager.h"
 
 INITIALIZE_EASYLOGGINGPP
