@@ -36,13 +36,6 @@ enum class PacketType {
   ChannelHeartRequest = 17
 };
 
-class Message {
- public:
-  const User& sender;
-  const User& receiver;
-  std::string content;
-};
-
 }  // namespace ntc
 
 #endif

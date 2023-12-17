@@ -5,9 +5,11 @@
 
 #include <memory>
 #include <optional>
+#include <stdexcept>
 
 #include "group.h"
 #include "logging.h"
+#include "proto/messages.pb.h"
 #include "user.h"
 
 namespace ntc {
@@ -37,6 +39,15 @@ class DataAccess {
   [[nodiscard]] std::optional<Group> getGroup(std::string_view name);
 
   [[nodiscard]] std::optional<Group> getGroup(const int &id);
+
+  [[nodiscard]] std::optional<netdesign2::Message> getSavedMessage(
+      const int &sender_id, const int &receiver_id, const int &internal_id);
+
+  bool createUser(const User &u);
+
+  bool createGroup(const Group &g);
+
+  bool createSavedMessage(const netdesign2::Message &m);
 
  private:
   SQLite::Database db_;

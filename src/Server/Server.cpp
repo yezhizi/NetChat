@@ -1,6 +1,6 @@
 #include "Server.h"
-#include "db_access.h"
 
+#include "db_access.h"
 #include "server_van.h"
 namespace ntc {
 
@@ -18,9 +18,9 @@ void Server::Finalize() {
 // 收到临时连接池的请求
 void Server::processRevcSocket(const int client_fd) const {
   // TODO
-  Packet msg;
-  this->_van->Recv(client_fd, &msg);
-  int packet_id = msg.packetid();
+  Packet pkt;
+  this->_van->Recv(client_fd, &pkt);
+  int packet_id = pkt.packetid();
   PacketType type = static_cast<PacketType>(packet_id);
   LOG(INFO) << "Server received packet. id : " << packet_id;
   Packet packet_back;
@@ -49,7 +49,7 @@ void Server::processRevcSocket(const int client_fd) const {
     case PacketType::LoginPreRequest: {
       // LoginResponse
       LoginPreRequest request;
-      msg.content().UnpackTo(&request);
+      pkt.content().UnpackTo(&request);
       std::string username = request.username();
       LOG(INFO) << "Server received LoginPreRequest"
                 << " username: " << username;
@@ -73,7 +73,7 @@ void Server::processRevcSocket(const int client_fd) const {
       LoginRequest request;
       LoginResponse response;
 
-      msg.content().UnpackTo(&request);
+      pkt.content().UnpackTo(&request);
 
       // 判断用户是否存在
       std::string username = request.username();
@@ -119,7 +119,7 @@ void Server::processRevcSocket(const int client_fd) const {
     case PacketType::SetupChannelRequest: {
       // SetupChannelResponse
       SetupChannelRequest request;
-      msg.content().UnpackTo(&request);
+      pkt.content().UnpackTo(&request);
       LOG(INFO) << "Server received SetupChannelRequest"
                 << " token: " << request.token();
       // 获取用户信息 token->username->fd
