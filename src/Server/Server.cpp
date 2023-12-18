@@ -67,8 +67,11 @@ void Server::processRecvSocket(const int client_fd) const {
       // 判断用户是否存在
       auto result = g_db->getUser(username);
       if (!result.has_value()) {
+        // 用户不存在
         LOG(INFO) << "User not registered. username: " << username;
         response.set_challenge("");
+        this->packToPacket(PacketType::LoginPreResponse, response, pkt_reply);
+        break;
       }
 
       auto user = std::move(result.value());
