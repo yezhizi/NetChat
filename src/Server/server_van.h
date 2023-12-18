@@ -104,7 +104,7 @@ class ServerVan : public Van {
     while (true) {
       struct epoll_event events[MAX_EVENTS];
       int num_events = epoll_wait(this->epoll_fd_, events, MAX_EVENTS, -1);
-
+      LOG(DEBUG) << "epoll_wait return " << num_events;
       for (int i = 0; i < num_events; ++i) {
         if (events[i].data.fd == this->_socket) {
           // process new connection
@@ -141,10 +141,10 @@ class ServerVan : public Van {
               << "epoll_ctl add client socket failed";
         } else {
           // the client socket is ready to read, add to the queue
-          CLOG(DEBUG, "Van")
-              << "client socket ready to read :" << events[i].data.fd;
           if (events[i].events & EPOLLIN)
-            this->RecvSocketQueue_.Push(events[i].data.fd);
+            CLOG(DEBUG, "Van")
+                << "client socket ready to read :" << events[i].data.fd;
+          this->RecvSocketQueue_.Push(events[i].data.fd);
         }
       }
     }
@@ -160,9 +160,16 @@ class ServerVan : public Van {
     msg.SerializeToArray(buf, ntc::kMaxMessageSize);
     int len = msg.ByteSizeLong();
     while (bytes < len) {
-      int size_send = send(fd, buf + bytes, len - bytes, 0);
+      int size_send = send(fd, buf + bytes, len - bytes, MSG_NOSIGNAL);
       if (size_send < 0) {
-        CLOG(ERROR, "Van") << "send message failed";
+        if (errno == EPIPE) {
+          // 远程主机关闭
+          // 让server van epoll_ctl删除对应的监听事件,并关闭socket
+          // this->Control(fd, "EPOLL_DEL_FD");
+          // this->Control(fd, "CLOSE_FD");
+          
+        }
+        CLOG(WARNING, "Van") << "send message failed";
         return -1;
       } else {
         bytes += size_send;

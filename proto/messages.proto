@@ -59,7 +59,7 @@ message Contact {
   bool online = 3;
   ContactType type = 4;
   repeated Contact members = 5; // optional, only if type is GROUP
-  optional int32 header = 6;
+  int32 header = 6;
 
   enum ContactType {
     FRIEND = 0;
