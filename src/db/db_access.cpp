@@ -151,12 +151,22 @@ namespace ntc {
 
 // Id is auto-incremented
 bool DataAccess::createUser(const User &u) {
-  SQLite::Statement query(db_,
-                          "INSERT INTO users (username, password) VALUES "
-                          "(?, ?)");
-  query.bind(1, u.getUsername());
-  query.bind(2, u.getPassword());
-  return query.exec() == 1;
+  auto n = u.getUsername();
+  auto p = u.getPassword();
+  bool ret = false;
+
+  try {
+    SQLite::Statement query(db_,
+                            "INSERT INTO users (username, password) VALUES "
+                            "(?, ?)");
+    query.bind(1, n);
+    query.bind(2, p);
+    ret = query.exec();
+  } catch (const std::exception &e) {
+    LOG(ERROR) << "Exception: " << e.what();
+  }
+
+  return ret;
 }
 
 // Id is auto-incremented

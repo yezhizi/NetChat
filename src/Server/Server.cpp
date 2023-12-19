@@ -53,9 +53,37 @@ void Server::processRecvSocket(const int client_fd) const {
                          pkt_reply);
       break;
     }
+    case PacketType::RegisterRequest: {
+      // RegisterRequest
+      // reply: RegisterResponse
+      RegisterRequest request;
+      RegisterResponse response;
+
+      auto n = std::move(request.username());
+      auto p = std::move(request.rawpassword());
+
+      if (n.length() < 3 || n.length() > 32) {
+        LOG(INFO) << "illegal username" << n;
+        response.set_success(false);
+        this->packToPacket(PacketType::RegisterResponse, response, pkt_reply);
+        break;
+      }
+
+      if (p.length() < 6 || p.length() > 32) {
+        LOG(INFO) << "illegal password" << p;
+        response.set_success(false);
+        this->packToPacket(PacketType::RegisterResponse, response, pkt_reply);
+        break;
+      }
+
+      User u{0, n, p};
+      auto success = g_db->createUser(u);
+      response.set_success(success);
+      this->packToPacket(PacketType::RegisterResponse, response, pkt_reply);
+    }
     case PacketType::LoginPreRequest: {
       // LoginPreRequest 用户请求登录前的 challenge
-      // reply LoginPreResponse
+      // reply: LoginPreResponse
       LoginPreRequest request;
       LoginPreResponse response;
 
@@ -160,9 +188,10 @@ void Server::processRecvSocket(const int client_fd) const {
       // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
       UM::Get()->setKeepaliveSocketMp(uid, client_fd, request.token());
 
-      //TODO 先不发送长连接消息,后面再改加. 在这里写会导致Ack还没发而先把联系人列表发了
-      // // 发送联系人列表
-      // ContactListRequest contact_list_request;
+      // TODO 先不发送长连接消息,后面再改加.
+      // 在这里写会导致Ack还没发而先把联系人列表发了
+      //  // 发送联系人列表
+      //  ContactListRequest contact_list_request;
 
       // // 获取联系人列表
       // auto users = g_db->getAllUsers();
@@ -176,7 +205,8 @@ void Server::processRecvSocket(const int client_fd) const {
       //   contact_list_request.add_contacts()->CopyFrom(contact);
       // }
 
-      // this->packToPacket(PacketType::ContactListRequest, contact_list_request,
+      // this->packToPacket(PacketType::ContactListRequest,
+      // contact_list_request,
       //                    pkt_reply);
       // this->_van->addSendTask(client_fd, pkt_reply);
 
@@ -237,6 +267,33 @@ void Server::processRecvSocket(const int client_fd) const {
       response.mutable_message()->CopyFrom(reply_msg.value());
       this->packToPacket(PacketType::SendMessageResponse, response, pkt_reply);
       break;
+    }
+    case PacketType::ContactMessageRequest: {
+      // 用户拉取最新的消息
+      // reply: ContactMessageResponse
+      ContactMessageRequest request;
+      ContactMessageResponse response;
+      pkt.content().UnpackTo(&request);
+
+      auto token = request.token();
+      auto uid = UM::Get()->getUserIdByToken(token);
+
+      auto result = g_db->getMessage(uid, request.id(), request.internalid());
+      if (!result.has_value()) {
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::ContactMessageResponse, response,
+                           pkt_reply);
+        break;
+      }
+
+      response.mutable_message()->CopyFrom(result.value());
+      this->packToPacket(PacketType::ContactMessageResponse, response,
+                         pkt_reply);
+    }
+    case PacketType::DeleteMessageRequest: {
+      // Ignored
+      LOG(WARNING) << "DeleteMsgReq is ignored";
+      return;
     }
     default:  // 未知消息
       LOG(INFO) << "Unknown message";
