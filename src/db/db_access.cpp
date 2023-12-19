@@ -139,6 +139,7 @@ bool DataAccess::createGroup(const Group &g) {
 }
 
 // Id is auto-incremented
+// TODO: Change param to RawMsg and return created id
 bool DataAccess::createSavedMessage(const netdesign2::Message &m) {
   SQLite::Statement query(
       db_,
