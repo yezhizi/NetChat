@@ -181,7 +181,7 @@ message FileDownloadResponse {
 //packet id = 22 client packet
 message RegisterRequest {
   string username = 1;
-  string rawPassword = 2;
+  string rawPassword = 2; // not that raw password! Raw means without salt. It's actually hashed. 
 }
 
 //packet id = 23 server packet
