@@ -79,7 +79,7 @@ namespace ntc {
 
 /* Messages */
 
-[[nodiscard]] std::optional<netdesign2::Message> DataAccess::getSavedMessage(
+[[nodiscard]] std::optional<netdesign2::Message> DataAccess::getMessage(
     const int &sender_id, const int &receiver_id, const int &internal_id) {
   SQLite::Statement query(db_,
                           "SELECT * FROM messages WHERE sender_id = ? "
@@ -104,6 +104,34 @@ namespace ntc {
     return m;
   }
   return {};
+}
+
+// Get all messages betweet sender and recver
+[[nodiscard]] std::vector<netdesign2::Message> DataAccess::getAllMessages(
+    const int &sender_id, const int &receiver_id) {
+  std::vector<netdesign2::Message> msgs;
+  SQLite::Statement query(db_,
+                          "SELECT * FROM messages WHERE sender_id = ? "
+                          "AND receiver_id = ?");
+  query.bind(1, sender_id);
+  query.bind(2, receiver_id);
+  while (query.executeStep()) {
+    netdesign2::Message m;
+
+    m.mutable_message()->set_from(query.getColumn("sender_id").getInt());
+    m.mutable_message()->set_to(query.getColumn("receiver_id").getInt());
+    m.mutable_message()->set_content(query.getColumn("content").getString());
+    m.mutable_message()->set_type(
+        static_cast<netdesign2::MessageType>(query.getColumn("type").getInt()));
+
+    m.set_id(query.getColumn("message_id").getInt());
+    m.set_internalid(query.getColumn("internal_id").getInt());
+    m.set_timestamp(query.getColumn("timestamp").getInt());
+
+    msgs.push_back(m);
+  }
+
+  return msgs;
 }
 
 [[nodiscard]] std::optional<netdesign2::File> DataAccess::getFile(
@@ -138,20 +166,56 @@ bool DataAccess::createGroup(const Group &g) {
   return query.exec() == 1;
 }
 
-// Id is auto-incremented
-// TODO: Change param to RawMsg and return created id
-bool DataAccess::createSavedMessage(const netdesign2::Message &m) {
+std::optional<int> DataAccess::createMsg(const netdesign2::Message &m) {
+  // Id is auto-incremented
   SQLite::Statement query(
       db_,
-      "INSERT INTO messages (sender_id, receiver_id, content, hash, type, "
-      "internal_id, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)");
+      "INSERT INTO messages (sender_id, receiver_id, content, type, "
+      "internal_id, timestamp) VALUES (?, ?, ?, ?, ?, ?)");
   query.bind(1, m.message().from());
   query.bind(2, m.message().to());
   query.bind(3, m.message().content());
-  query.bind(5, static_cast<int>(m.message().type()));
-  query.bind(6, m.internalid());
-  query.bind(7, m.timestamp());
-  return query.exec() == 1;
+  query.bind(4, static_cast<int>(m.message().type()));
+  query.bind(5, m.internalid());
+  query.bind(6, m.timestamp());
+  if (query.exec() == 1) {
+    return db_.getLastInsertRowid();
+  }
+  return {};
+}
+
+std::optional<netdesign2::Message> DataAccess::createMsgByRawMsg(
+    const netdesign2::RawMessage &m) {
+  // make a message
+  netdesign2::Message msg;
+  msg.mutable_message()->set_from(m.from());
+  msg.mutable_message()->set_to(m.to());
+  msg.mutable_message()->set_content(m.content());
+  msg.mutable_message()->set_type(m.type());
+
+  // get existing msgs between sender and receiver
+  // find the max internal id
+  auto msgs = getAllMessages(m.from(), m.to());
+  int max_internal_id = 0;
+  for (const auto &msg : msgs) {
+    if (msg.internalid() > max_internal_id) {
+      max_internal_id = msg.internalid();
+    }
+  }
+  msg.set_internalid(max_internal_id + 1);
+
+  // set current unix timestamp
+  msg.set_timestamp(utils::misc::getTimestamp());
+
+  // save to db and get the id
+  auto result = createMsg(msg);
+  if (result.has_value()) {
+    // set id and return
+    msg.set_id(result.value());
+    return msg;
+  }
+
+  return {};
 }
 
 // Id is auto-incremented

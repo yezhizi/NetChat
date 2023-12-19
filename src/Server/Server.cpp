@@ -208,6 +208,9 @@ void Server::processRecvSocket(const int client_fd) const {
       if (uid != sender_id) {
         // token error, ignore
         LOG(INFO) << "Unmatched userId and token. user id: " << uid;
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::SendMessageResponse, response,
+                           pkt_reply);
         break;
       }
 
@@ -216,13 +219,30 @@ void Server::processRecvSocket(const int client_fd) const {
       if (!receiver.has_value()) {
         // receiver not exists
         LOG(INFO) << "Receiver not exists. receiver id: " << receiver_id;
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::SendMessageResponse, response,
+                           pkt_reply);
         break;
       }
 
-      // save message to db
-      // auto result = g_db->createSavedMessage(message);
+      // create a new message
+      auto reply_msg = g_db->createMsgByRawMsg(message);
+      if (!reply_msg.has_value()) {
+        // create message failed
+        LOG(INFO) << "Create message failed. sender id: " << sender_id
+                  << " receiver id: " << receiver_id;
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::SendMessageResponse, response,
+                           pkt_reply);
+        break;
+      }
 
+      // TODO: notify receiver
+      // implement here...
 
+      // respond to sender
+      response.mutable_message()->CopyFrom(reply_msg.value());
+      this->packToPacket(PacketType::SendMessageResponse, response, pkt_reply);
       break;
     }
     default:  // 未知消息

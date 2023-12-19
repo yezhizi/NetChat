@@ -3,6 +3,7 @@
 
 #include <SQLiteCpp/SQLiteCpp.h>
 
+#include <chrono>
 #include <memory>
 #include <optional>
 #include <stdexcept>
@@ -11,6 +12,7 @@
 #include "proto/messages.pb.h"
 #include "user.h"
 #include "utils/logging.h"
+#include "utils/misc.h"
 
 namespace ntc {
 /* 数据库访问类 */
@@ -50,10 +52,10 @@ class DataAccess {
   // Not implemented
   [[nodiscard]] std::vector<User> getGroupUsers(const int &group_id);
 
-  [[nodiscard]] std::optional<netdesign2::Message> getSavedMessage(
+  [[nodiscard]] std::optional<netdesign2::Message> getMessage(
       const int &sender_id, const int &receiver_id, const int &internal_id);
 
-  [[nodiscard]] std::vector<netdesign2::Message> getAllSavedMessage(
+  [[nodiscard]] std::vector<netdesign2::Message> getAllMessages(
       const int &sender_id, const int &receiver_id);
 
   [[nodiscard]] std::optional<netdesign2::File> getFile(const int &id);
@@ -62,7 +64,11 @@ class DataAccess {
 
   bool createGroup(const Group &g);
 
-  bool createSavedMessage(const netdesign2::Message &m);
+  // Create a message in DB and return its id
+  std::optional<int> createMsg(const netdesign2::Message &m);
+
+  // Create a message in DB by raw message
+  std::optional<netdesign2::Message> createMsgByRawMsg(const netdesign2::RawMessage &m);
 
   bool createFile(const netdesign2::File &f);
 
