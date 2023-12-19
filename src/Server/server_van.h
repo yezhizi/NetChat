@@ -145,8 +145,8 @@ class ServerVan : public Van {
             CLOG(DEBUG, "Van")
                 << "client socket ready to read :" << events[i].data.fd;
             this->RecvSocketQueue_.Push(events[i].data.fd);
-          }else {
-            //连接断开事件
+          } else {
+            // 连接断开事件
             CLOG(INFO, "Van") << "client socket disconnected";
             this->Control(events[i].data.fd, "EPOLL_DEL_FD");
             this->Control(events[i].data.fd, "CLOSE_FD");
@@ -207,8 +207,9 @@ class ServerVan : public Van {
         }
       }
     }
-    msg->ParseFromArray(buf, bytes);
-
+    bool ret = msg->ParseFromArray(buf, bytes);
+    if (!ret) return -1;
+    CLOG(DEBUG, "Van") << "recieve bytes: " << bytes;
     return bytes;
   }
 

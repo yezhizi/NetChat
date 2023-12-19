@@ -22,7 +22,8 @@ void Server::processRecvSocket(const int client_fd) const {
   using namespace netdesign2;
   // TODO
   Packet pkt;
-  this->_van->Recv(client_fd, &pkt);
+  int pkt_bytes = this->_van->Recv(client_fd, &pkt);
+  if (pkt_bytes < 0) return;
 
   // 解析包
   int pkt_id = pkt.packetid();
@@ -36,7 +37,7 @@ void Server::processRecvSocket(const int client_fd) const {
       // ServerStatusRequest
       ServerStatusResponse response;
       response.set_online(true);
-      response.set_registrable(false);
+      response.set_registrable(true);
 
       Server::packToPacket(PacketType::ServerStatusResponse, response,
                            pkt_reply);
@@ -47,7 +48,7 @@ void Server::processRecvSocket(const int client_fd) const {
       LOG(INFO) << "Server received ServerStatusUpdateRequest";
       ServerStatusUpdateResponse response;
       response.set_online(true);
-      response.set_registrable(false);
+      response.set_registrable(true);
 
       this->packToPacket(PacketType::ServerStatusUpdateResponse, response,
                          pkt_reply);
@@ -59,27 +60,33 @@ void Server::processRecvSocket(const int client_fd) const {
       RegisterRequest request;
       RegisterResponse response;
 
+      pkt.content().UnpackTo(&request);
+
       auto n = std::move(request.username());
       auto p = std::move(request.rawpassword());
 
+      bool is_success = true;
+
       if (n.length() < 3 || n.length() > 32) {
         LOG(INFO) << "illegal username" << n;
-        response.set_success(false);
-        this->packToPacket(PacketType::RegisterResponse, response, pkt_reply);
-        break;
+        is_success = false;
       }
 
       if (p.length() < 6 || p.length() > 32) {
         LOG(INFO) << "illegal password" << p;
-        response.set_success(false);
-        this->packToPacket(PacketType::RegisterResponse, response, pkt_reply);
-        break;
+        is_success = false;
       }
 
-      User u{0, n, p};
-      auto success = g_db->createUser(u);
-      response.set_success(success);
+      if (is_success) {
+        // the username and pass is legal
+        User u{0, n, utils::crypto::SHA256(p)};
+        is_success = g_db->createUser(u); // is user creation sccess
+      }
+
+      response.set_success(is_success);
       this->packToPacket(PacketType::RegisterResponse, response, pkt_reply);
+
+      break;
     }
     case PacketType::LoginPreRequest: {
       // LoginPreRequest 用户请求登录前的 challenge
