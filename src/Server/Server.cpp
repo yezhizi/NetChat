@@ -67,19 +67,18 @@ void Server::processRecvSocket(const int client_fd) const {
       // 判断用户是否存在
       auto result = g_db->getUser(username);
       if (!result.has_value()) {
-        // 用户不存在
+        // User 不存在
         LOG(INFO) << "User not registered. username: " << username;
         response.set_challenge("");
-        this->packToPacket(PacketType::LoginPreResponse, response, pkt_reply);
-        break;
+      } else {
+        // User 存在
+        auto user = std::move(result.value());
+
+        // 生成 challenge
+        std::string challenge = utils::crypto::genChallenge();
+        UM::Get()->setChallengeMp(user.getId(), challenge);
+        response.set_challenge(challenge);
       }
-
-      auto user = std::move(result.value());
-
-      // 生成 challenge
-      std::string challenge = utils::crypto::genChallenge();
-      UM::Get()->setChallengeMp(user.getId(), challenge);
-      response.set_challenge(challenge);
 
       // 写入回复包
       this->packToPacket(PacketType::LoginPreResponse, response, pkt_reply);
@@ -187,14 +186,56 @@ void Server::processRecvSocket(const int client_fd) const {
       // User request to send message
       // reply: SendMessageResponse
       SendMessageRequest request;
+      SendMessageResponse response;
       pkt.content().UnpackTo(&request);
-      
+
       // 获取用户信息 token->uid
       auto token = request.token();
       auto uid = UM::Get()->getUserIdByToken(token);
 
-      // Not implemented...
+      // 获取消息信息
+      auto message = request.message();
+      auto sender_id = message.from();
+      auto receiver_id = message.to();
 
+      if (uid != sender_id) {
+        // token error, ignore
+        LOG(INFO) << "Unmatched userId and token. user id: " << uid;
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::SendMessageResponse, response,
+                           pkt_reply);
+        break;
+      }
+
+      // check receiver_id exists
+      auto receiver = g_db->getUser(receiver_id);
+      if (!receiver.has_value()) {
+        // receiver not exists
+        LOG(INFO) << "Receiver not exists. receiver id: " << receiver_id;
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::SendMessageResponse, response,
+                           pkt_reply);
+        break;
+      }
+
+      // create a new message
+      auto reply_msg = g_db->createMsgByRawMsg(message);
+      if (!reply_msg.has_value()) {
+        // create message failed
+        LOG(INFO) << "Create message failed. sender id: " << sender_id
+                  << " receiver id: " << receiver_id;
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::SendMessageResponse, response,
+                           pkt_reply);
+        break;
+      }
+
+      // TODO: notify receiver
+      // implement here...
+
+      // respond to sender
+      response.mutable_message()->CopyFrom(reply_msg.value());
+      this->packToPacket(PacketType::SendMessageResponse, response, pkt_reply);
       break;
     }
     default:  // 未知消息
