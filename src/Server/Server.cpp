@@ -238,6 +238,26 @@ void Server::processRecvSocket(const int client_fd) const {
       this->packToPacket(PacketType::SendMessageResponse, response, pkt_reply);
       break;
     }
+    case PacketType::ContactMessageRequest: {
+      // 用户拉取最新的消息
+      // reply: ContactMessageResponse
+      ContactMessageRequest request; 
+      ContactMessageResponse response; 
+      pkt.content().UnpackTo(&request);
+      
+      auto token = request.token();
+      auto uid = UM::Get()->getUserIdByToken(token);
+
+      auto result = g_db->getMessage(uid, request.id(), request.internalid());
+      if (!result.has_value()) {
+        response.mutable_message()->set_id(-1);
+        this->packToPacket(PacketType::ContactMessageResponse, response, pkt_reply);
+        break;
+      }
+
+      response.mutable_message()->CopyFrom(result.value());
+      this->packToPacket(PacketType::ContactMessageResponse, response, pkt_reply);
+    }
     default:  // 未知消息
       LOG(INFO) << "Unknown message";
       return;
