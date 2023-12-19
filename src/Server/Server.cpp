@@ -118,7 +118,6 @@ void Server::processRecvSocket(const int client_fd) const {
       // 比较
       if (pass_challenge_sha256 == hashPassword) {
         // 登录成功
-        // TODO: 重复登录问题 ?
         std::string token = utils::crypto::genToken();
         response.set_logined(true);
         response.set_token(token);
@@ -151,13 +150,6 @@ void Server::processRecvSocket(const int client_fd) const {
       // 获取用户信息 token->userId->fd
       auto uid = UM::Get()->getUserIdByToken(request.token());
       int fd = UM::Get()->getfdByUserId(uid);
-      if (fd == -1 || fd != client_fd) {
-        // user not login or token error
-        LOG(INFO) << "User not login or token error. user id: " << uid;
-        this->_van->Control(client_fd, "EPOLL_DEL_FD");
-        this->_van->Control(client_fd, "CLOSE_FD");
-        break;
-      }
 
       //  1. 通知van取消对应的监听事件
       this->_van->Control(client_fd, "EPOLL_DEL_FD");
@@ -169,24 +161,25 @@ void Server::processRecvSocket(const int client_fd) const {
       // 2. 唤醒在长连接处的工作线程,给客户端发送一些消息(联系人...)
       UM::Get()->setKeepaliveSocketMp(uid, client_fd, request.token());
 
-      // 发送联系人列表
-      ContactListRequest contact_list_request;
+      //TODO 先不发送长连接消息,后面再改加. 在这里写会导致Ack还没发而先把联系人列表发了
+      // // 发送联系人列表
+      // ContactListRequest contact_list_request;
 
-      // 获取联系人列表
-      auto users = g_db->getAllUsers();
-      for (auto u : users) {
-        Contact contact;
-        contact.set_id(u.getId());
-        contact.set_name(u.getUsername());
-        contact.set_online(true);
-        contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
+      // // 获取联系人列表
+      // auto users = g_db->getAllUsers();
+      // for (auto u : users) {
+      //   Contact contact;
+      //   contact.set_id(u.getId());
+      //   contact.set_name(u.getUsername());
+      //   contact.set_online(true);
+      //   contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
 
-        contact_list_request.add_contacts()->CopyFrom(contact);
-      }
+      //   contact_list_request.add_contacts()->CopyFrom(contact);
+      // }
 
-      this->packToPacket(PacketType::ContactListRequest, contact_list_request,
-                         pkt_reply);
-      this->_van->addSendTask(client_fd, pkt_reply);
+      // this->packToPacket(PacketType::ContactListRequest, contact_list_request,
+      //                    pkt_reply);
+      // this->_van->addSendTask(client_fd, pkt_reply);
 
       break;
     }

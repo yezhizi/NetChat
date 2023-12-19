@@ -133,7 +133,7 @@ class ServerVan : public Van {
           CLOG_IF(ret < 0, WARNING, "Van") << "fcntl set nonblock failed";
 
           struct epoll_event event;
-          event.events = EPOLLIN | EPOLLET;
+          event.events = EPOLLIN | EPOLLET | EPOLLHUP | EPOLLERR;
           event.data.fd = client_socket;
           ret =
               epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, client_socket, &event);
@@ -141,10 +141,16 @@ class ServerVan : public Van {
               << "epoll_ctl add client socket failed";
         } else {
           // the client socket is ready to read, add to the queue
-          if (events[i].events & EPOLLIN)
+          if (events[i].events & EPOLLIN) {
             CLOG(DEBUG, "Van")
                 << "client socket ready to read :" << events[i].data.fd;
-          this->RecvSocketQueue_.Push(events[i].data.fd);
+            this->RecvSocketQueue_.Push(events[i].data.fd);
+          }else {
+            //连接断开事件
+            CLOG(INFO, "Van") << "client socket disconnected";
+            this->Control(events[i].data.fd, "EPOLL_DEL_FD");
+            this->Control(events[i].data.fd, "CLOSE_FD");
+          }
         }
       }
     }
@@ -167,7 +173,6 @@ class ServerVan : public Van {
           // 让server van epoll_ctl删除对应的监听事件,并关闭socket
           // this->Control(fd, "EPOLL_DEL_FD");
           // this->Control(fd, "CLOSE_FD");
-          
         }
         CLOG(WARNING, "Van") << "send message failed";
         return -1;
