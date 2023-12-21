@@ -234,7 +234,7 @@ std::optional<netdesign2::Message> DataAccess::createMsgByRawMsg(
 
 // Caller should explicitly create the file on disk
 // uuid is auto-generated and returned
-std::optional<std::string> DataAccess::createFile() {
+std::optional<std::string> DataAccess::createFile() noexcept {
   // generate uuid 
   auto uuid = utils::misc::getUUID();
 

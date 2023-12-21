@@ -1,3 +1,5 @@
+#ifndef MISC_H
+#define MISC_H
 #include <chrono>
 
 #include "uuid/uuid.h"
@@ -21,3 +23,5 @@ inline std::string getUUID() {
 }
 
 }  // namespace utils::misc
+
+#endif  // MISC_H

@@ -6,6 +6,10 @@ namespace ntc::file {
         return false;
     }
 
+    bool FileStorage::saveToDisk(const netdesign2::File &file) {
+        return false;
+    }
+
     bool FileStorage::loadIntoProto(netdesign2::File &file) {
         return false;
     }

@@ -47,19 +47,13 @@ class DataAccess {
 
   [[nodiscard]] std::vector<Group> getAllGroups();
 
-  // Not implemented
-  [[nodiscard]] std::vector<Group> getUserGroups(const int &user_id);
-
-  // Not implemented
-  [[nodiscard]] std::vector<User> getGroupUsers(const int &group_id);
-
   [[nodiscard]] std::optional<netdesign2::Message> getMessage(
       const int &sender_id, const int &receiver_id, const int &internal_id);
 
   [[nodiscard]] std::vector<netdesign2::Message> getAllMessages(
       const int &sender_id, const int &receiver_id);
 
-  [[nodiscard]] std::optional<file::FileStorage> getFile(std::string_view uuid); 
+  [[nodiscard]] std::optional<ntc::file::FileStorage> getFile(std::string_view uuid); 
 
   /* Create methods */
 
@@ -78,7 +72,7 @@ class DataAccess {
   std::optional<std::string> createFile() noexcept;
 
   /* Update methods */
-  bool updateFile(const file::FileStorage &f) noexcept;
+  bool updateFile(const ntc::file::FileStorage &f) noexcept;
   bool updateFile(std::string_view uuid, std::string_view filename, std::string_view hash) noexcept;
 
  private:
