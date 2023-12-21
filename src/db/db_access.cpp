@@ -2,6 +2,7 @@
 
 namespace ntc {
 
+/* Query methods */
 /* Users */
 
 [[nodiscard]] std::optional<User> DataAccess::getUser(
@@ -134,20 +135,23 @@ namespace ntc {
   return msgs;
 }
 
-[[nodiscard]] std::optional<netdesign2::File> DataAccess::getFile(
-    const int &id) {
+/* Files */
+// Caller should explicitly set the content by reading the disk
+[[nodiscard]] std::optional<file::FileStorage> DataAccess::getFile(
+    std::string_view uuid) {
   SQLite::Statement query(db_, "SELECT * FROM files WHERE file_id = ?");
-  query.bind(1, id);
+  query.bind(1, uuid.data());
   if (query.executeStep()) {
-    netdesign2::File f;
-    // TODO: ID?
-    // TODO: read content from disk?
-    // TODO: hash? should from client side...
-    f.set_name(query.getColumn("filename").getString());
+    file::FileStorage f;
+    f.setId(query.getColumn("file_id").getString());
+    f.setName(query.getColumn("filename").getString());
+    f.setHash(query.getColumn("hash").getString());
     return f;
   }
   return {};
 }
+
+/* Create methods */
 
 // Id is auto-incremented
 bool DataAccess::createUser(const User &u) {
@@ -228,11 +232,61 @@ std::optional<netdesign2::Message> DataAccess::createMsgByRawMsg(
   return {};
 }
 
-// Id is auto-incremented
-bool DataAccess::createFile(const netdesign2::File &f) {
-  SQLite::Statement query(db_, "INSERT INTO files (filename) VALUES (?)");
-  query.bind(1, f.name());
-  return query.exec() == 1;
+// Caller should explicitly create the file on disk
+// uuid is auto-generated and returned
+std::optional<std::string> DataAccess::createFile() {
+  // generate uuid 
+  auto uuid = utils::misc::getUUID();
+
+  // insert into db
+  SQLite::Statement query(db_, "INSERT INTO files (file_id) VALUES (?)");
+  query.bind(1, uuid);
+
+  try {
+    if (query.exec() == 1) {
+      return uuid;
+    }
+  } catch(const std::exception& e) {
+    LOG(ERROR) << "Exception: " << e.what();
+  }
+  
+  return {};
+}
+
+/* Update methods */
+bool DataAccess::updateFile(const file::FileStorage &f) noexcept {
+  SQLite::Statement query(
+      db_, "UPDATE files SET filename = ?, hash = ? WHERE file_id = ?");
+  query.bind(1, f.getName());
+  query.bind(2, f.getHash());
+  query.bind(3, f.getId());
+
+  auto ret = false;
+  try {
+    ret = query.exec();
+  } catch (const std::exception &e) {
+    LOG(ERROR) << "Exception: " << e.what();
+  }
+
+  return ret;
+}
+
+bool DataAccess::updateFile(std::string_view uuid, std::string_view filename,
+                            std::string_view hash) noexcept {
+  SQLite::Statement query(
+      db_, "UPDATE files SET filename = ?, hash = ? WHERE file_id = ?");
+  query.bind(1, filename.data());
+  query.bind(2, hash.data());
+  query.bind(3, uuid.data());
+
+  auto ret = false;
+  try {
+    ret = query.exec();
+  } catch (const std::exception &e) {
+    LOG(ERROR) << "Exception: " << e.what();
+  }
+
+  return ret;
 }
 
 }  // namespace ntc
