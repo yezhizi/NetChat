@@ -12,6 +12,7 @@ namespace ntc {
 
 class UM {
   friend class Server;
+  using KeepAliveMsgSender = Server::KeepAliveMsgSender;
 
  private:
   Server *server_ptr_;  // constant pointer
@@ -19,7 +20,7 @@ class UM {
   // mutex
   std::mutex _temp_socket_pool_mu;
   std::mutex _challenge_pool_mu;
-  std::mutex __keepalive_socket_pool_mu;
+  std::mutex _keepalive_sender_mp_mu;
 
   UM() : server_ptr_(nullptr){};
   UM(const UM &) = delete;
@@ -57,7 +58,7 @@ class UM {
   // token->userid
   int getUserIdByToken(const std::string &token) {
     if (token == "") return 0;
-    std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
+    std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
     if (this->server_ptr_->_token_pool.find(token) !=
         this->server_ptr_->_token_pool.end()) {
       return this->server_ptr_->_token_pool[token];
@@ -94,24 +95,29 @@ class UM {
   }
 
   // 保活连接池
-  // 设置对应的保活连接socket
-  void setKeepaliveSocketMp(const int &id, int fd, const std::string &token) {
-    std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
-    this->server_ptr_->_keepalive_socket_pool[id] = fd;
-    this->server_ptr_->_token_pool[token] = id;
+  // 设置对应的保活连接的Sender
+  void setKpAliveSender(const int &uid, int fd, const std::string &token) {
+    std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
+
+    this->server_ptr_->_keepalive_sender_mp[uid] =
+        std::make_unique<KeepAliveMsgSender>(fd);
+
+    this->server_ptr_->_token_pool[token] = uid;
   }
 
-  // id->fd
-  int getfdByUserId(const int &id) {
-    if (id == 0) return -1;
-    std::lock_guard<std::mutex> lock(this->__keepalive_socket_pool_mu);
-    if (this->server_ptr_->_keepalive_socket_pool.find(id) !=
-        this->server_ptr_->_keepalive_socket_pool.end()) {
-      return this->server_ptr_->_keepalive_socket_pool[id];
+  // id->sender
+  KeepAliveMsgSender *getSender(const int &id) {
+    if (id == 0) return nullptr;
+    std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
+
+    if (this->server_ptr_->_keepalive_sender_mp.find(id) !=
+        this->server_ptr_->_keepalive_sender_mp.end()) {
+      return this->server_ptr_->_keepalive_sender_mp[id].get();
     } else {
-      return -1;
+      return nullptr;
     }
   }
+
 };
 }  // namespace ntc
 #endif  //_USER_MANNAER_H

@@ -11,6 +11,7 @@
 #include "utils/crypto.h"
 #include "utils/logging.h"
 #include "van.h"
+#include "threadsafe_queue.h"
 
 namespace ntc {
 
@@ -18,6 +19,7 @@ class Server {
   using Packet = netdesign2::Packet;
 
   friend class UM;
+  class KeepAliveMsgSender;
 
  private:
   Van *_van;
@@ -27,8 +29,8 @@ class Server {
   // 登录时challenge的映射  userid -> challenge
   std::unordered_map<int, std::string> _challenge_pool;
 
-  // 保活连接池映射 userid -> fd
-  std::unordered_map<int, int> _keepalive_socket_pool;
+  // 保活连接池映射 userid -> sender
+  std::unordered_map<int, std::unique_ptr<KeepAliveMsgSender>> _keepalive_sender_mp;
 
   // token -> userid
   std::unordered_map<std::string, int> _token_pool;
@@ -47,6 +49,27 @@ class Server {
     google::protobuf::Any *content_ = packet.mutable_content();
     content_->PackFrom(content);
   }
+
+  // KeepAliveMsgSender内部类
+  class KeepAliveMsgSender {
+   public:
+    KeepAliveMsgSender(int fd) : fd_(fd) {
+      keepalive_msg_sender_thread_ = std::thread(&KeepAliveMsgSender::run, this);
+    }
+    inline int getFd() const { return this->fd_; }
+    inline void addSendTask(const Packet &packet) { this->msg_queue_.Push(packet); }
+    ~KeepAliveMsgSender(){
+      this->keepalive_msg_sender_thread_.join();
+    }
+
+   private:
+    void run();
+    std::thread keepalive_msg_sender_thread_;
+    // msg queue
+    ThreadsafeQueue<Packet> msg_queue_;
+    // fd
+    int fd_;
+  };
 
  public:
   ~Server() { this->Finalize(); }

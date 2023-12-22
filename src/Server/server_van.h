@@ -29,10 +29,6 @@ class ServerVan : public Van {
     this->RecvSocketThreads_.resize(Server::getRecvSocketNum());
     for (auto &t : this->RecvSocketThreads_)
       t = std::thread(&ServerVan::RevcSocketThreadFunc_, this);
-    // bind the working thread function
-    this->KeepAliveThreads_.resize(Server::getKeepAliveNum());
-    for (auto &t : this->KeepAliveThreads_)
-      t = std::thread(&ServerVan::KeepAliveSendThreadsFunc_, this);
 
     int epoll_fd_ = epoll_create(MAX_EVENTS);
     CLOG_IF(epoll_fd_ < 0, FATAL, "Van") << "epoll_create failed";
@@ -237,13 +233,7 @@ class ServerVan : public Van {
       Server::Get().processRecvSocket(client_fd);
     }
   }
-  void KeepAliveSendThreadsFunc_() {
-    while (true) {
-      std::pair<int, Packet> p;
-      this->KeepAliveQueue_.WaitAndPop(&p);
-      this->SendMesg(p.second, p.first);
-    }
-  }
+
 };
 
 }  // namespace ntc
