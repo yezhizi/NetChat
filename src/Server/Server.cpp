@@ -25,7 +25,7 @@ void Server::processRecvSocket(const int client_fd) const {
   // TODO
   Packet pkt;
   int pkt_bytes = this->_van->Recv(client_fd, &pkt);
-  if (pkt_bytes < 0) return;
+  if (pkt_bytes <= 0) return;
 
   // 解析包
   int pkt_id = pkt.packetid();
@@ -33,7 +33,7 @@ void Server::processRecvSocket(const int client_fd) const {
   LOG(INFO) << "Server received packet. id : " << pkt_id;
 
   // call back
-  CallBack cb;
+  CallBack cb = nullptr;
 
   // 生成回复包
   Packet pkt_reply;
@@ -161,7 +161,7 @@ void Server::processRecvSocket(const int client_fd) const {
         response.set_logined(true);
         response.set_token(token);
         //  设置用户信息
-        UM::Get()->setKpAliveSender(user.getId(), client_fd, token);
+        UM::Get()->setUserIdByToken(token, user.getId());
       } else {
         // 登录失败
         response.set_logined(false);
@@ -189,17 +189,18 @@ void Server::processRecvSocket(const int client_fd) const {
       // 获取用户信息 token->userId->fd
       auto uid = UM::Get()->getUserIdByToken(request.token());
 
-      //  1. 通知van取消对应的监听事件
-      this->_van->Control(client_fd, "EPOLL_DEL_FD");
       // ServerAckResponse
       ServerAckResponse response;
       LOG(INFO) << "Server sent ServerAckResponse";
       this->packToPacket(PacketType::ServerAckResponse, response, pkt_reply);
 
-      // 2. 设置长连接 uid->sender+fd  uid->token
-      UM::Get()->setKpAliveSender(uid, client_fd, request.token());
+      Packet new_req;
 
       cb = [&]() {
+        LOG(INFO) << "callback";
+        // 2. 设置长连接 uid->sender+fd  uid->token
+        UM::Get()->setKpAliveSender(uid, client_fd);
+        
         // 发送联系人列表
         ContactListRequest contact_list_request;
 
@@ -213,20 +214,22 @@ void Server::processRecvSocket(const int client_fd) const {
           contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
 
           contact_list_request.add_contacts()->CopyFrom(contact);
+          //TODO:internalIds?
         }
 
         this->packToPacket(PacketType::ContactListRequest, contact_list_request,
-                           pkt_reply);
+                           new_req);
         KeepAliveMsgSender *sender = UM::Get()->getSender(uid);
 
         // 添加到发送队列
         if (sender) {
-          sender->addSendTask(pkt_reply);
-
-        }else{
-          LOG(INFO) << "Sender is nullptr";
+          sender->addSendTask(new_req);
+        } else {
+          LOG(ERROR) << "Sender is nullptr";
         }
         LOG(INFO) << "Server pre sent ContactListRequest";
+        //  1. 通知van取消对应的监听事件
+        this->_van->Control(client_fd, "EPOLL_DEL_FD");
       };
 
       break;
@@ -446,9 +449,11 @@ void Server::processRecvSocket(const int client_fd) const {
     // 让server van epoll_ctl删除对应的监听事件,并关闭socket
     this->_van->Control(client_fd, "EPOLL_DEL_FD");
     this->_van->Control(client_fd, "CLOSE_FD");
+    return;
   }
   // run call back
   if (cb) cb();
+  else{LOG(DEBUG)<<1;}
 
   LOG(INFO) << "Server sent packet. id : " << pkt_reply.packetid();
 }
@@ -457,9 +462,9 @@ void Server::processRecvSocket(const int client_fd) const {
 void Server::KeepAliveMsgSender::run() {
   // 从队列中取出消息并发送
   while (true) {
-    Packet *pkt;
-    this->msg_queue_.WaitAndPop(pkt);
-    int ret = Server::Get()._van->Send(*pkt, this->fd_);
+    Packet pkt;
+    this->msg_queue_.WaitAndPop(&pkt);
+    int ret = Server::Get()._van->Send(pkt, this->fd_);
     if (ret < 0) {
       // 发送失败
       // 关闭socket
@@ -467,27 +472,29 @@ void Server::KeepAliveMsgSender::run() {
       Server::Get()._van->Control(this->fd_, "CLOSE_FD");
       break;
     }
-    //接收ack
-    Packet ack;
-    int pkt_bytes = Server::Get()._van->Recv(this->fd_, &ack);
-    if (pkt_bytes < 0) {
-      // 接收失败
-      // 关闭socket
-      LOG(INFO) << "KeepAliveMsgSender recv failed. fd: " << this->fd_;
-      break;
-    }
-    // 解析包 ClientAckResponse
-    int pkt_id = ack.packetid();
-    auto type = static_cast<PacketType>(pkt_id);
-    if (type != PacketType::ClientAckResponse) {
-      // 接收到的包不是ClientAckResponse
-      // 关闭socket
-      LOG(INFO) << "KeepAliveMsgSender recv wrong packet. fd: " << this->fd_;
-      
-      break;
-    }
+    //TODO: 接收有问题！！
+    // // 接收ack
+    // Packet ack;
+    // int pkt_bytes = Server::Get()._van->Recv(this->fd_, &ack);
+    // if (pkt_bytes < 0) {
+    //   // 接收失败
+    //   // 关闭socket
+    //   LOG(INFO) << "KeepAliveMsgSender recv failed. fd: " << this->fd_;
+    //   Server::Get()._van->Control(this->fd_, "CLOSE_FD");
+    //   break;
+    // }
+    // // 解析包 ClientAckResponse
+    // int pkt_id = ack.packetid();
+    // auto type = static_cast<PacketType>(pkt_id);
+    // if (type != PacketType::ClientAckResponse) {
+    //   // 接收到的包不是ClientAckResponse
+    //   // 关闭socket
+    //   LOG(INFO) << "KeepAliveMsgSender recv wrong packet. fd: " << this->fd_;
+
+    //   break;
+    // }
   }
-  Server::Get()._van->Control(this->fd_, "CLOSE_FD");
+  
   return;
 }
 

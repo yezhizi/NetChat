@@ -21,6 +21,7 @@ class UM {
   std::mutex _temp_socket_pool_mu;
   std::mutex _challenge_pool_mu;
   std::mutex _keepalive_sender_mp_mu;
+  std::mutex _token_pool_mu;
 
   UM() : server_ptr_(nullptr){};
   UM(const UM &) = delete;
@@ -53,20 +54,6 @@ class UM {
     this->server_ptr_->_revc_socket_pool[ipport] = fd;
   }
 
-  // 用户数据 id->int32  userid->str  pass->str(sha256 hash)
-  // 在线状态 id->int32 token -> str ("" for offline)
-  // token->userid
-  int getUserIdByToken(const std::string &token) {
-    if (token == "") return 0;
-    std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
-    if (this->server_ptr_->_token_pool.find(token) !=
-        this->server_ptr_->_token_pool.end()) {
-      return this->server_ptr_->_token_pool[token];
-    } else {
-      return 0;
-    }
-  }
-
   ///// 用户登录 ////
   // 设置对应的challenge  userid -> challenge threadsafe
   void setChallengeMp(const int &id, const std::string &challenge) {
@@ -96,13 +83,11 @@ class UM {
 
   // 保活连接池
   // 设置对应的保活连接的Sender
-  void setKpAliveSender(const int &uid, int fd, const std::string &token) {
+  void setKpAliveSender(const int &uid, int fd) {
     std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
-
+    LOG(INFO) << "set keepalive sender for user " << uid;
     this->server_ptr_->_keepalive_sender_mp[uid] =
         std::make_unique<KeepAliveMsgSender>(fd);
-
-    this->server_ptr_->_token_pool[token] = uid;
   }
 
   // id->sender
@@ -116,6 +101,22 @@ class UM {
     } else {
       return nullptr;
     }
+  }
+  // get token->uid
+  int getUserIdByToken(const std::string &token) {
+    if (token == "") return 0;
+    std::lock_guard<std::mutex> lock(this->_token_pool_mu);
+    if (this->server_ptr_->_token_pool.find(token) !=
+        this->server_ptr_->_token_pool.end()) {
+      return this->server_ptr_->_token_pool[token];
+    } else {
+      return 0;
+    }
+  }
+  // set token->uid
+  void setUserIdByToken(const std::string &token, const int &uid) {
+    std::lock_guard<std::mutex> lock(this->_token_pool_mu);
+    this->server_ptr_->_token_pool[token] = uid;
   }
 
 };

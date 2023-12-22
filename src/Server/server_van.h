@@ -187,12 +187,14 @@ class ServerVan : public Van {
       int ret = recv(fd, buf + bytes, ntc::kMaxMessageSize - bytes, 0);
       if (ret < 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK) {
+          // 没有数据可读
           break;
         } else {
           CLOG(WARNING, "Van") << "recv failed";
           return -1;
         }
       } else if (ret == 0) {
+        // 远程主机关闭
         break;
 
       } else {
