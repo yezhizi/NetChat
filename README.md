@@ -2,7 +2,7 @@
 
 Simple Server for a Chat App.
 
-## Build
+## Quick Start
 
 1. Install the toolchain
 
@@ -13,7 +13,7 @@ apt install build-essential ninja-build cmake
 2. Intall dependencies
 
 ```sh
-apt install libprotobuf-dev
+apt install libprotobuf-dev protobuf-compiler
 ```
 
 Currently Protobuf is the only dependency requires manual installation. Others will be available when configuring the CMake.  
