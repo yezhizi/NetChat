@@ -6,8 +6,8 @@
 
 #include "base.h"
 #include "sodium.h"
+#include "utils/misc.h"
 #include "utils/logging.h"
-#include "uuid/uuid.h"
 
 namespace utils::crypto {
 
@@ -66,13 +66,7 @@ inline std::string SHA256(const std::string &in) {
 // 生成uuid作为token
 inline std::string genToken() {
   InitSodium();
-  uuid_t uu;
-  uuid_generate(uu);
-
-  char uuidStr[37];  // 36字符UUID + 1字符空终止符
-  uuid_unparse(uu, uuidStr);
-
-  return std::string(uuidStr);
+  return utils::misc::getUUID();
 }
 
 }  // namespace utils::crypto

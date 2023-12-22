@@ -80,7 +80,7 @@ void Server::processRecvSocket(const int client_fd) const {
       if (is_success) {
         // the username and pass is legal
         User u{0, n, utils::crypto::SHA256(p)};
-        is_success = g_db->createUser(u); // is user creation sccess
+        is_success = g_db->createUser(u);  // is user creation sccess
       }
 
       response.set_success(is_success);
@@ -256,8 +256,8 @@ void Server::processRecvSocket(const int client_fd) const {
       }
 
       // create a new message
-      auto reply_msg = g_db->createMsgByRawMsg(message);
-      if (!reply_msg.has_value()) {
+      auto msg_result = g_db->createMsgByRawMsg(message);
+      if (!msg_result.has_value()) {
         // create message failed
         LOG(INFO) << "Create message failed. sender id: " << sender_id
                   << " receiver id: " << receiver_id;
@@ -266,13 +266,128 @@ void Server::processRecvSocket(const int client_fd) const {
                            pkt_reply);
         break;
       }
+      auto reply_msg = msg_result.value();
+
+      // check msg type, if IMAGE/FILE, register it
+      if (message.type() == netdesign2::MessageType::IMAGE ||
+          message.type() == netdesign2::MessageType::FILE) {
+        // register a new file
+        auto file_id_result = g_db->createFile();
+        if (!file_id_result.has_value()) {
+          LOG(INFO) << "Register file in db failed, sender id: " << sender_id
+                    << " receiver id: " << receiver_id;
+          response.mutable_message()->set_id(-1);
+          this->packToPacket(PacketType::SendMessageResponse, response,
+                             pkt_reply);
+          break;
+        }
+
+        // update the message with generated file id
+        reply_msg.mutable_message()->set_content(file_id_result.value());
+      }
 
       // TODO: notify receiver
       // implement here...
 
       // respond to sender
-      response.mutable_message()->CopyFrom(reply_msg.value());
+      response.mutable_message()->CopyFrom(reply_msg);
       this->packToPacket(PacketType::SendMessageResponse, response, pkt_reply);
+      break;
+    }
+    case PacketType::FileUploadRequest: {
+      // User request to upload file
+      // reply: FileUploadResponse
+      FileUploadRequest request;
+      FileUploadResponse response;
+      pkt.content().UnpackTo(&request);
+
+      // 获取用户信息 token->uid
+      auto token = request.token();
+      auto uid = UM::Get()->getUserIdByToken(token);
+      if (!uid) {
+        // token error, decline the request
+        LOG(INFO) << "Unmatched userId and token. user id: " << uid;
+        response.set_success(false);
+        this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
+        break;
+      }
+
+      // check file exists in table
+      auto result = g_db->getFile(request.id());
+      if (!result.has_value()) {
+        // file not registered
+        LOG(INFO) << "File not registered. file id: " << request.id();
+        response.set_success(false);
+        this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
+        break;
+      }
+
+      // Write to disk
+      bool success = false;
+      auto file = result.value();
+      file.setHash(request.hash());
+      file.setName(request.file().name());
+      if (!file.checkDiskExistence()) {
+        success = file.saveToDisk(request.file());
+      }
+
+      // update the file in table
+      if (!g_db->updateFile(file)) {
+        // update failed
+        LOG(INFO) << "Update file failed. file id: " << request.id();
+        response.set_success(false);
+        this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
+        break;
+      }
+
+      response.set_success(success);
+      this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
+      break;
+    }
+    case PacketType::FileDownloadRequest: {
+      // User request to download file
+      // reply: FileDownloadResponse
+      FileDownloadRequest request;
+      FileDownloadResponse response;
+      pkt.content().UnpackTo(&request);
+
+      // 获取用户信息 token->uid
+      auto token = request.token();
+      auto uid = UM::Get()->getUserIdByToken(token);
+      if (!uid) {
+        // token error, decline the request
+        LOG(INFO) << "Unmatched userId and token. user id: " << uid;
+        response.mutable_file()->set_name("");
+        this->packToPacket(PacketType::FileDownloadResponse, response,
+                           pkt_reply);
+        break;
+      }
+
+      // query the file in table
+      auto result = g_db->getFile(request.id());
+      if (!result.has_value()) {
+        // file not exist
+        LOG(INFO) << "File not exist. file id: " << request.id();
+        response.mutable_file()->set_name("");
+        this->packToPacket(PacketType::FileDownloadResponse, response,
+                           pkt_reply);
+        break;
+      }
+
+      // load from disk
+      auto file = result.value();
+      response.set_hash(file.getHash());
+      if (file.checkDiskExistence() &&
+          file.loadIntoProto(*response.mutable_file())) {
+        LOG(INFO) << "Failed to load file on disk. file id: " << request.id();
+        response.mutable_file()->set_name("");
+        this->packToPacket(PacketType::FileDownloadResponse, response,
+                           pkt_reply);
+        break;
+      };
+
+      // respond to sender
+      this->packToPacket(PacketType::FileDownloadResponse, response, pkt_reply);
       break;
     }
     case PacketType::ContactMessageRequest: {

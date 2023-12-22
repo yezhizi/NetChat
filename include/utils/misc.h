@@ -1,4 +1,8 @@
+#ifndef MISC_H
+#define MISC_H
 #include <chrono>
+
+#include "uuid/uuid.h"
 
 namespace utils::misc {
 
@@ -9,4 +13,15 @@ inline int getTimestamp() {
                  .count());
 }
 
+// 生成 UUID
+inline std::string getUUID() {
+  uuid_t uuid;
+  uuid_generate_random(uuid);
+  char str[37];
+  uuid_unparse_lower(uuid, str);
+  return std::string(str);
+}
+
 }  // namespace utils::misc
+
+#endif  // MISC_H

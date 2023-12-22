@@ -3,6 +3,11 @@ package netdesign2;
 option java_package = "top.focess.netdesign.proto";
 // option optimize_for = LITE_RUNTIME;
 
+// client packet - sent by client
+// server packet - sent by server
+// request - the initiator of 1 round of communication
+// response - the response of 1 round of communication
+
 import "google/protobuf/any.proto";
 
 message Packet {

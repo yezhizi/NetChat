@@ -11,6 +11,7 @@
 #include "group.h"
 #include "proto/messages.pb.h"
 #include "user.h"
+#include "file_storage.h"
 #include "utils/logging.h"
 #include "utils/misc.h"
 
@@ -46,19 +47,15 @@ class DataAccess {
 
   [[nodiscard]] std::vector<Group> getAllGroups();
 
-  // Not implemented
-  [[nodiscard]] std::vector<Group> getUserGroups(const int &user_id);
-
-  // Not implemented
-  [[nodiscard]] std::vector<User> getGroupUsers(const int &group_id);
-
   [[nodiscard]] std::optional<netdesign2::Message> getMessage(
       const int &sender_id, const int &receiver_id, const int &internal_id);
 
   [[nodiscard]] std::vector<netdesign2::Message> getAllMessages(
       const int &sender_id, const int &receiver_id);
 
-  [[nodiscard]] std::optional<netdesign2::File> getFile(const int &id);
+  [[nodiscard]] std::optional<ntc::file::FileStorage> getFile(std::string_view uuid); 
+
+  /* Create methods */
 
   bool createUser(const User &u);
 
@@ -68,9 +65,15 @@ class DataAccess {
   std::optional<int> createMsg(const netdesign2::Message &m);
 
   // Create a message in DB by raw message
-  std::optional<netdesign2::Message> createMsgByRawMsg(const netdesign2::RawMessage &m);
+  std::optional<netdesign2::Message> createMsgByRawMsg(
+      const netdesign2::RawMessage &m);
 
-  bool createFile(const netdesign2::File &f);
+  // Create a file in DB, caller should handle disk IO, return generated UUID
+  std::optional<std::string> createFile() noexcept;
+
+  /* Update methods */
+  bool updateFile(const ntc::file::FileStorage &f) noexcept;
+  bool updateFile(std::string_view uuid, std::string_view filename, std::string_view hash) noexcept;
 
  private:
   SQLite::Database db_;
@@ -108,14 +111,13 @@ class DataAccess {
       LOG(DEBUG) << "`user_group` table created.";
     }
 
-    // 检查并创建文件表
+    // 检查并创建文件表（文件中包括图片）
     if (!db_.tableExists("files")) {
       db_.exec(
           "CREATE TABLE files ("
-          "file_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+          "file_id TEXT PRIMARY KEY, "  // UUID
           "filename TEXT NOT NULL, "
-          "hash TEXT NOT NULL, "
-          "timestamp INTEGER NOT NULL)");
+          "hash TEXT NOT NULL)");
       LOG(DEBUG) << "`files` table created.";
     }
 
@@ -128,8 +130,8 @@ class DataAccess {
           "receiver_id INTEGER NOT NULL, "
           "type INTEGER NOT NULL, "  // oneof TEXT, IMAGE or FILE
           "internal_id INTEGER, "    // 用于标识对话内部的消息
-          "content TEXT, "           // TEXT/IMAGE 类型的消息内容
-          "file_id INTEGER, "        // FILE 类型外键
+          "content TEXT, "           // TEXT 类型的消息内容
+          "file_id TEXT, "           // IMAGE/FILE 类型外键
           "timestamp INTEGER NOT NULL, "
           "FOREIGN KEY (sender_id) REFERENCES users (user_id), "
           "FOREIGN KEY (receiver_id) REFERENCES users (user_id), "
