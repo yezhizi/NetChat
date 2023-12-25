@@ -3,6 +3,7 @@
 
 #include <arpa/inet.h>
 #include <fcntl.h>
+#include <netinet/tcp.h>
 #include <sys/epoll.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -123,6 +124,11 @@ class ServerVan : public Van {
 
           UM::Get()->setRevcSocketMp(client_ip_port, client_socket);
 
+          // 设置nodelay
+          int opt = 1;
+          setsockopt(client_socket, IPPROTO_TCP, TCP_NODELAY, &opt,
+                     sizeof(opt));
+
           // 设置非阻塞接收
           int flags = fcntl(client_socket, F_GETFL, 0);
           int ret = fcntl(client_socket, F_SETFL, flags | O_NONBLOCK);
@@ -235,7 +241,6 @@ class ServerVan : public Van {
       Server::Get().processRecvSocket(client_fd);
     }
   }
-
 };
 
 }  // namespace ntc

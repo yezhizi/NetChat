@@ -141,6 +141,7 @@ void Server::processRecvSocket(const int client_fd) const {
         LOG(INFO) << "User not found. username: " << username;
         response.set_logined(false);
         response.set_token("illegal user");
+        response.set_id(-1);
         this->packToPacket(PacketType::LoginResponse, response, pkt_reply);
         break;
       }
@@ -160,19 +161,22 @@ void Server::processRecvSocket(const int client_fd) const {
         std::string token = utils::crypto::genToken();
         response.set_logined(true);
         response.set_token(token);
+        response.set_id(user.getId());
         //  设置用户信息
         UM::Get()->setUserIdByToken(token, user.getId());
       } else {
         // 登录失败
         response.set_logined(false);
         response.set_token("wrong password");
+        response.set_id(-1);
       }
 
       // 写入回复包
       this->packToPacket(PacketType::LoginResponse, response, pkt_reply);
       LOG(INFO) << "Server sent LoginResponse"
                 << " logined: " << response.logined()
-                << " token: " << response.token();
+                << " token: " << response.token()
+                << " id: " << response.id();
 
       // 删除记录的 challenge
       UM::Get()->delChallengeMp(user.getId());
@@ -197,7 +201,6 @@ void Server::processRecvSocket(const int client_fd) const {
       Packet new_req;
 
       cb = [&]() {
-        LOG(INFO) << "callback";
         // 2. 设置长连接 uid->sender+fd  uid->token
         UM::Get()->setKpAliveSender(uid, client_fd);
         
@@ -214,9 +217,11 @@ void Server::processRecvSocket(const int client_fd) const {
           contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
 
           contact_list_request.add_contacts()->CopyFrom(contact);
-          //TODO:internalIds?
+          //TODO:internalIds: the max internal id of the contact
+          contact_list_request.add_internalids(0);
+          // int max_internal_id = g_db->getMaxInternalId(uid, u.getId());
         }
-
+        
         this->packToPacket(PacketType::ContactListRequest, contact_list_request,
                            new_req);
         KeepAliveMsgSender *sender = UM::Get()->getSender(uid);
@@ -464,6 +469,11 @@ void Server::KeepAliveMsgSender::run() {
   while (true) {
     Packet pkt;
     this->msg_queue_.WaitAndPop(&pkt);
+    if (pkt.packetid() == static_cast<int>(PacketType::ContactListRequest)) {
+      
+      std::this_thread::sleep_for(std::chrono::seconds(1));
+      LOG(INFO) << "Channel: Send ContactListRequest";
+    }
     int ret = Server::Get()._van->Send(pkt, this->fd_);
     if (ret < 0) {
       // 发送失败
@@ -472,27 +482,29 @@ void Server::KeepAliveMsgSender::run() {
       Server::Get()._van->Control(this->fd_, "CLOSE_FD");
       break;
     }
-    //TODO: 接收有问题！！
-    // // 接收ack
-    // Packet ack;
-    // int pkt_bytes = Server::Get()._van->Recv(this->fd_, &ack);
-    // if (pkt_bytes < 0) {
-    //   // 接收失败
-    //   // 关闭socket
-    //   LOG(INFO) << "KeepAliveMsgSender recv failed. fd: " << this->fd_;
-    //   Server::Get()._van->Control(this->fd_, "CLOSE_FD");
-    //   break;
-    // }
-    // // 解析包 ClientAckResponse
-    // int pkt_id = ack.packetid();
-    // auto type = static_cast<PacketType>(pkt_id);
-    // if (type != PacketType::ClientAckResponse) {
-    //   // 接收到的包不是ClientAckResponse
-    //   // 关闭socket
-    //   LOG(INFO) << "KeepAliveMsgSender recv wrong packet. fd: " << this->fd_;
+    // TODO: 接收有问题！！暂时先测试接收是否有问题
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    // 接收ack
+    Packet ack;
+    int pkt_bytes = Server::Get()._van->Recv(this->fd_, &ack);
+    if (pkt_bytes < 0) {
+      // 接收失败
+      // 关闭socket
+      LOG(INFO) << "KeepAliveMsgSender recv failed. fd: " << this->fd_;
+      Server::Get()._van->Control(this->fd_, "CLOSE_FD");
+      break;
+    }
+    // 解析包 ClientAckResponse
+    int pkt_id = ack.packetid();
+    auto type = static_cast<PacketType>(pkt_id);
+    if (type != PacketType::ClientAckResponse) {
+      // 接收到的包不是ClientAckResponse
+      // 关闭socket
+      LOG(INFO) << "KeepAliveMsgSender recv wrong packet. fd: " << this->fd_;
 
-    //   break;
-    // }
+      break;
+    }
+    LOG(DEBUG)<<"KeepAliveChannel: recv ack from client";
   }
   
   return;
