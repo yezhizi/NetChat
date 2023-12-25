@@ -307,7 +307,26 @@ void Server::processRecvSocket(const int client_fd) const {
       }
 
       // TODO: notify receiver
-      // implement here...
+      cb = [&]() {
+        // implement here...
+        return;
+        Packet new_req;
+        ContactMessageListRequest contact_message_list_request;
+        
+
+
+
+        KeepAliveMsgSender *sender = UM::Get()->getSender(receiver_id);
+
+        // 添加到发送队列
+        if (sender) {
+          sender->addSendTask(new_req);
+        } else {
+          LOG(ERROR) << "Sender is nullptr";
+        }
+        LOG(INFO) << "Server pre sent ContactMessageRequest";
+      };
+      
 
       // respond to sender
       response.mutable_message()->CopyFrom(reply_msg);
