@@ -8,10 +8,10 @@
 
 #include "base.h"
 #include "message.h"
+#include "threadsafe_queue.h"
 #include "utils/crypto.h"
 #include "utils/logging.h"
 #include "van.h"
-#include "threadsafe_queue.h"
 
 namespace ntc {
 
@@ -30,7 +30,8 @@ class Server {
   std::unordered_map<int, std::string> _challenge_pool;
 
   // 保活连接池映射 userid -> sender
-  std::unordered_map<int, std::unique_ptr<KeepAliveMsgSender>> _keepalive_sender_mp;
+  std::unordered_map<int, std::unique_ptr<KeepAliveMsgSender>>
+      _keepalive_sender_mp;
 
   // token -> userid
   std::unordered_map<std::string, int> _token_pool;
@@ -53,14 +54,22 @@ class Server {
   // KeepAliveMsgSender内部类
   class KeepAliveMsgSender {
    public:
-    KeepAliveMsgSender(int fd) : fd_(fd) {
-      keepalive_msg_sender_thread_ = std::thread(&KeepAliveMsgSender::run, this);
+    KeepAliveMsgSender(const int uid, const int fd) : fd_(fd), uid_(uid) {
+      keepalive_msg_sender_thread_ =
+          std::thread(&KeepAliveMsgSender::run, this);
     }
-    inline int getFd() const { return this->fd_; }
-    inline void addSendTask(const Packet &packet) { this->msg_queue_.Push(packet); }
-    ~KeepAliveMsgSender(){
-      this->keepalive_msg_sender_thread_.join();
+    inline int getFd() const {
+      std::lock_guard<std::mutex> lock(this->mu_);
+      return this->fd_;
     }
+    inline void setFd(const int fd) {
+      std::lock_guard<std::mutex> lock(this->mu_);
+      this->fd_ = fd;
+    }
+    inline void addSendTask(const Packet &packet) {
+      this->msg_queue_.Push(packet);
+    }
+    ~KeepAliveMsgSender() { this->keepalive_msg_sender_thread_.join(); }
 
    private:
     void run();
@@ -69,6 +78,8 @@ class Server {
     ThreadsafeQueue<Packet> msg_queue_;
     // fd
     int fd_;
+    int uid_;
+    mutable std::mutex mu_;
   };
 
  public:

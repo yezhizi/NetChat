@@ -164,6 +164,7 @@ void Server::processRecvSocket(const int client_fd) const {
         response.set_id(user.getId());
         //  设置用户信息
         UM::Get()->setUserIdByToken(token, user.getId());
+
       } else {
         // 登录失败
         response.set_logined(false);
@@ -175,8 +176,7 @@ void Server::processRecvSocket(const int client_fd) const {
       this->packToPacket(PacketType::LoginResponse, response, pkt_reply);
       LOG(INFO) << "Server sent LoginResponse"
                 << " logined: " << response.logined()
-                << " token: " << response.token()
-                << " id: " << response.id();
+                << " token: " << response.token() << " id: " << response.id();
 
       // 删除记录的 challenge
       UM::Get()->delChallengeMp(user.getId());
@@ -187,11 +187,13 @@ void Server::processRecvSocket(const int client_fd) const {
       // SetupChannelResponse
       SetupChannelRequest request;
       pkt.content().UnpackTo(&request);
-      LOG(INFO) << "Server received SetupChannelRequest"
-                << " token: " << request.token();
 
       // 获取用户信息 token->userId->fd
       auto uid = UM::Get()->getUserIdByToken(request.token());
+
+      LOG(INFO) << "Server received SetupChannelRequest"
+                << " token: " << request.token()
+                << " uid: " << uid;
 
       // ServerAckResponse
       ServerAckResponse response;
@@ -203,7 +205,7 @@ void Server::processRecvSocket(const int client_fd) const {
       cb = [&]() {
         // 2. 设置长连接 uid->sender+fd  uid->token
         UM::Get()->setKpAliveSender(uid, client_fd);
-        
+
         // 发送联系人列表
         ContactListRequest contact_list_request;
 
@@ -217,11 +219,14 @@ void Server::processRecvSocket(const int client_fd) const {
           contact.set_type(Contact::ContactType::Contact_ContactType_FRIEND);
 
           contact_list_request.add_contacts()->CopyFrom(contact);
-          //TODO:internalIds: the max internal id of the contact
-          contact_list_request.add_internalids(0);
-          // int max_internal_id = g_db->getMaxInternalId(uid, u.getId());
+          // TODO:internalIds: the max internal id of the contact
+          //  contact_list_request.add_internalids(0);
+          //  int max_internal_id = g_db->getMaxInternalId(uid, u.getId());
+          int max_internal_id = g_db->getAllMessages(uid, u.getId()).size() +
+                                g_db->getAllMessages(u.getId(), uid).size();
+          contact_list_request.add_internalids(max_internal_id);
         }
-        
+
         this->packToPacket(PacketType::ContactListRequest, contact_list_request,
                            new_req);
         KeepAliveMsgSender *sender = UM::Get()->getSender(uid);
@@ -236,6 +241,7 @@ void Server::processRecvSocket(const int client_fd) const {
         //  1. 通知van取消对应的监听事件
         this->_van->Control(client_fd, "EPOLL_DEL_FD");
       };
+      LOG_IF(!cb,FATAL) << "Callback is nullptr";
 
       break;
     }
@@ -309,12 +315,17 @@ void Server::processRecvSocket(const int client_fd) const {
       // TODO: notify receiver
       cb = [&]() {
         // implement here...
-        return;
+        // 是否在线
+        bool is_online = UM::Get()->isOnline(receiver_id);
+        if (!is_online) {
+          LOG(INFO) << "Receiver is offline. receiver id: " << receiver_id;
+          return;
+        }
+
         Packet new_req;
         ContactMessageListRequest contact_message_list_request;
-        
 
-
+        contact_message_list_request.add_messages()->CopyFrom(reply_msg);
 
         KeepAliveMsgSender *sender = UM::Get()->getSender(receiver_id);
 
@@ -326,11 +337,11 @@ void Server::processRecvSocket(const int client_fd) const {
         }
         LOG(INFO) << "Server pre sent ContactMessageRequest";
       };
-      
 
       // respond to sender
       response.mutable_message()->CopyFrom(reply_msg);
       this->packToPacket(PacketType::SendMessageResponse, response, pkt_reply);
+      LOG(INFO) << "Server sent SendMessageResponse";
       break;
     }
     case PacketType::FileUploadRequest: {
@@ -450,6 +461,7 @@ void Server::processRecvSocket(const int client_fd) const {
       response.mutable_message()->CopyFrom(result.value());
       this->packToPacket(PacketType::ContactMessageResponse, response,
                          pkt_reply);
+      break;
     }
     case PacketType::DeleteMessageRequest: {
       // Ignored
@@ -476,9 +488,10 @@ void Server::processRecvSocket(const int client_fd) const {
     return;
   }
   // run call back
-  if (cb) cb();
-  else{LOG(DEBUG)<<1;}
-
+  if (static_cast<bool>(cb)) {
+    LOG(DEBUG) << "run callback";
+    cb();
+  }
   LOG(INFO) << "Server sent packet. id : " << pkt_reply.packetid();
 }
 
@@ -489,15 +502,16 @@ void Server::KeepAliveMsgSender::run() {
     Packet pkt;
     this->msg_queue_.WaitAndPop(&pkt);
     if (pkt.packetid() == static_cast<int>(PacketType::ContactListRequest)) {
-      
       std::this_thread::sleep_for(std::chrono::seconds(1));
       LOG(INFO) << "Channel: Send ContactListRequest";
     }
+    std::lock_guard<std::mutex> lock(this->mu_);
     int ret = Server::Get()._van->Send(pkt, this->fd_);
     if (ret < 0) {
       // 发送失败
       // 关闭socket
       LOG(INFO) << "KeepAliveMsgSender send failed. fd: " << this->fd_;
+      UM::Get()->delKpAliveSender(this->uid_);
       Server::Get()._van->Control(this->fd_, "CLOSE_FD");
       break;
     }
@@ -510,6 +524,7 @@ void Server::KeepAliveMsgSender::run() {
       // 接收失败
       // 关闭socket
       LOG(INFO) << "KeepAliveMsgSender recv failed. fd: " << this->fd_;
+      UM::Get()->delKpAliveSender(this->uid_);
       Server::Get()._van->Control(this->fd_, "CLOSE_FD");
       break;
     }
@@ -523,9 +538,8 @@ void Server::KeepAliveMsgSender::run() {
 
       break;
     }
-    LOG(DEBUG)<<"KeepAliveChannel: recv ack from client";
+    LOG(DEBUG) << "KeepAliveChannel: recv ack from client";
   }
-  
   return;
 }
 

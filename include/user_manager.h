@@ -86,8 +86,22 @@ class UM {
   void setKpAliveSender(const int &uid, int fd) {
     std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
     LOG(INFO) << "set keepalive sender for user " << uid;
-    this->server_ptr_->_keepalive_sender_mp[uid] =
-        std::make_unique<KeepAliveMsgSender>(fd);
+    if (this->server_ptr_->_keepalive_sender_mp.find(uid) !=
+        this->server_ptr_->_keepalive_sender_mp.end()) {
+      this->server_ptr_->_keepalive_sender_mp[uid]->setFd(fd);
+    } else {
+      this->server_ptr_->_keepalive_sender_mp[uid] =
+          std::make_unique<KeepAliveMsgSender>(uid, fd);
+    }
+  }
+  // 删除对应的保活连接的Sender
+  void delKpAliveSender(const int &uid) {
+    std::lock_guard<std::mutex> lock(this->_keepalive_sender_mp_mu);
+    LOG(INFO) << "delete keepalive sender for user " << uid;
+    if (this->server_ptr_->_keepalive_sender_mp.find(uid) !=
+        this->server_ptr_->_keepalive_sender_mp.end()) {
+      this->server_ptr_->_keepalive_sender_mp.erase(uid);
+    }
   }
 
   // id->sender
@@ -119,6 +133,15 @@ class UM {
     this->server_ptr_->_token_pool[token] = uid;
   }
 
+  // 用户是否在线
+  bool isOnline(const int uid) {
+    std::lock_guard<std::mutex> lk(this->_keepalive_sender_mp_mu);
+    KeepAliveMsgSender *sender = getSender(uid);
+    if (sender)
+      return true;
+    else
+      return false;
+  }
 };
 }  // namespace ntc
 #endif  //_USER_MANNAER_H

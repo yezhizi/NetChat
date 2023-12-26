@@ -41,8 +41,8 @@ class ServerVan : public Van {
 
     int ret = epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, this->_socket, &event);
     CLOG_IF(ret < 0, FATAL, "Van") << "epoll_ctl add server socket failed";
-    this->accepting_thread_ = std::unique_ptr<std::thread>(
-        new std::thread(&ServerVan::Accepting, this));
+    this->accepting_thread_ = std::make_unique<std::thread>(
+        &ServerVan::Accepting, this);
     LOG(INFO) << "ServerVan accepting thread started";
   }
 
