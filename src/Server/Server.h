@@ -67,8 +67,10 @@ class Server {
       this->fd_ = fd;
     }
     inline void addSendTask(const Packet &packet) {
+      LOG(DEBUG)<<"Sender add send task";
       this->msg_queue_.Push(packet);
     }
+    inline void Clear() { this->msg_queue_.Clear(); }
     ~KeepAliveMsgSender() { this->keepalive_msg_sender_thread_.join(); }
 
    private:
@@ -79,6 +81,7 @@ class Server {
     // fd
     int fd_;
     int uid_;
+    bool isOnline;
     mutable std::mutex mu_;
   };
 

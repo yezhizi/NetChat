@@ -135,7 +135,6 @@ class UM {
 
   // 用户是否在线
   bool isOnline(const int uid) {
-    std::lock_guard<std::mutex> lk(this->_keepalive_sender_mp_mu);
     KeepAliveMsgSender *sender = getSender(uid);
     if (sender)
       return true;

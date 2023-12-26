@@ -40,6 +40,12 @@ template <typename T> class ThreadsafeQueue {
         *value = std::move(queue_.front());
         queue_.pop();
     }
+    void Clear() {
+        std::unique_lock<std::mutex> lk(mu_);
+        while (!queue_.empty()) {
+            queue_.pop();
+        }
+    }
 
   private:
     mutable std::mutex mu_;
