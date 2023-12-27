@@ -22,6 +22,7 @@ class UM {
   std::mutex _challenge_pool_mu;
   std::mutex _keepalive_sender_mp_mu;
   std::mutex _token_pool_mu;
+  std::mutex _file_msg_pool_mu;
 
   UM() : server_ptr_(nullptr){};
   UM(const UM &) = delete;
@@ -142,6 +143,32 @@ class UM {
     else
       return false;
   }
+
+  //文件消息转发
+  void setFileMsg(const std::string &fileid, const int &uid,
+                  const netdesign2::Message &msg) {
+    std::lock_guard<std::mutex> lock(this->_file_msg_pool_mu);
+    this->server_ptr_->_file_msg_pool[fileid] = std::make_pair(uid, std::move(msg));
+  }
+
+  void delFileMsg(const std::string &fileid) {
+    std::lock_guard<std::mutex> lock(this->_file_msg_pool_mu);
+    if (this->server_ptr_->_file_msg_pool.find(fileid) !=
+        this->server_ptr_->_file_msg_pool.end()) {
+      this->server_ptr_->_file_msg_pool.erase(fileid);
+    }
+  }
+
+  std::pair<int, netdesign2::Message> getFileMsg(const std::string &fileid) {
+    std::lock_guard<std::mutex> lock(this->_file_msg_pool_mu);
+    if (this->server_ptr_->_file_msg_pool.find(fileid) !=
+        this->server_ptr_->_file_msg_pool.end()) {
+      return this->server_ptr_->_file_msg_pool[fileid];
+    } else {
+      return std::make_pair(0, netdesign2::Message());
+    }
+  }
+
 };
 }  // namespace ntc
 #endif  //_USER_MANNAER_H

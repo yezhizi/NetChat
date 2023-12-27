@@ -199,8 +199,6 @@ void Server::processRecvSocket(const int client_fd) const {
       LOG(INFO) << "Server sent ServerAckResponse";
       this->packToPacket(PacketType::ServerAckResponse, response, pkt_reply);
 
-      
-
       cb = [&]() {
         Packet new_req;
         // 2. 设置长连接 uid->sender+fd  uid->token
@@ -297,6 +295,9 @@ void Server::processRecvSocket(const int client_fd) const {
       // check msg type, if IMAGE/FILE, register it
       if (message.type() == netdesign2::MessageType::IMAGE ||
           message.type() == netdesign2::MessageType::FILE) {
+
+        LOG(DEBUG) << "Server received file message";
+
         // register a new file
         auto file_id_result = g_db->createFile();
         if (!file_id_result.has_value()) {
@@ -309,7 +310,14 @@ void Server::processRecvSocket(const int client_fd) const {
         }
 
         // update the message with generated file id
-        reply_msg.mutable_message()->set_content(file_id_result.value());
+        auto file_id = file_id_result.value();
+        reply_msg.mutable_message()->set_content(file_id);
+
+        cb = [reply_msg,file_id,receiver_id]() {
+          // 记录下reply_msg
+          UM::Get()->setFileMsg(file_id, receiver_id, reply_msg);
+        };
+
       } else {
         // TODO: notify receiver
         cb = [&, reply_msg]() {
@@ -390,10 +398,40 @@ void Server::processRecvSocket(const int client_fd) const {
         this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
         break;
       }
-      LOG (DEBUG) << "Update file success. file id: " << request.id();
+      auto request_id = request.id();
+      LOG(DEBUG) << "Update file success. file id: " << request.id();
 
-      LOG (DEBUG) << "FileUploadResponse success: " << success;
+      LOG(DEBUG) << "FileUploadResponse success: " << success;
       response.set_success(success);
+
+      if (success) {
+        cb = [&,request_id]() {
+          auto uid_msg = UM::Get()->getFileMsg(request_id);
+          int uid = uid_msg.first;
+          auto msg = uid_msg.second;
+          if (uid == 0) {
+            LOG(INFO) << "Sender is offline. sender id: " << uid;
+            return;
+          }
+          UM::Get()->delFileMsg(request_id);
+          auto *sender = UM::Get()->getSender(uid);
+          if (!sender) {
+            LOG(ERROR) << "Sender is nullptr";
+            return;
+          }
+          Packet new_req;
+          ContactMessageListRequest contact_message_list_request;
+          contact_message_list_request.add_messages()->CopyFrom(msg);
+
+          this->packToPacket(PacketType::ContactMessageListRequest,
+                             contact_message_list_request, new_req);
+
+          // 添加到发送队列
+          sender->addSendTask(new_req);
+          LOG(INFO) << "Server pre sent ContactMessageListRequest";
+        };
+      }
+
       this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
       break;
     }
@@ -431,7 +469,7 @@ void Server::processRecvSocket(const int client_fd) const {
       auto file = result.value();
       response.set_hash(file.getHash());
       if (!(file.checkDiskExistence() &&
-          file.loadIntoProto(*response.mutable_file()))) {
+            file.loadIntoProto(*response.mutable_file()))) {
         LOG(INFO) << "Failed to load file on disk. file id: " << request.id();
         response.mutable_file()->set_name("");
         this->packToPacket(PacketType::FileDownloadResponse, response,
@@ -463,9 +501,9 @@ void Server::processRecvSocket(const int client_fd) const {
                            pkt_reply);
         break;
       }
-      LOG (DEBUG) << "Get message success. user id: " << uid
-                     << " contact id: " << request.id()
-                     << " internal id: " << request.internalid();
+      LOG(DEBUG) << "Get message success. user id: " << uid
+                 << " contact id: " << request.id()
+                 << " internal id: " << request.internalid();
 
       response.mutable_message()->CopyFrom(result.value());
       this->packToPacket(PacketType::ContactMessageResponse, response,

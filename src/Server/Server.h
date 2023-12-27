@@ -36,6 +36,10 @@ class Server {
   // token -> userid
   std::unordered_map<std::string, int> _token_pool;
 
+  // fileid -> uid, message
+  //存储文件消息，在收到文件消息时，再转发消息通知
+  std::unordered_map<std::string, std::pair<int, netdesign2::Message>> _file_msg_pool;
+
   void Init();
   void Finalize();
 
