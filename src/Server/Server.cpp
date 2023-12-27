@@ -199,9 +199,10 @@ void Server::processRecvSocket(const int client_fd) const {
       LOG(INFO) << "Server sent ServerAckResponse";
       this->packToPacket(PacketType::ServerAckResponse, response, pkt_reply);
 
-      Packet new_req;
+      
 
       cb = [&]() {
+        Packet new_req;
         // 2. 设置长连接 uid->sender+fd  uid->token
         UM::Get()->setKpAliveSender(uid, client_fd);
 
@@ -221,8 +222,7 @@ void Server::processRecvSocket(const int client_fd) const {
           // TODO:internalIds: the max internal id of the contact
           //  contact_list_request.add_internalids(0);
           //  int max_internal_id = g_db->getMaxInternalId(uid, u.getId());
-          int max_internal_id = g_db->getAllMessages(uid, u.getId()).size() +
-                                g_db->getAllMessages(u.getId(), uid).size();
+          int max_internal_id = g_db->getAllMessages(uid, u.getId()).size();
           contact_list_request.add_internalids(max_internal_id);
         }
 
@@ -232,7 +232,6 @@ void Server::processRecvSocket(const int client_fd) const {
 
         // 添加到发送队列
         if (sender) {
-          sender->Clear();
           sender->addSendTask(new_req);
         } else {
           LOG(ERROR) << "Sender is nullptr";
@@ -311,34 +310,34 @@ void Server::processRecvSocket(const int client_fd) const {
 
         // update the message with generated file id
         reply_msg.mutable_message()->set_content(file_id_result.value());
+      } else {
+        // TODO: notify receiver
+        cb = [&, reply_msg]() {
+          // implement here...
+          // 是否在线
+          bool is_online = UM::Get()->isOnline(receiver_id);
+          if (!is_online) {
+            LOG(INFO) << "Receiver is offline. receiver id: " << receiver_id;
+            return;
+          }
+
+          Packet new_req;
+          ContactMessageListRequest contact_message_list_request;
+          contact_message_list_request.add_messages()->CopyFrom(reply_msg);
+
+          this->packToPacket(PacketType::ContactMessageListRequest,
+                             contact_message_list_request, new_req);
+          KeepAliveMsgSender *sender = UM::Get()->getSender(receiver_id);
+
+          // 添加到发送队列
+          if (sender) {
+            sender->addSendTask(new_req);
+          } else {
+            LOG(ERROR) << "Sender is nullptr";
+          }
+          LOG(INFO) << "Server pre sent ContactMessageRequest";
+        };
       }
-
-      // TODO: notify receiver
-      cb = [&, reply_msg]() {
-        // implement here...
-        // 是否在线
-        bool is_online = UM::Get()->isOnline(receiver_id);
-        if (!is_online) {
-          LOG(INFO) << "Receiver is offline. receiver id: " << receiver_id;
-          return;
-        }
-
-        Packet new_req;
-        ContactMessageListRequest contact_message_list_request;
-        contact_message_list_request.add_messages()->CopyFrom(reply_msg);
-
-        this->packToPacket(PacketType::ContactMessageListRequest,
-                           contact_message_list_request, new_req);
-        KeepAliveMsgSender *sender = UM::Get()->getSender(receiver_id);
-
-        // 添加到发送队列
-        if (sender) {
-          sender->addSendTask(new_req);
-        } else {
-          LOG(ERROR) << "Sender is nullptr";
-        }
-        LOG(INFO) << "Server pre sent ContactMessageRequest";
-      };
 
       // respond to sender
       response.mutable_message()->CopyFrom(reply_msg);
@@ -391,6 +390,7 @@ void Server::processRecvSocket(const int client_fd) const {
         this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
         break;
       }
+      LOG (DEBUG) << "Update file success. file id: " << request.id();
 
       response.set_success(success);
       this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
@@ -454,11 +454,17 @@ void Server::processRecvSocket(const int client_fd) const {
 
       auto result = g_db->getMessage(uid, request.id(), request.internalid());
       if (!result.has_value()) {
+        LOG(WARNING) << "Get message failed. user id: " << uid
+                     << " contact id: " << request.id()
+                     << " internal id: " << request.internalid();
         response.mutable_message()->set_id(-1);
         this->packToPacket(PacketType::ContactMessageResponse, response,
                            pkt_reply);
         break;
       }
+      LOG (DEBUG) << "Get message success. user id: " << uid
+                     << " contact id: " << request.id()
+                     << " internal id: " << request.internalid();
 
       response.mutable_message()->CopyFrom(result.value());
       this->packToPacket(PacketType::ContactMessageResponse, response,
@@ -540,7 +546,7 @@ void Server::KeepAliveMsgSender::run() {
         // 关闭socket
         LOG(INFO) << "KeepAliveMsgSender recv wrong packet. fd: " << this->fd_;
 
-        break;
+        // break;
       }
       LOG(DEBUG) << "KeepAliveChannel: recv ack from client";
     }

@@ -89,6 +89,7 @@ class UM {
     if (this->server_ptr_->_keepalive_sender_mp.find(uid) !=
         this->server_ptr_->_keepalive_sender_mp.end()) {
       this->server_ptr_->_keepalive_sender_mp[uid]->setFd(fd);
+      this->server_ptr_->_keepalive_sender_mp[uid]->Clear();
     } else {
       this->server_ptr_->_keepalive_sender_mp[uid] =
           std::make_unique<KeepAliveMsgSender>(uid, fd);
