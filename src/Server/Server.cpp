@@ -335,7 +335,7 @@ void Server::processRecvSocket(const int client_fd) const {
           } else {
             LOG(ERROR) << "Sender is nullptr";
           }
-          LOG(INFO) << "Server pre sent ContactMessageRequest";
+          LOG(INFO) << "Server pre sent ContactMessageListRequest";
         };
       }
 
@@ -392,6 +392,7 @@ void Server::processRecvSocket(const int client_fd) const {
       }
       LOG (DEBUG) << "Update file success. file id: " << request.id();
 
+      LOG (DEBUG) << "FileUploadResponse success: " << success;
       response.set_success(success);
       this->packToPacket(PacketType::FileUploadResponse, response, pkt_reply);
       break;
@@ -429,8 +430,8 @@ void Server::processRecvSocket(const int client_fd) const {
       // load from disk
       auto file = result.value();
       response.set_hash(file.getHash());
-      if (file.checkDiskExistence() &&
-          file.loadIntoProto(*response.mutable_file())) {
+      if (!(file.checkDiskExistence() &&
+          file.loadIntoProto(*response.mutable_file()))) {
         LOG(INFO) << "Failed to load file on disk. file id: " << request.id();
         response.mutable_file()->set_name("");
         this->packToPacket(PacketType::FileDownloadResponse, response,
@@ -513,8 +514,8 @@ void Server::KeepAliveMsgSender::run() {
       std::this_thread::sleep_for(std::chrono::seconds(1));
       LOG(INFO) << "Channel: Send ContactListRequest";
     } else if (pkt.packetid() ==
-               static_cast<int>(PacketType::ContactMessageRequest)) {
-      LOG(INFO) << "Channel: Send ContactMessageRequest";
+               static_cast<int>(PacketType::ContactMessageListRequest)) {
+      LOG(INFO) << "Channel: Send ContactMessageListRequest";
     }
     std::lock_guard<std::mutex> lock(this->mu_);
     {
