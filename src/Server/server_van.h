@@ -3,6 +3,7 @@
 
 #include <arpa/inet.h>
 #include <fcntl.h>
+#include <netinet/tcp.h>
 #include <sys/epoll.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -29,10 +30,6 @@ class ServerVan : public Van {
     this->RecvSocketThreads_.resize(Server::getRecvSocketNum());
     for (auto &t : this->RecvSocketThreads_)
       t = std::thread(&ServerVan::RevcSocketThreadFunc_, this);
-    // bind the working thread function
-    this->KeepAliveThreads_.resize(Server::getKeepAliveNum());
-    for (auto &t : this->KeepAliveThreads_)
-      t = std::thread(&ServerVan::KeepAliveSendThreadsFunc_, this);
 
     int epoll_fd_ = epoll_create(MAX_EVENTS);
     CLOG_IF(epoll_fd_ < 0, FATAL, "Van") << "epoll_create failed";
@@ -44,8 +41,8 @@ class ServerVan : public Van {
 
     int ret = epoll_ctl(this->epoll_fd_, EPOLL_CTL_ADD, this->_socket, &event);
     CLOG_IF(ret < 0, FATAL, "Van") << "epoll_ctl add server socket failed";
-    this->accepting_thread_ = std::unique_ptr<std::thread>(
-        new std::thread(&ServerVan::Accepting, this));
+    this->accepting_thread_ = std::make_unique<std::thread>(
+        &ServerVan::Accepting, this);
     LOG(INFO) << "ServerVan accepting thread started";
   }
 
@@ -127,6 +124,11 @@ class ServerVan : public Van {
 
           UM::Get()->setRevcSocketMp(client_ip_port, client_socket);
 
+          // 设置nodelay
+          int opt = 1;
+          setsockopt(client_socket, IPPROTO_TCP, TCP_NODELAY, &opt,
+                     sizeof(opt));
+
           // 设置非阻塞接收
           int flags = fcntl(client_socket, F_GETFL, 0);
           int ret = fcntl(client_socket, F_SETFL, flags | O_NONBLOCK);
@@ -191,12 +193,14 @@ class ServerVan : public Van {
       int ret = recv(fd, buf + bytes, ntc::kMaxMessageSize - bytes, 0);
       if (ret < 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK) {
+          // 没有数据可读
           break;
         } else {
           CLOG(WARNING, "Van") << "recv failed";
           return -1;
         }
       } else if (ret == 0) {
+        // 远程主机关闭
         break;
 
       } else {
@@ -235,13 +239,6 @@ class ServerVan : public Van {
       int client_fd;
       this->RecvSocketQueue_.WaitAndPop(&client_fd);
       Server::Get().processRecvSocket(client_fd);
-    }
-  }
-  void KeepAliveSendThreadsFunc_() {
-    while (true) {
-      std::pair<int, Packet> p;
-      this->KeepAliveQueue_.WaitAndPop(&p);
-      this->SendMesg(p.second, p.first);
     }
   }
 };

@@ -116,8 +116,8 @@ class DataAccess {
       db_.exec(
           "CREATE TABLE files ("
           "file_id TEXT PRIMARY KEY, "  // UUID
-          "filename TEXT NOT NULL, "
-          "hash TEXT NOT NULL)");
+          "filename TEXT , "
+          "hash TEXT)");
       LOG(DEBUG) << "`files` table created.";
     }
 
